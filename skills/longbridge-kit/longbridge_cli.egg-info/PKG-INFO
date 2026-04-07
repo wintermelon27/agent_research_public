@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: longbridge-cli
+Version: 1.0.0
+Summary: 长桥 LongPort OpenAPI CLI 工具
+Requires-Python: >=3.9
+Requires-Dist: longbridge
+Requires-Dist: click>=8.0
+Requires-Dist: rich>=13.0

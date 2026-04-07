@@ -1,0 +1,2 @@
+[console_scripts]
+longbridge = longbridge_cli.cli:cli
