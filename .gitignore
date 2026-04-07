@@ -1,0 +1,25 @@
+# Secrets
+.env
+.default.env
+
+# OpenClaw workspace files (local only)
+.agignore
+.clawhub/
+.openclaw/
+
+# Skills (managed separately, not part of research repo)
+skills/
+
+# Scripts (utility scripts, not research content)
+scripts/
+
+# Stock monitor (personal trading tools)
+stock_monitor.py
+stock_monitor_state.json
+
+# PDF references (keep only in local, not in research repo)
+*.pdf
+
+# OS files
+.DS_Store
+Thumbs.db
