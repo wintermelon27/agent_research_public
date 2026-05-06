@@ -17,8 +17,8 @@ scripts/
 stock_monitor.py
 stock_monitor_state.json
 
-# PDF references (keep only in local, not in research repo)
-*.pdf
+# PDF references: block root-level only, allow in subdirectories (A股/港股/美股/)
+/*.pdf
 
 # OS files
 .DS_Store
