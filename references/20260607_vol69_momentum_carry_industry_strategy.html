@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vol.69 动量与 Carry · 播客转录笔记</title>
+<style>
+  /* ===== Reset & Base ===== */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;font-size:16px;scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:#faf7f2;
+    color:#2b2a26;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* ===== Layout ===== */
+  .wrap{max-width:780px;margin:0 auto;padding:48px 28px 96px}
+
+  /* ===== Cover ===== */
+  .cover{
+    background:linear-gradient(135deg,#1a1814 0%,#2c2417 50%,#1a1814 100%);
+    color:#f5e9c8;
+    border-radius:18px;
+    padding:56px 40px 48px;
+    margin-bottom:48px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 12px 36px rgba(20,18,12,.18);
+  }
+  .cover::before{
+    content:"";
+    position:absolute;top:-50%;right:-30%;
+    width:520px;height:520px;
+    background:radial-gradient(circle,rgba(212,175,55,.25) 0%,rgba(212,175,55,0) 70%);
+    pointer-events:none;
+  }
+  .cover .eyebrow{
+    display:inline-block;
+    font-size:11px;letter-spacing:3px;font-weight:600;
+    color:#d4af37;text-transform:uppercase;
+    border:1px solid rgba(212,175,55,.4);
+    padding:5px 12px;border-radius:30px;
+    margin-bottom:22px;
+  }
+  .cover h1{
+    font-family:"Source Han Serif","Noto Serif CJK SC","Songti SC",serif;
+    font-size:38px;line-height:1.25;font-weight:700;
+    color:#fff;margin-bottom:14px;letter-spacing:.5px;
+  }
+  .cover .subtitle{
+    font-size:16px;color:rgba(245,233,200,.78);
+    margin-bottom:30px;line-height:1.6;
+  }
+  .cover .meta{
+    display:grid;grid-template-columns:repeat(2,1fr);
+    gap:14px 24px;
+    padding-top:24px;
+    border-top:1px solid rgba(212,175,55,.2);
+    font-size:13px;
+  }
+  .cover .meta-item{display:flex;flex-direction:column;gap:2px}
+  .cover .meta-label{color:rgba(245,233,200,.5);font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
+  .cover .meta-value{color:#f5e9c8;font-weight:500}
+
+  /* ===== Section Cards ===== */
+  .section{
+    background:#fff;
+    border-radius:14px;
+    padding:36px 36px 32px;
+    margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(40,30,15,.04);
+    border:1px solid #ece6d8;
+  }
+  .section-head{
+    display:flex;align-items:center;gap:14px;
+    margin-bottom:24px;padding-bottom:18px;
+    border-bottom:2px solid #f4ecd6;
+  }
+  .section-badge{
+    display:flex;align-items:center;justify-content:center;
+    width:48px;height:48px;border-radius:12px;
+    background:linear-gradient(135deg,#d4af37 0%,#b8941f 100%);
+    color:#fff;font-weight:700;font-size:20px;
+    font-family:"Source Han Serif","Noto Serif CJK SC",serif;
+    box-shadow:0 4px 10px rgba(212,175,55,.25);
+    flex-shrink:0;
+  }
+  .section-title{
+    font-family:"Source Han Serif","Noto Serif CJK SC","Songti SC",serif;
+    font-size:24px;font-weight:700;color:#1a1814;line-height:1.3;
+    flex:1;
+  }
+  .section-anchor{
+    display:inline-block;
+    font-size:11px;font-weight:600;letter-spacing:1px;
+    color:#a8893d;background:#fdf8e8;
+    padding:4px 10px;border-radius:20px;
+    border:1px solid #ebd9a4;
+  }
+
+  h3.subhead{
+    font-family:"Source Han Serif","Noto Serif CJK SC",serif;
+    font-size:17px;font-weight:600;color:#5a4a25;
+    margin:24px 0 12px;
+    padding-left:12px;
+    border-left:3px solid #d4af37;
+    line-height:1.4;
+  }
+
+  p{margin-bottom:14px;font-size:15.5px;color:#3a362d}
+  strong{color:#1a1814;font-weight:700;background:linear-gradient(transparent 60%,#fdf0c8 60%);padding:0 2px}
+
+  /* ===== Lists ===== */
+  ul,ol{margin:10px 0 16px;padding-left:24px}
+  li{margin-bottom:8px;font-size:15.5px;color:#3a362d}
+  li::marker{color:#c9a646}
+
+  /* ===== Blockquote / Pull-quote ===== */
+  blockquote{
+    position:relative;
+    background:linear-gradient(135deg,#fdf8e8 0%,#f9f0d4 100%);
+    border-left:4px solid #d4af37;
+    border-radius:0 10px 10px 0;
+    padding:20px 24px 20px 56px;
+    margin:18px 0;
+    font-size:15.5px;
+    color:#5a4a25;
+    font-style:italic;
+  }
+  blockquote::before{
+    content:"\201C";
+    position:absolute;
+    left:14px;top:6px;
+    font-family:Georgia,serif;
+    font-size:48px;line-height:1;
+    color:#d4af37;opacity:.5;
+  }
+  blockquote p{margin-bottom:6px;color:#5a4a25}
+  blockquote p:last-child{margin-bottom:0;font-style:normal;font-size:13px;color:#8a7434;font-weight:500}
+
+  /* ===== Tables ===== */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:18px 0 22px;
+    font-size:14.5px;
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 1px 4px rgba(40,30,15,.05);
+    border:1px solid #ece6d8;
+  }
+  thead{background:linear-gradient(180deg,#2c2417 0%,#1a1814 100%)}
+  th{
+    padding:13px 14px;
+    text-align:left;
+    color:#d4af37;
+    font-weight:600;
+    font-size:13px;letter-spacing:.5px;
+  }
+  td{
+    padding:12px 14px;
+    border-top:1px solid #f0e8d4;
+    color:#3a362d;
+    vertical-align:top;
+  }
+  tbody tr{transition:background .15s ease}
+  tbody tr:hover{background:#fdf8e8}
+  tbody tr:nth-child(even){background:#faf6ea}
+  tbody tr:nth-child(even):hover{background:#fdf3d4}
+
+  /* ===== Inline code & markers ===== */
+  code{
+    background:#f4ecd6;color:#5a4a25;
+    padding:1px 6px;border-radius:4px;
+    font-family:"SF Mono","Menlo",monospace;
+    font-size:13.5px;
+  }
+
+  /* ===== Annotation tags (✅ ⚠️ 🔮) ===== */
+  .tag-ok{color:#2e7d4f;font-weight:600}
+  .tag-warn{color:#b35900;font-weight:600}
+  .tag-guess{color:#5e5e8a;font-weight:600}
+
+  /* ===== Highlight box (推断) ===== */
+  .insight{
+    background:linear-gradient(135deg,#fff7e0 0%,#fceed5 100%);
+    border:1px solid #ebd9a4;
+    border-left:4px solid #d4af37;
+    border-radius:8px;
+    padding:14px 18px;
+    margin:16px 0;
+    font-size:14.5px;
+    color:#5a4a25;
+  }
+  .insight::before{
+    content:"💡 推断";
+    display:inline-block;
+    font-weight:700;color:#a8893d;
+    font-size:13px;letter-spacing:1px;
+    margin-right:6px;
+  }
+
+  /* ===== Data source tag row ===== */
+  .src-line{
+    display:flex;align-items:center;gap:8px;
+    font-size:12.5px;color:#8a7b58;
+    background:#f8f3e2;
+    padding:8px 14px;border-radius:6px;
+    margin:10px 0 16px;
+    border:1px dashed #e0d4a8;
+  }
+  .src-line::before{content:"🎙️";font-size:14px}
+
+  /* ===== Footer ===== */
+  .footer{
+    text-align:center;
+    margin-top:48px;padding:24px 16px;
+    color:#a89878;font-size:12.5px;
+    border-top:1px solid #ece6d8;
+  }
+  .footer a{color:#a8893d;text-decoration:none}
+  .footer .brand{
+    font-family:"Source Han Serif","Noto Serif CJK SC",serif;
+    font-size:14px;font-weight:600;
+    color:#5a4a25;margin-bottom:6px;
+  }
+
+  /* ===== TOC ===== */
+  .toc{
+    background:#fff;
+    border:1px solid #ece6d8;
+    border-radius:14px;
+    padding:24px 28px;
+    margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(40,30,15,.04);
+  }
+  .toc-title{
+    font-size:11px;font-weight:700;letter-spacing:2.5px;
+    color:#a8893d;text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  .toc-list{list-style:none;padding:0;margin:0}
+  .toc-list li{margin:0;padding:0}
+  .toc-list a{
+    display:flex;align-items:center;gap:10px;
+    padding:8px 0;
+    color:#3a362d;text-decoration:none;
+    font-size:14.5px;
+    border-bottom:1px dashed #f0e8d4;
+    transition:color .15s;
+  }
+  .toc-list li:last-child a{border-bottom:none}
+  .toc-list a:hover{color:#a8893d}
+  .toc-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:22px;height:22px;border-radius:50%;
+    background:#f4ecd6;color:#a8893d;
+    font-size:11px;font-weight:700;
+    flex-shrink:0;
+  }
+
+  /* ===== Highlight header chip (结尾/溯源) ===== */
+  .meta-row{
+    display:flex;flex-wrap:wrap;gap:8px;
+    margin:10px 0 18px;
+  }
+  .chip{
+    display:inline-flex;align-items:center;gap:4px;
+    font-size:12px;font-weight:500;
+    padding:5px 11px;border-radius:14px;
+    background:#fdf8e8;color:#5a4a25;
+    border:1px solid #ebd9a4;
+  }
+  .chip.dark{background:#1a1814;color:#d4af37;border-color:#3a3220}
+  .chip.green{background:#e8f5ec;color:#2e7d4f;border-color:#b8dec1}
+  .chip.amber{background:#fdf0c8;color:#8a5a00;border-color:#e6c878}
+
+  /* ===== Responsive ===== */
+  @media (max-width:640px){
+    .wrap{padding:24px 14px 60px}
+    .cover{padding:36px 24px 32px;border-radius:14px}
+    .cover h1{font-size:28px}
+    .cover .meta{grid-template-columns:1fr;gap:10px}
+    .section{padding:26px 20px 22px;border-radius:12px}
+    .section-title{font-size:20px}
+    .section-badge{width:40px;height:40px;font-size:17px}
+    th,td{padding:10px 8px;font-size:13px}
+    blockquote{padding:16px 18px 16px 44px}
+    blockquote::before{font-size:36px;left:10px;top:8px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ COVER ============ -->
+  <div class="cover">
+    <span class="eyebrow">Podcast · 投研笔记</span>
+    <h1>动量与 Carry<br>产业视角下的投资策略</h1>
+    <div class="subtitle">Vol.69 · 遂玖资产胡克勤二度返场 · 拆解决策框架</div>
+    <div class="meta">
+      <div class="meta-item">
+        <span class="meta-label">主播</span>
+        <span class="meta-value">@石磊TheAttract · @敏-姐</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">嘉宾</span>
+        <span class="meta-value">胡克勤（遂玖资产）</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">时长</span>
+        <span class="meta-value">114 分钟</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">发布</span>
+        <span class="meta-value">2026-05-31</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TOC ============ -->
+  <div class="toc">
+    <div class="toc-title">📑 目录</div>
+    <ul class="toc-list">
+      <li><a href="#s1"><span class="toc-num">1</span>全球供应链：上游资源品的「涨价之年」</a></li>
+      <li><a href="#s2"><span class="toc-num">2</span>核心框架：动量 vs Carry（方法论基石）</a></li>
+      <li><a href="#s3"><span class="toc-num">3</span>案例拆解（一）：黄金——从回归型到动量型泡沫</a></li>
+      <li><a href="#s4"><span class="toc-num">4</span>案例拆解（二）：中国神华——从周期股到类债股</a></li>
+      <li><a href="#s5"><span class="toc-num">5</span>产业格局变化下的策略陷阱</a></li>
+      <li><a href="#s6"><span class="toc-num">6</span>底层逻辑：内生性结构收益</a></li>
+      <li><a href="#s7"><span class="toc-num">7</span>适应性策略（章节未完整展示）</a></li>
+      <li><a href="#s8"><span class="toc-num">8</span>关键金句合集</a></li>
+      <li><a href="#s9"><span class="toc-num">9</span>数据溯源汇总</a></li>
+      <li><a href="#s10"><span class="toc-num">10</span>投资策略洞察（库哥角度）</a></li>
+    </ul>
+  </div>
+
+  <!-- ============ S1 ============ -->
+  <div class="section" id="s1">
+    <div class="section-head">
+      <div class="section-badge">壹</div>
+      <div class="section-title">全球供应链：上游资源品的「涨价之年」</div>
+      <span class="section-anchor">03:21 – 07:35</span>
+    </div>
+
+    <h3 class="subhead">当前供应链紧张程度 = 2020 年水平，但性质完全不同</h3>
+    <p>今年是"涨价之年"——AI 基建和上游资源品同步上涨。但下游顺价不畅通，两条链条的传导范式完全不同。这是胡克勤回场的现实切入点。</p>
+
+    <ul>
+      <li><span class="tag-ok">✅ 原文数据</span>：2020 年是<strong>中下游制成品 + 集装箱运力</strong>短缺</li>
+      <li><span class="tag-ok">✅ 原文数据</span>：当前是<strong>上游油气短缺</strong>，油运、LNG 运力紧张，干散货运价近期也大幅上涨</li>
+    </ul>
+
+    <div class="insight">上游紧缺 + 下游通缩的剪刀差，是当前全球宏观的核心矛盾。</div>
+  </div>
+
+  <!-- ============ S2 ============ -->
+  <div class="section" id="s2">
+    <div class="section-head">
+      <div class="section-badge">贰</div>
+      <div class="section-title">核心框架：动量 vs Carry</div>
+      <span class="section-anchor">07:36 – 19:11</span>
+    </div>
+    <p style="color:#8a7b58;font-size:13px;margin-bottom:20px">—— 本期方法论基石</p>
+
+    <h3 class="subhead">2.1 框架定义</h3>
+    <table>
+      <thead>
+        <tr><th>维度</th><th>动量 Momentum</th><th>Carry</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>特征</strong></td><td>强者恒强、弱者恒弱</td><td>持有时间本身有价值</td></tr>
+        <tr><td><strong>本质</strong></td><td>资产价值正在改变</td><td>资产价值稳定或确定</td></tr>
+        <tr><td><strong>走势</strong></td><td>一波接一波，间歇性</td><td>价格围绕价值中枢震荡回归</td></tr>
+        <tr><td><strong>波动率</strong></td><td>较高</td><td>较低</td></tr>
+        <tr><td><strong>类比</strong></td><td>趋势跟踪</td><td>收息 / 套利</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">2.2 资产类别适用性</h3>
+    <ul>
+      <li><span class="tag-ok">✅ 原文数据</span>：<strong>A 股宽基指数</strong>：动量效应强 → 需要<strong>择时顺势</strong></li>
+      <li><span class="tag-ok">✅ 原文数据</span>：<strong>标普 500</strong>：动量效应弱 → 适合<strong>长期持有</strong>（价值中枢稳定）</li>
+      <li><strong>债券 / 红利 / 自由现金流</strong>：典型 Carry 主导</li>
+    </ul>
+
+    <h3 class="subhead">2.3 大宗商品期货六大因子</h3>
+    <ol>
+      <li>动量</li><li>Carry</li><li>价值</li><li>低波</li><li>季节性</li><li>套保压力</li>
+    </ol>
+
+    <p><strong>关键机制</strong>：</p>
+    <ul>
+      <li>动量因子背后：库存与产能周期的持续性（去库存要时间，扩产能也要时间）</li>
+      <li>Carry 因子机制：<strong>贴水做多、升水做空</strong>，通过不断移仓获取结构性收益</li>
+    </ul>
+
+    <h3 class="subhead">2.4 Carry 收益的实证</h3>
+    <div class="meta-row">
+      <span class="chip green">✅ 原文数据</span>
+      <span class="chip amber">关键数字</span>
+    </div>
+    <table>
+      <thead>
+        <tr><th>标的</th><th>时间段</th><th>Carry 收益</th><th>备注</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>主流大宗商品综合</td><td>1980 – 2015</td><td>约 50%</td><td>一半来自现货价格变动，一半来自 Carry</td></tr>
+        <tr><td>WTI 原油</td><td>1984 – 2014</td><td>跑赢美债 <strong style="color:#a8590a">6.2%</strong></td><td>持续持有并移仓</td></tr>
+        <tr><td>WTI 原油（仅 Back 结构时开仓）</td><td>同上</td><td>超额收益 <strong style="color:#a8590a">12.8%</strong></td><td>期货曲线贴水时开仓</td></tr>
+        <tr><td>铁矿石（过去十年）</td><td>—</td><td>移仓收益 &gt; 现货波动</td><td>同样远大于</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">2.5 本质提炼</h3>
+    <ul>
+      <li><strong>动量赚的钱</strong>：产业趋势传导过程中市场来不及一步定价完的那段时间</li>
+      <li><strong>Carry 赚的钱</strong>：价值中枢稳定、承担风险获得的时间回报</li>
+      <li><strong>组合意义</strong>：两者天然互补——相关性低甚至负相关 → 收益风险比更优</li>
+    </ul>
+
+    <div class="insight">Carry 在贴水结构的大宗商品中尤其有效，这是程序化移仓策略的底层逻辑。</div>
+  </div>
+
+  <!-- ============ S3 ============ -->
+  <div class="section" id="s3">
+    <div class="section-head">
+      <div class="section-badge">叁</div>
+      <div class="section-title">案例拆解（一）：黄金</div>
+      <span class="section-anchor">32:21 – 44:49</span>
+    </div>
+    <p style="color:#8a7b58;font-size:13px;margin-bottom:20px">—— 从回归型到动量型泡沫</p>
+
+    <h3 class="subhead">3.1 三阶段叙事</h3>
+    <table>
+      <thead>
+        <tr><th>阶段</th><th>时段</th><th>类型</th><th>主导主体</th><th>行为特征</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>前半程</td>
+          <td>—</td>
+          <td>类 Carry（回归型）</td>
+          <td><strong style="color:#a8893d">央行</strong></td>
+          <td>逢低买入、不追高，底部不断抬升</td>
+        </tr>
+        <tr>
+          <td>2025 关税战 → 2026 初</td>
+          <td>—</td>
+          <td>动量型泡沫</td>
+          <td>金融投资者</td>
+          <td>追涨杀跌、正反馈推升</td>
+        </tr>
+        <tr>
+          <td>2026 调整后</td>
+          <td>—</td>
+          <td>回归型</td>
+          <td><strong style="color:#a8893d">央行重新主导</strong></td>
+          <td>货币备胎需求</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">3.2 切换的驱动</h3>
+    <div class="meta-row"><span class="chip green">✅ 原文数据</span></div>
+    <ul>
+      <li>2025 年关税战伤害了<strong>美元信用</strong></li>
+      <li>叠加美联储降息</li>
+      <li>金融投资者大量涌入 → 本质是追涨杀跌的动量型主体</li>
+      <li>一旦金融资本捕获某个资产，动量效应就会很强</li>
+    </ul>
+
+    <h3 class="subhead">3.3 关键判断信号</h3>
+    <blockquote>
+      <p><strong>看谁是边际定价者。</strong></p>
+      <p>央行 = 回归型主体 ｜ 金融投资者 = 动量型主体</p>
+    </blockquote>
+
+    <div class="insight"><span style="font-weight:700">与库哥黄金主线相关</span>：当前 2026 年中段，黄金是否已切回"央行主导"是关键跟踪点。如果央行买盘持续 + 金融资金退潮 → 回归型特征延续 → 更适合"逢低布局"而非追涨；如果金融资本重新涌入 → 警惕动量型泡沫的二次冲顶。</div>
+  </div>
+
+  <!-- ============ S4 ============ -->
+  <div class="section" id="s4">
+    <div class="section-head">
+      <div class="section-badge">肆</div>
+      <div class="section-title">案例拆解（二）：中国神华</div>
+      <span class="section-anchor">44:50 – 01:11:44</span>
+    </div>
+    <p style="color:#8a7b58;font-size:13px;margin-bottom:20px">—— 从周期股到类债股</p>
+
+    <h3 class="subhead">4.1 重估逻辑</h3>
+    <ul>
+      <li><strong>2022 年后</strong>政策要求：火电厂 ↔ 煤炭公司形成长协定价，<strong>锁量锁价</strong>，甚至锁定 110% 用量</li>
+      <li>这使得中国神华的<strong>现金流确定性极高</strong></li>
+      <li>本质上相当于一张<strong>票息约 10-14% 的债券</strong></li>
+    </ul>
+
+    <h3 class="subhead">4.2 重估的时间表</h3>
+    <div class="meta-row"><span class="chip green">✅ 原文数据</span></div>
+    <ul>
+      <li>重估历时 <strong style="color:#a8590a">约 3 年</strong>被市场认识</li>
+      <li>每年兑现 <strong style="color:#a8590a">约 30% 收益</strong></li>
+      <li><strong>不是来自煤价波动</strong>，而是来自<strong>估值范式切换</strong>：周期股 → 类债股</li>
+      <li>目前神华<strong>隐含票息已回归至约 5%</strong> → 重估基本完成</li>
+    </ul>
+
+    <h3 class="subhead">4.3 延伸策略</h3>
+    <blockquote>
+      <p><strong>自由现金流股票 + 超长期国债 = 两种 Carry 互补</strong></p>
+      <p>自由现金流股票：受益通胀 ｜ 超长期国债：受益通缩</p>
+    </blockquote>
+    <ul>
+      <li>短期负相关，长期都震荡向上</li>
+      <li><strong>组合波动率大幅降低</strong></li>
+    </ul>
+
+    <div class="insight">神华案例是"产业格局变化重塑估值范式"的范本——类似逻辑可套用到任何长协锁价的上游资源股（如中国海油 vs 油运锁定、紫金矿业 vs 铜加工锁定等）。</div>
+  </div>
+
+  <!-- ============ S5 ============ -->
+  <div class="section" id="s5">
+    <div class="section-head">
+      <div class="section-badge">伍</div>
+      <div class="section-title">产业格局变化下的策略陷阱</div>
+      <span class="section-anchor">01:11:45 – 01:22:06</span>
+    </div>
+
+    <h3 class="subhead">5.1 范式陷阱：白酒 vs 啤酒的对照</h3>
+    <table>
+      <thead>
+        <tr><th>维度</th><th>白酒</th><th>啤酒</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>2022 年前商业模式</strong></td>
+          <td>厂家压货 → 渠道囤货 → 价格炒作 → 消费者买单（金融化循环）</td>
+          <td>规模红利</td>
+        </tr>
+        <tr>
+          <td><strong>2022 年后</strong></td>
+          <td><strong style="color:#a8590a">金融属性消退</strong></td>
+          <td><strong style="color:#2e7d4f">从规模红利 → 价值红利</strong></td>
+        </tr>
+        <tr>
+          <td><strong>底层依赖</strong></td>
+          <td>地产 + 信用扩张</td>
+          <td>资本开支收缩 + 自由现金流改善</td>
+        </tr>
+        <tr>
+          <td><strong>新方向</strong></td>
+          <td>年轻消费场景模糊</td>
+          <td>精酿、调酒</td>
+        </tr>
+        <tr>
+          <td><strong>估值范式</strong></td>
+          <td>难以定价</td>
+          <td><strong style="color:#a8893d">向 Carry 型资产演变</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>啤酒数据</strong><span class="tag-ok" style="margin-left:6px">✅ 原文数据</span></p>
+    <ul>
+      <li>2025 年，<strong style="color:#a8590a">8-10 元次高端价格带增速超 25%</strong></li>
+      <li><strong style="color:#a8590a">10 元以上高端啤酒占比已达 35%</strong>（较 2021 年提升 12pct）</li>
+    </ul>
+
+    <div class="insight">啤酒的"Carry 化"路径可能是消费板块未来 5 年的主线索之一——从 β 依赖估值修复到 α 依赖现金流稳定。</div>
+
+    <h3 class="subhead">5.2 分歧从哪里来</h3>
+    <blockquote>
+      <p>同一产业结构，从不同角度看会得出不同结论。</p>
+      <p><strong>最终需要验证：边际定价者的行为变了，价值才会真实改变。</strong></p>
+    </blockquote>
+    <p>投资的第一要务：</p>
+    <ol>
+      <li>避免站在<strong>转折点</strong>和<strong>风险集中</strong>的位置</li>
+      <li><strong>安全边际</strong>和<strong>时机</strong>同样重要</li>
+    </ol>
+  </div>
+
+  <!-- ============ S6 ============ -->
+  <div class="section" id="s6">
+    <div class="section-head">
+      <div class="section-badge">陆</div>
+      <div class="section-title">底层逻辑：内生性结构收益</div>
+      <span class="section-anchor">01:22:07 – 01:33:12</span>
+    </div>
+
+    <h3 class="subhead">6.1 期货市场不是零和游戏</h3>
+    <blockquote>
+      <p>期货市场存在<strong>内生性的结构收益</strong>。</p>
+    </blockquote>
+    <ul>
+      <li>只要市场健康运行，某些赚钱机会就<strong>天然存在</strong></li>
+      <li>不是因为你精准预测了未来</li>
+      <li>而是因为<strong>你承担了这个产业系统需要有人承担的功能或风险</strong></li>
+      <li><strong>系统就支付给你稳定的回报</strong></li>
+    </ul>
+
+    <h3 class="subhead">6.2 大宗商品价格的本质</h3>
+    <blockquote>
+      <p>商品的价格不是凭空赌出来的。</p>
+      <p>它是对物理世界中<strong>仓储、空间搬运、时间搬运的期权价值</strong>进行量化的工具。</p>
+      <p>本质是<strong>流量和流动速度的时间价值衡量</strong>。</p>
+    </blockquote>
+
+    <h3 class="subhead">6.3 重要的概念：正确的风险</h3>
+    <blockquote>
+      <p><strong>风险越大不一定收益越高。</strong></p>
+      <p>承担了错误的风险，收益不会与风险成正比。</p>
+      <p><strong>只有承担了系统需要你承担的那部分风险，收益才真正有保障。</strong></p>
+    </blockquote>
+
+    <div class="insight">这是 Carry 策略的哲学根基——不是承担更多风险，而是承担正确的风险。对个人投资者而言，意味着要在自己理解的结构性收益来源上持续下注，而不是在不理解的高波动方向上博收益。</div>
+  </div>
+
+  <!-- ============ S7 ============ -->
+  <div class="section" id="s7">
+    <div class="section-head">
+      <div class="section-badge">柒</div>
+      <div class="section-title">适应性策略（章节未完整展示）</div>
+      <span class="section-anchor">01:33:13 起</span>
+    </div>
+
+    <p>节目后续涉及"如何判断当前环境"以及"适应性策略"，由于节目在 <code>6842</code> 秒结束，嘉宾应给出了具体的策略判断框架，但转录稿结尾内容散乱（结尾为感谢语），未捕捉到完整策略清单。</p>
+
+    <div class="insight">建议结合配套微信公众号文字稿 <a href="https://mp.weixin.qq.com/s/pAsU7mFnGvEArLaPRjNYcA" style="color:#a8893d">https://mp.weixin.qq.com/s/pAsU7mFnGvEArLaPRjNYcA</a> 补全本节。</div>
+  </div>
+
+  <!-- ============ S8 ============ -->
+  <div class="section" id="s8">
+    <div class="section-head">
+      <div class="section-badge">捌</div>
+      <div class="section-title">关键金句合集</div>
+    </div>
+
+    <blockquote>
+      <p>"只有承担了正确的风险，系统才会给你稳定的回报。"</p>
+      <p>— 胡克勤</p>
+    </blockquote>
+
+    <blockquote>
+      <p>"动量赚的是产业趋势传导过程中市场来不及一步定价完的那段时间的钱；Carry 赚的是价值中枢稳定、你持有资产并承担风险所获得的时间回报。"</p>
+      <p>— 框架总结</p>
+    </blockquote>
+
+    <blockquote>
+      <p>"看谁是边际定价者。央行是回归型主体，金融投资者是动量型主体。"</p>
+      <p>— 黄金案例</p>
+    </blockquote>
+
+    <blockquote>
+      <p>"风险越大不一定收益越高。"</p>
+      <p>— 底层逻辑</p>
+    </blockquote>
+  </div>
+
+  <!-- ============ S9 ============ -->
+  <div class="section" id="s9">
+    <div class="section-head">
+      <div class="section-badge">玖</div>
+      <div class="section-title">数据溯源汇总</div>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>主题</th><th>关键数据</th><th>原文出处</th><th>标注</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>黄金阶段切换</td><td>2025 关税战、2026 美联储降息</td><td>节目 32:21-44:49</td><td><span class="tag-ok">✅ 原文</span></td></tr>
+        <tr><td>WTI Carry 收益</td><td>1984-2014 跑赢美债 6.2% / 12.8%（Back 结构）</td><td>节目 13:05</td><td><span class="tag-ok">✅ 原文</span></td></tr>
+        <tr><td>铁矿石 Carry</td><td>移仓收益 &gt; 现货波动</td><td>节目 13:05</td><td><span class="tag-ok">✅ 原文</span></td></tr>
+        <tr><td>中国神华</td><td>票息 10-14%（重估前）→ 5%（当前）；3 年兑现，每年约 30%</td><td>节目 44:50</td><td><span class="tag-ok">✅ 原文</span></td></tr>
+        <tr><td>啤酒高端化</td><td>8-10 元增 25%+ / 10 元+ 占比 35%（2021 提升 12pct）</td><td>节目 01:11:45</td><td><span class="tag-ok">✅ 原文</span></td></tr>
+        <tr><td>主机厂长协</td><td>锁定 110% 用量</td><td>节目 44:50</td><td><span class="tag-ok">✅ 原文</span></td></tr>
+        <tr><td>A 股 vs 标普 500 动量</td><td>强弱对照</td><td>节目 08:39</td><td><span class="tag-ok">✅ 原文</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ============ S10 ============ -->
+  <div class="section" id="s10">
+    <div class="section-head">
+      <div class="section-badge">拾</div>
+      <div class="section-title">投资策略洞察（库哥角度）</div>
+    </div>
+
+    <h3 class="subhead">与库哥黄金主线的交叉点</h3>
+    <ul>
+      <li><strong>当前判断</strong>：2026 年中段，黄金正处在 2026 年调整后的"回归型"阶段</li>
+      <li><strong>跟踪指标</strong>：
+        <ul>
+          <li>央行月度净购金数据</li>
+          <li>黄金 ETF 资金流（金融资本代理变量）</li>
+          <li>COMEX 非商业净持仓（COT 报告）</li>
+        </ul>
+      </li>
+      <li><strong>策略含义</strong>：
+        <ul>
+          <li>如果央行主导延续 → 逢低布局 + Carry 思维</li>
+          <li>如果金融资本重新涌入 → 警惕动量泡沫二阶段</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3 class="subhead">Carry 策略在库哥工具箱中的位置</h3>
+    <table>
+      <thead>
+        <tr><th>工具</th><th>收益类型</th><th>Carry 比重</th><th>动量比重</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>黄金期货（主力）</td><td>动量 + Carry 混合</td><td>中</td><td>高</td></tr>
+        <tr><td>港股涡轮（POP 21796）</td><td>动量</td><td>低</td><td>高</td></tr>
+        <tr><td>Sell Put（多市场验证）</td><td>隐含 Carry</td><td>高</td><td>低</td></tr>
+        <tr><td>中国神华类高股息</td><td>纯 Carry</td><td>极高</td><td>极低</td></tr>
+      </tbody>
+    </table>
+
+    <div class="insight">库哥体系本质上是 <strong>Carry 主导 + 动量点缀</strong>——黄金期货是少数动量暴露较高的工具，需要特别注意动量/Carry 切换的边际定价者信号。</div>
+
+    <h3 class="subhead">催化跟踪表</h3>
+    <table>
+      <thead>
+        <tr><th>事件</th><th>跟踪指标</th><th>关联章节</th><th>状态</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>黄金阶段切换</td><td>央行 / 金融资本定价权</td><td>案例一</td><td><span class="chip amber">待持续跟踪</span></td></tr>
+        <tr><td>神华重估完成</td><td>隐含票息回归至 5%</td><td>案例二</td><td><span class="chip green">✅ 已发生</span></td></tr>
+        <tr><td>啤酒 Carry 化</td><td>高端价格带占比</td><td>范式陷阱</td><td><span class="chip">进行中</span></td></tr>
+        <tr><td>白酒范式转换</td><td>年轻消费场景</td><td>范式陷阱</td><td><span class="chip">模糊地带</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <div class="footer">
+    <div class="brand">库氏 Jarvis · 投研笔记</div>
+    <p>原始转录稿：<code>/tmp/podcast_transcript.txt</code>（3786 行，含完整时间戳）</p>
+    <p>GitHub：<code>references/20260607_vol69_momentum_carry_industry_strategy.md</code></p>
+    <p>双端同步：GitHub master + Gitee master</p>
+    <p style="margin-top:14px">📅 报告生成：2026-06-08 · 工具：faster-whisper base + HTML 排版</p>
+  </div>
+
+</div>
+</body>
+</html>
