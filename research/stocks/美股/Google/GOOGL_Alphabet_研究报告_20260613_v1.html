@@ -4,10 +4,8 @@ body { font-size: 11px; margin: 30px; line-height: 1.55; color: #222; }
 h1 { color: #1a1a1a; border-bottom: 3px solid #1a4d8c; padding-bottom: 6px; font-size: 18px; }
 h2 { color: #1a4d8c; margin-top: 18px; border-left: 5px solid #1a4d8c; padding-left: 8px; font-size: 14px; }
 h3 { color: #333; margin-top: 12px; font-size: 12px; }
-h4 { color: #444; font-size: 11px; }
 blockquote { border-left: 4px solid #e67e22; padding: 6px 10px; background: #fff8f0; margin: 10px 0; font-size: 10px; }
 code { background: #f5f5f5; padding: 1px 4px; border-radius: 2px; font-size: 10px; }
-pre { background: #f8f8f8; padding: 10px; border-radius: 4px; font-size: 9px; overflow-x: auto; }
 </style></head><body><blockquote>
 <p><strong>股票代码：</strong> GOOGL | <strong>全称：</strong> Alphabet Inc.（谷歌母公司）
 <strong>数据来源：</strong> ibeam Client Portal API（实盘权利金+筹码K线） + MiniMax web_search | <strong>报告日期：</strong> 2026-06-13
@@ -17,31 +15,34 @@ pre { background: #f8f8f8; padding: 10px; border-radius: 4px; font-size: 9px; ov
 </blockquote>
 <hr />
 <h1>GOOGL 筹码分布 + 期权策略 综合研究报告</h1>
-<h2>一、筹码成本分布分析</h2>
-<h3>1.1 三周期筹码全景</h3>
-<table style="width:100%;border-collapse:collapse;font-size:9px;margin:8px 0;"><thead><tr><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">周期</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">数据量</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">价格区间</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">VWAP</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">当前价</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">获利盘</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">乖离率</th></tr></thead><tbody><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">52周日K</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">251 bars</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">$165.75 - $401.06</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">**$278.61**</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">$360.65</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">**88.0%**</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">+29.4%</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">3月1hK</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">1000 bars</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">$272.67 - $405.16</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">**$350.84**</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">$360.65</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">47.3%</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">+2.8%</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">1周5minK</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">960 bars</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">$346.91 - $370.94</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">**$359.87**</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">$360.65</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">45.9%</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">+0.3%</td></tr></tbody></table>
+<h2>一、筹码成本分布分析（52周5分钟K线 — 41,360根）</h2>
+<blockquote>
+<p><strong>数据来源：</strong> IBKR history endpoint，52批 startTime 分页拉取 <code>period=1w bar=5min</code>
+<strong>覆盖范围：</strong> 2025-06-09 &#x2192; 2026-06-12 | 价格区间 $162.53 - $404.15</p>
+</blockquote>
+<h3>1.1 核心指标</h3>
+<table style="width:100%;border-collapse:collapse;font-size:9px;margin:8px 0;"><thead><tr><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">指标</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">数值</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">说明</th></tr></thead><tbody><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">K线数量</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">**41,360根**</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">52周全部5分钟K线</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">VWAP</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">**$271.81**</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">成交量加权均价</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">当前价</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">$360.88</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">6/12收盘</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">获利盘</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">**91.2%**</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">意味着九成以上持仓者浮盈</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">乖离率</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">**+32.8%**</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">现价远超全年平均成本</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">52周低</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">$162.53</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">一年前</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">52周高</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">$404.15</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">近期高点</td></tr></tbody></table>
 
-<h3>1.2 关键发现</h3>
-<p><strong>长期视角（52周日K）：</strong></p>
-<p>GOOGL一年内从$174.56涨至$360.65，涨幅+107%，全年VWAP仅$278.61。88%的持仓者处于盈利状态——这是巨大的获利了结压力。全年主要密集峰：
-- <strong>$176.83（6.3%）</strong>：早期低成本筹码，极度获利
-- <strong>$316.59（6.3%）</strong>：中期建仓区，当前获利约14%</p>
-<p><strong>中期视角（3月1hK）：</strong></p>
-<p>近3个月价格在$272-$405之间运行，VWAP $350.84。获利盘仅47.3%——说明近3个月入场的大部分持仓者成本集中在$340-$390区间。关键密集峰：
-- <strong>$387.71（7.4%）</strong>：近期高点附近的套牢盘，构成上行阻力
-- <strong>$363.36（5.1%）</strong>：当前价附近的关键博弈位
-- <strong>$339.02（3.0%）</strong>：下方支撑</p>
-<p><strong>短期视角（1周5minK）：</strong></p>
-<p>近一周呈现出<strong>双峰结构</strong>：
-- <strong>$364.60（10.6%）</strong> + <strong>$363.32（10.2%）</strong>：两个相邻密集峰构成短期强阻力带
-- <strong>$356.29（8.5%）</strong>：短期支撑位
-- 当前价$360.65正处于双峰下方、支撑上方的狭窄区间</p>
-<p><strong>筹码分布综合判断：</strong></p>
-<p><code>支撑位：$356（短期）&lt; $339（中期）&lt; $317（长期密集峰）
-阻力位：$364-365（短期双峰）&lt; $388（中期）&lt; $401（52周高点）
-当前价位：处于短期阻力下方、短期支撑上方，多空胶着</code></p>
-<p>&#x26A0; <strong>核心矛盾</strong>：全年获利盘88%意味着大量低成本筹码有获利了结动机；但近3月获利盘仅47%说明中期持仓者并未大幅盈利。真正的压力测试在$364-365双峰区——突破则打开上行空间，受阻则可能回踩$356支撑。</p>
-<hr />
+<h3>1.2 筹码峰分析</h3>
+<table style="width:100%;border-collapse:collapse;font-size:9px;margin:8px 0;"><thead><tr><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">排名</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">价格</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">占比</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">性质</th></tr></thead><tbody><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">&#x1F947;</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">**$176.67**</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">6.3%</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">&#x1F525;最大密集峰—早期建仓成本</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">&#x1F948;</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">$312.63</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">3.8%</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">中期积累区</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">&#x1F949;</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">$192.48</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">3.6%</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">早期次峰</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">4</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">$318.96</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">3.6%</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">中期次峰</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">5</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">$306.31</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">3.3%</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">中期建仓区</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">6</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">$252.56</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">3.3%</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">过渡期积累</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">7</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">$331.60</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">2.5%</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">近期突破前积累</td></tr></tbody></table>
+
+<h3>1.3 与简化三周期的关键差异</h3>
+<table style="width:100%;border-collapse:collapse;font-size:9px;margin:8px 0;"><thead><tr><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">指标</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">简化三周期</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">**52周5minK**</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">差异</th></tr></thead><tbody><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">数据量</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">2,211根</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">**41,360根**</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">19倍精度</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">VWAP</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">$278.61</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">**$271.81**</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">-$6.80</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">获利盘</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">88.0%</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">**91.2%**</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">+3.2pp</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">短期阻力</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">$364-365双峰</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">**不存在！**</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">&#x26A0; 致命误判</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">第一支撑</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">$356</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">**$313-$319**</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">差$43</td></tr></tbody></table>
+
+<h3>1.4 核心洞察</h3>
+<p><strong>&#x1F6A8; 简化三周期的"$364-365双峰阻力"是假象！</strong></p>
+<p>那是仅看1周5minK（960根）产生的误导——1周数据把近期窄幅震荡的高频成交当成了「阻力位」。52周全景（41,360根）清晰显示：<strong>$360以上几乎没有显著的筹码峰</strong>，上方阻力极小。</p>
+<p>真正的筹码结构：</p>
+<p><code>支撑位：$313-$319（中期积累，3.6-3.8%）&lt; $177-$192（早期成本，3.6-6.3%）
+阻力位：上方几乎真空——$360以上最大峰值仅2.5%（$331.60）
+当前价：$360.88，处于筹码真空区，上方无结构性阻力</code></p>
+<p><strong>这意味着什么？</strong>
+- &#x2705; 没有「套牢盘砸盘」的担忧——91.2%持仓者赚钱
+- &#x2705; 上方没有筹码阻力墙——突破后上行空间打开
+- &#x26A0; 唯一的风险：丰厚获利盘可能获利了结（$177区6.3%如果松动）
+- &#x26A0; 如果回撤，真正的支撑不在$356，而在$313-$319区</p>
+<h3>1.5 52周筹码分布图</h3>
+<p><img alt="筹码分布" src="MEDIA:/tmp/googl_chip_52w_5min.png" /></p>
 <h2>二、期权链结构与策略矩阵（IBKR实盘数据）</h2>
 <h3>2.1 期权链基本信息</h3>
 <ul>
@@ -92,10 +93,10 @@ pre { background: #f8f8f8; padding: 10px; border-radius: 4px; font-size: 9px; ov
 <h3>3.2 基本面分析 — 商业模式与护城河</h3>
 <p><strong>核心护城河：</strong>
 - &#x1F50D; 搜索引擎市场绝对垄断（全球搜索份额&gt;90%），$600亿+季度搜索广告收入
-- &#x2601; Google Cloud排名第三（仅次于AWS/Azure），但增速最快（+63%），AI驱动差异化
-- &#x1F916; <strong>AI先发优势</strong>：2017年发明Transformer架构，Gemini模型全面整合到搜索/云/Workspace
-- &#x1F4F1; Android生态锁定了30亿+设备入口
-- &#x1F3AC; YouTube是全球第二大搜索引擎+第一大视频平台</p>
+- ☁ Google Cloud排名第三（仅次于AWS/Azure），但增速最快（+63%），AI驱动差异化
+- 🤖 <strong>AI先发优势</strong>：2017年发明Transformer架构，Gemini模型全面整合到搜索/云/Workspace
+- 📱 Android生态锁定了30亿+设备入口
+- 🎬 YouTube是全球第二大搜索引擎+第一大视频平台</p>
 <p><strong>变革信号</strong>：Google正从纯广告公司向"AI公司"转型。Gemini付费用户达3.5亿，开始构建订阅收入第二曲线。</p>
 <h3>3.3 增长空间</h3>
 <ul>
@@ -141,10 +142,10 @@ pre { background: #f8f8f8; padding: 10px; border-radius: 4px; font-size: 9px; ov
 </ul>
 <h3>3.10 未来重要事件</h3>
 <ul>
-<li>&#x1F5D3; <strong>2026年7月下旬</strong>：Q2 2026财报发布</li>
-<li>&#x1F5D3; <strong>2026年Q3-Q4</strong>：Gemini AI眼镜正式上市</li>
-<li>&#x1F5D3; <strong>2026年</strong>：DOJ反垄断制裁方案落地</li>
-<li>&#x1F5D3; <strong>2026年底</strong>：Gemini付费用户目标5亿+</li>
+<li>🗓 <strong>2026年7月下旬</strong>：Q2 2026财报发布</li>
+<li>🗓 <strong>2026年Q3-Q4</strong>：Gemini AI眼镜正式上市</li>
+<li>🗓 <strong>2026年</strong>：DOJ反垄断制裁方案落地</li>
+<li>🗓 <strong>2026年底</strong>：Gemini付费用户目标5亿+</li>
 </ul>
 <h3>3.11 近期新闻摘要</h3>
 <ul>
@@ -176,12 +177,18 @@ pre { background: #f8f8f8; padding: 10px; border-radius: 4px; font-size: 9px; ov
 <table style="width:100%;border-collapse:collapse;font-size:9px;margin:8px 0;"><thead><tr><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">框架</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">评分</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">结论</th></tr></thead><tbody><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">Playbook</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">82/100</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">Strong Buy</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">Piotroski F-Score</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">9/9</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">Exceptional</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">DCF估值</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">$260-$450</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">当前接近基准情景</td></tr></tbody></table>
 
 <hr />
-<h2>五、投资结论与策略建议（基于实盘数据）</h2>
-<h3>5.1 筹码+期权联合研判</h3>
-<p><code>筹码结构：短期$364-365双峰阻力 ← 当前$360.65 &amp;#x2192; $356支撑
-期权实盘：IV偏低，Call极其便宜（6/18 $380C仅$0.83），买方市场主导
-核心策略：Bull Call Spread利用低成本博突破，若突破$365则上方无筹码阻力
-风险控制：若跌破$356支撑位，Bull Call应考虑止损；最大风险仅为净权利金</code></p>
+<h2>五、投资结论与策略建议（52周5minK + 实盘期权数据）</h2>
+<h3>5.1 筹码+期权联合研判（52周分钟K修正版）</h3>
+<p>```
+&#x1F6A8; 重大修正：简化三周期的"$364-365双峰阻力"是假象！
+52周41,360根5分钟K线揭示真相：
+  - 上方几乎无筹码阻力（$360以上最大峰仅2.5%）
+  - 真正的支撑远在$313-$319区
+  - 91.2%持仓者获利，无套牢盘砸盘压力
+  - 这是一张极其干净的上涨结构图</p>
+<p>期权实盘：IV偏低（$380C仅$0.83 vs BS估算$3.96），Call极其便宜
+核心策略：筹码结构支持突破上行 + 期权买方市场 = 极度有利
+```</p>
 <h3>5.2 推荐策略（实盘优先排序）</h3>
 <table style="width:100%;border-collapse:collapse;font-size:9px;margin:8px 0;"><thead><tr><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">优先级</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">策略</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">合约</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">实盘成本</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">R/R</th><th style="background:#1a4d8c;color:white;padding:4px 6px;text-align:left;border:1px solid #1a4d8c;font-size:9px;">理由</th></tr></thead><tbody><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">&#x1F947;</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">**Bull Call Spread**</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">**6/18 $380C/$400C**</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">**$70**</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">27.6x</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">&#x1F525;双高流动性(18k/14k)，仅需涨+5.6%保本</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">&#x1F948;</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">裸Buy Call</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">6/18 $380C</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">$83</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">—</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">最低成本高流动性，5天搏突破</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">&#x1F949;</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">Bull Call Spread</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">6/26 $400C/$410C</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">$31</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">31.3x</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">极限低成本，13天安全期</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">4</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">裸Buy Call</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">6/26 $400C</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">$65</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">—</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">OTM 10.9%有安全垫，13天充裕</td></tr><tr><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">5</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">Bull Call Spread</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">6/18 $375C/$385C</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">$92</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fafafa;font-size:9px;">9.9x</td><td style="padding:3px 6px;border:1px solid #ddd;background:#fff;font-size:9px;">仅需涨$15保本，高胜率</td></tr></tbody></table>
 
