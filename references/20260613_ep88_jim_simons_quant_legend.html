@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EP88 穿越量化之父西蒙斯 · 播客转录笔记</title>
+<style>
+  /* ===== Reset & Base ===== */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;font-size:16px;scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:#faf7f2;
+    color:#2b2a26;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* ===== Layout ===== */
+  .wrap{max-width:780px;margin:0 auto;padding:48px 28px 96px}
+
+  /* ===== Cover ===== */
+  .cover{
+    background:linear-gradient(135deg,#1a1814 0%,#2c2417 50%,#1a1814 100%);
+    color:#f5e9c8;
+    border-radius:18px;
+    padding:56px 40px 48px;
+    margin-bottom:48px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 12px 36px rgba(20,18,12,.18);
+  }
+  .cover::before{
+    content:"";
+    position:absolute;top:-50%;right:-30%;
+    width:520px;height:520px;
+    background:radial-gradient(circle,rgba(212,175,55,.25) 0%,rgba(212,175,55,0) 70%);
+    pointer-events:none;
+  }
+  .cover .eyebrow{
+    display:inline-block;
+    font-size:11px;letter-spacing:3px;font-weight:600;
+    color:#d4af37;text-transform:uppercase;
+    border:1px solid rgba(212,175,55,.4);
+    padding:5px 12px;border-radius:30px;
+    margin-bottom:22px;
+  }
+  .cover h1{
+    font-family:"Source Han Serif","Noto Serif CJK SC","Songti SC",serif;
+    font-size:38px;line-height:1.25;font-weight:700;
+    color:#fff;margin-bottom:14px;letter-spacing:.5px;
+  }
+  .cover .subtitle{
+    font-size:16px;color:rgba(245,233,200,.78);
+    margin-bottom:30px;line-height:1.6;
+  }
+  .cover .meta{
+    display:grid;grid-template-columns:repeat(2,1fr);
+    gap:14px 24px;
+    padding-top:24px;
+    border-top:1px solid rgba(212,175,55,.2);
+    font-size:13px;
+  }
+  .cover .meta-item{display:flex;flex-direction:column;gap:2px}
+  .cover .meta-label{color:rgba(245,233,200,.5);font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
+  .cover .meta-value{color:#f5e9c8;font-weight:500}
+
+  /* ===== Section Cards ===== */
+  .section{
+    background:#fff;
+    border-radius:14px;
+    padding:36px 36px 32px;
+    margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(40,30,15,.04);
+    border:1px solid #ece6d8;
+  }
+  .section-head{
+    display:flex;align-items:center;gap:14px;
+    margin-bottom:24px;padding-bottom:18px;
+    border-bottom:2px solid #f4ecd6;
+  }
+  .section-badge{
+    display:flex;align-items:center;justify-content:center;
+    width:48px;height:48px;border-radius:12px;
+    background:linear-gradient(135deg,#d4af37 0%,#b8941f 100%);
+    color:#fff;font-weight:700;font-size:20px;
+    font-family:"Source Han Serif","Noto Serif CJK SC",serif;
+    box-shadow:0 4px 10px rgba(212,175,55,.25);
+    flex-shrink:0;
+  }
+  .section-title{
+    font-family:"Source Han Serif","Noto Serif CJK SC","Songti SC",serif;
+    font-size:24px;font-weight:700;color:#1a1814;line-height:1.3;
+    flex:1;
+  }
+  .section-anchor{
+    display:inline-block;
+    font-size:11px;font-weight:600;letter-spacing:1px;
+    color:#a8893d;background:#fdf8e8;
+    padding:4px 10px;border-radius:20px;
+    border:1px solid #ebd9a4;
+  }
+
+  h3.subhead{
+    font-family:"Source Han Serif","Noto Serif CJK SC",serif;
+    font-size:17px;font-weight:600;color:#5a4a25;
+    margin:24px 0 12px;
+    padding-left:12px;
+    border-left:3px solid #d4af37;
+    line-height:1.4;
+  }
+
+  p{margin-bottom:14px;font-size:15.5px;color:#3a362d}
+  strong{color:#1a1814;font-weight:700;background:linear-gradient(transparent 60%,#fdf0c8 60%);padding:0 2px}
+
+  /* ===== Lists ===== */
+  ul,ol{margin:10px 0 16px;padding-left:24px}
+  li{margin-bottom:8px;font-size:15.5px;color:#3a362d}
+  li::marker{color:#c9a646}
+
+  /* ===== Blockquote / Pull-quote ===== */
+  blockquote{
+    position:relative;
+    background:linear-gradient(135deg,#fdf8e8 0%,#f9f0d4 100%);
+    border-left:4px solid #d4af37;
+    border-radius:0 10px 10px 0;
+    padding:20px 24px 20px 56px;
+    margin:18px 0;
+    font-size:15.5px;
+    color:#5a4a25;
+    font-style:italic;
+  }
+  blockquote::before{
+    content:"\201C";
+    position:absolute;
+    left:14px;top:6px;
+    font-family:Georgia,serif;
+    font-size:48px;line-height:1;
+    color:#d4af37;opacity:.5;
+  }
+  blockquote p{margin-bottom:6px;color:#5a4a25}
+  blockquote p:last-child{margin-bottom:0;font-style:normal;font-size:13px;color:#8a7434;font-weight:500}
+
+  /* ===== Tables ===== */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:18px 0 22px;
+    font-size:14.5px;
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 1px 4px rgba(40,30,15,.05);
+    border:1px solid #ece6d8;
+  }
+  thead{background:linear-gradient(180deg,#2c2417 0%,#1a1814 100%)}
+  th{
+    padding:13px 14px;
+    text-align:left;
+    color:#d4af37;
+    font-weight:600;
+    font-size:13px;letter-spacing:.5px;
+  }
+  td{
+    padding:12px 14px;
+    border-top:1px solid #f0e8d4;
+    color:#3a362d;
+    vertical-align:top;
+  }
+  tbody tr{transition:background .15s ease}
+  tbody tr:hover{background:#fdf8e8}
+  tbody tr:nth-child(even){background:#faf6ea}
+  tbody tr:nth-child(even):hover{background:#fdf3d4}
+
+  /* ===== Inline code & markers ===== */
+  code{
+    background:#f4ecd6;color:#5a4a25;
+    padding:1px 6px;border-radius:4px;
+    font-family:"SF Mono","Menlo",monospace;
+    font-size:13.5px;
+  }
+
+  /* ===== Annotation tags (✅ ⚠️ 🔮) ===== */
+  .tag-ok{color:#2e7d4f;font-weight:600}
+  .tag-warn{color:#b35900;font-weight:600}
+  .tag-guess{color:#5e5e8a;font-weight:600}
+
+  /* ===== Highlight box (推断) ===== */
+  .insight{
+    background:linear-gradient(135deg,#fff7e0 0%,#fceed5 100%);
+    border:1px solid #ebd9a4;
+    border-left:4px solid #d4af37;
+    border-radius:8px;
+    padding:14px 18px;
+    margin:16px 0;
+    font-size:14.5px;
+    color:#5a4a25;
+  }
+  .insight::before{
+    content:"💡 推断";
+    display:inline-block;
+    font-weight:700;color:#a8893d;
+    font-size:13px;letter-spacing:1px;
+    margin-right:6px;
+  }
+
+  /* ===== Data source tag row ===== */
+  .src-line{
+    display:flex;align-items:center;gap:8px;
+    font-size:12.5px;color:#8a7b58;
+    background:#f8f3e2;
+    padding:8px 14px;border-radius:6px;
+    margin:10px 0 16px;
+    border:1px dashed #e0d4a8;
+  }
+  .src-line::before{content:"🎙️";font-size:14px}
+
+  /* ===== Footer ===== */
+  .footer{
+    text-align:center;
+    margin-top:48px;padding:24px 16px;
+    color:#a89878;font-size:12.5px;
+    border-top:1px solid #ece6d8;
+  }
+  .footer a{color:#a8893d;text-decoration:none}
+  .footer .brand{
+    font-family:"Source Han Serif","Noto Serif CJK SC",serif;
+    font-size:14px;font-weight:600;
+    color:#5a4a25;margin-bottom:6px;
+  }
+
+  /* ===== TOC ===== */
+  .toc{
+    background:#fff;
+    border:1px solid #ece6d8;
+    border-radius:14px;
+    padding:24px 28px;
+    margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(40,30,15,.04);
+  }
+  .toc-title{
+    font-size:13px;font-weight:700;letter-spacing:1.5px;
+    color:#a8893d;
+    margin-bottom:14px;
+  }
+  .toc-list{list-style:none;padding:0;margin:0}
+  .toc-list li{margin:0;padding:0}
+  .toc-list a{
+    display:flex;align-items:center;gap:10px;
+    padding:8px 0;
+    color:#3a362d;text-decoration:none;
+    font-size:14.5px;
+    border-bottom:1px dashed #f0e8d4;
+    transition:color .15s;
+  }
+  .toc-list li:last-child a{border-bottom:none}
+  .toc-list a:hover{color:#a8893d}
+  .toc-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:22px;height:22px;border-radius:50%;
+    background:#f4ecd6;color:#a8893d;
+    font-size:11px;font-weight:700;
+    flex-shrink:0;
+  }
+
+  /* ===== Highlight header chip ===== */
+  .meta-row{
+    display:flex;flex-wrap:wrap;gap:8px;
+    margin:10px 0 18px;
+  }
+  .chip{
+    display:inline-flex;align-items:center;gap:4px;
+    font-size:12px;font-weight:500;
+    padding:5px 11px;border-radius:14px;
+    background:#fdf8e8;color:#5a4a25;
+    border:1px solid #ebd9a4;
+  }
+  .chip.dark{background:#1a1814;color:#d4af37;border-color:#3a3220}
+  .chip.green{background:#e8f5ec;color:#2e7d4f;border-color:#b8dec1}
+  .chip.amber{background:#fdf0c8;color:#8a5a00;border-color:#e6c878}
+
+  /* ===== Responsive ===== */
+  @media (max-width:640px){
+    .wrap{padding:24px 14px 60px}
+    .cover{padding:36px 24px 32px;border-radius:14px}
+    .cover h1{font-size:28px}
+    .cover .meta{grid-template-columns:1fr;gap:10px}
+    .section{padding:26px 20px 22px;border-radius:12px}
+    .section-title{font-size:20px}
+    .section-badge{width:40px;height:40px;font-size:17px}
+    th,td{padding:10px 8px;font-size:13px}
+    blockquote{padding:16px 18px 16px 44px}
+    blockquote::before{font-size:36px;left:10px;top:8px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ COVER ============ -->
+  <div class="cover">
+    <span class="eyebrow">Podcast · 投研笔记</span>
+    <h1>穿越量化之父西蒙斯</h1>
+    <div class="subtitle">EP88 · 一劳永逸"穿越大师"系列 · 文艺复兴科技的 39% 年化传奇</div>
+    <div class="meta">
+      <div class="meta-item">
+        <span class="meta-label">主播</span>
+        <span class="meta-value">@马尼森 · @马尼杰克</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">主角</span>
+        <span class="meta-value">Jim Simons（西蒙斯）</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">时长</span>
+        <span class="meta-value">68 分钟</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">发布</span>
+        <span class="meta-value">2026-05-17</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TOC ============ -->
+  <div class="toc">
+    <div class="toc-title">📑 目录</div>
+    <ul class="toc-list">
+      <li><a href="#s1"><span class="toc-num">1</span>西蒙斯其人：把市场当密码的数学家</a></li>
+      <li><a href="#s2"><span class="toc-num">2</span>量化方法论：50.75% 的赌场逻辑</a></li>
+      <li><a href="#s3"><span class="toc-num">3</span>文艺复兴的内部：开放协作 vs 行业黑箱</a></li>
+      <li><a href="#s4"><span class="toc-num">4</span>普通人的四条投资原则 ⭐</a></li>
+      <li><a href="#s5"><span class="toc-num">5</span>AI 大爆炸：谁是最大赢家？</a></li>
+      <li><a href="#s6"><span class="toc-num">6</span>加密货币 + 稳定币</a></li>
+      <li><a href="#s7"><span class="toc-num">7</span>市场状态切换：机制转换 vs 正常状态</a></li>
+      <li><a href="#s8"><span class="toc-num">8</span>被动投资的双刃剑</a></li>
+      <li><a href="#s9"><span class="toc-num">9</span>A 股量化：信号强，但政策是大变量</a></li>
+      <li><a href="#s10"><span class="toc-num">10</span>科技股 IPO 超级周期：2025-2026 估值警报</a></li>
+      <li><a href="#s11"><span class="toc-num">11</span>三句投资金句 + 库哥视角</a></li>
+    </ul>
+  </div>
+
+  <!-- ============ S1 ============ -->
+  <div class="section" id="s1">
+    <div class="section-head">
+      <div class="section-badge">壹</div>
+      <div class="section-title">西蒙斯其人：把市场当密码的数学家</div>
+      <span class="section-anchor">00:00 – 08:00</span>
+    </div>
+
+    <h3 class="subhead">文艺复兴科技 + 大奖章基金</h3>
+    <ul>
+      <li>文艺复兴科技 1982 年成立，旗舰基金<strong>大奖章基金（Medallion Fund）</strong>1988 年成立</li>
+      <li>30 多年扣费后年化 <strong>39%</strong>，扣费前高达 <strong>66%</strong></li>
+      <li>管理费 4% + 36% 业绩费 + 4% 利润分成 — "贵有贵的道理"</li>
+      <li>1993 年起对外部投资者<strong>关闭申购</strong>，2005 年起<strong>全员工资投资</strong> — 外界买不到</li>
+    </ul>
+
+    <h3 class="subhead">关键数据</h3>
+    <table>
+      <thead>
+        <tr><th>指标</th><th>数据</th><th>对比</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>大奖章年化（扣费后）</td><td>39%</td><td>vs 巴菲特 20% / 林奇 29%</td></tr>
+        <tr><td>大奖章年化（扣费前）</td><td>66%</td><td>巴菲特 / 林奇 1.5-2 倍</td></tr>
+        <tr><td>员工数</td><td>300 人</td><td>90 人拥有数学/物理/CS 博士</td></tr>
+        <tr><td>书架</td><td>无一本金融书</td><td>全是数学/物理/密码学</td></tr>
+        <tr><td>离职率</td><td>&lt; 1%</td><td>高分红 + 严苛竞业锁定</td></tr>
+      </tbody>
+    </table>
+
+    <blockquote>
+      <p>我这辈子没上过一堂金融课。</p>
+      <p>— 西蒙斯开场（2019 长岛访谈）</p>
+    </blockquote>
+
+    <h3 class="subhead">西蒙斯 vs 巴菲特 / 林奇：看企业 vs 看时间序列</h3>
+    <ul>
+      <li><span class="tag-ok">✅ 西蒙斯</span>：看时间序列数据，不在乎泡泡玛特卖什么、可口可乐好不好吃</li>
+      <li><span class="tag-ok">✅ 巴菲特</span>：看企业 — 股票后面是公司，公司后面是人和生意</li>
+      <li><span class="tag-ok">✅ 林奇</span>：投你所了解的 — 逛超市观察生活</li>
+    </ul>
+
+    <div class="insight">一旦产生"我看好"的想法，<strong>判断就被污染</strong> — 你会主动找看涨理由。普通投资者最危险的状态：研究完觉得自己懂，然后强化信念。</div>
+
+    <p style="color:#8a7b58;font-size:13px;margin-top:20px"><strong>个人背景</strong>：美国国防分析研究所（IDA）密码学家 → 因反战被开除 → 石溪大学数学系主任 → 1982 创立文艺复兴。2024 年 5 月过世，享年 86 岁。</p>
+  </div>
+
+  <!-- ============ S2 ============ -->
+  <div class="section" id="s2">
+    <div class="section-head">
+      <div class="section-badge">贰</div>
+      <div class="section-title">量化方法论：50.75% 的赌场逻辑</div>
+      <span class="section-anchor">08:00 – 17:00</span>
+    </div>
+
+    <h3 class="subhead">市场本质：待破解的密码</h3>
+    <p>西蒙斯看市场 = 看一堆<strong>随机但有规律的数据</strong>。这和他之前在 IDA 破译密码的工作本质相同 — <strong>从噪音里分离出信号</strong>。</p>
+
+    <ul>
+      <li>巴菲特 / 林奇 = 投"生意"</li>
+      <li>西蒙斯 = 投"密码"</li>
+      <li>公司内部原则：<strong>不要去理解为什么</strong>（vs 林奇"投你所了解的"）</li>
+    </ul>
+
+    <h3 class="subhead">关键演示：50.75% 的 1000 次重复</h3>
+    <p>西蒙斯画了条曲线，圈出三段走势：</p>
+    <ul>
+      <li>历史上一段曲线反复出现 <strong>1000 次</strong></li>
+      <li>每次未来 5 天上涨概率 <strong>50.75%</strong></li>
+      <li>单次没意义 → 1000 次 × 微小优势 × 杠杆 → 积少成多</li>
+    </ul>
+
+    <blockquote>
+      <p>赌场没有说上来就把你全部赚完的。我每次概率只比你多那么一点（49.5% vs 50%）。这就是赌场的逻辑。</p>
+      <p>— 西蒙斯</p>
+    </blockquote>
+
+    <h3 class="subhead">三个核心要素缺一不可</h3>
+    <table>
+      <thead>
+        <tr><th>要素</th><th>作用</th><th>常见误区</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>微弱但稳定的概率优势</td><td>50.75% 级别即可</td><td>追求 70%/80% → 不存在</td></tr>
+        <tr><td>严格的统计显著性</td><td>1000+ 次样本</td><td>30 次就梭哈</td></tr>
+        <tr><td>杠杆放大 + 不下重注</td><td>凯利公式思想</td><td>小赢大输</td></tr>
+      </tbody>
+    </table>
+
+    <div class="insight">西蒙斯反直觉观点：<strong>承认你不知道 + 接受微小优势 + 持续执行</strong> = 长期跑赢市场。这与林奇"投你所了解的"完全相反 — 是普通散户最难学的能力。</div>
+  </div>
+
+  <!-- ============ S3 ============ -->
+  <div class="section" id="s3">
+    <div class="section-head">
+      <div class="section-badge">叁</div>
+      <div class="section-title">文艺复兴的内部：开放协作 vs 行业黑箱</div>
+      <span class="section-anchor">17:00 – 20:00</span>
+    </div>
+
+    <h3 class="subhead">300 员工 / 90 博士的管理哲学</h3>
+    <ul>
+      <li>管理方法只有一个：<strong>不要假装自己懂他们做的东西</strong></li>
+      <li>老板不懂就不懂 — 装作懂 = 公司最大风险</li>
+      <li>请这些人来 = 因为他比我更懂某个方向</li>
+      <li>老板的工作 = <strong>给自由</strong>，不是管理</li>
+    </ul>
+
+    <h3 class="subhead">反行业惯例：所有代码对全公司公开</h3>
+    <table>
+      <thead>
+        <tr><th>维度</th><th>对冲基金行业惯例</th><th>文艺复兴</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>策略保密</td><td>每个团队策略都有黑箱</td><td><strong>整个公司就是一个大模型</strong></td></tr>
+        <tr><td>知识共享</td><td>互相之间不知道</td><td>所有代码/模型/论文对全公司公开</td></tr>
+        <tr><td>离职风险</td><td>黑箱保护</td><td>高分红 + 严苛竞业协议</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">双管齐下锁人</h3>
+    <ul>
+      <li>高比例分红（"离开也赚不到这么多"）</li>
+      <li>严苛的竞业协议</li>
+      <li>结果：<strong>离职率 &lt; 1%</strong>（比大部分企业低很多很多）</li>
+    </ul>
+
+    <blockquote>
+      <p>你不能因为一个季度难看就把整个系统推翻。要相信这个系统是可以继续工作的。</p>
+      <p>— 西蒙斯</p>
+    </blockquote>
+
+    <p style="color:#8a7b58;font-size:13px;margin-top:16px"><strong>对普通人的启发</strong>：散户最常犯的错就是"做了一个月失败了 → 换方法 → 下次又失败"，最后不知道是模型问题还是市场问题。耐心 = Trust the model。</p>
+  </div>
+
+  <!-- ============ S4 ============ -->
+  <div class="section" id="s4">
+    <div class="section-head">
+      <div class="section-badge">肆</div>
+      <div class="section-title">普通人的四条投资原则 ⭐</div>
+      <span class="section-anchor">20:00 – 25:00</span>
+    </div>
+
+    <p style="color:#8a7b58;font-size:13px;margin-bottom:20px">—— 西蒙斯给普通散户的核心建议</p>
+
+    <h3 class="subhead">为什么普通人做不了量化？</h3>
+    <p>西蒙斯原话："普通人做不了量化，不是不聪明，是缺三样东西：<strong>数据 / 计算资源 / 时间</strong>"</p>
+
+    <p>但如果你听懂了他做事的思维方式，<strong>你能避开市场上 80% 的坑</strong>。</p>
+
+    <h3 class="subhead">四条核心原则</h3>
+    <table>
+      <thead>
+        <tr><th>#</th><th>原则</th><th>核心要点</th><th>反面警示</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1️⃣</td>
+          <td><strong>承认你不知道</strong></td>
+          <td>每个交易都有对手盘，对方也看到你的信息</td>
+          <td>主观判断 = 先入为主 = 找理由强化信念</td>
+        </tr>
+        <tr>
+          <td>2️⃣</td>
+          <td><strong>小注分散</strong></td>
+          <td>高概率也不是 100%，不押全部资产</td>
+          <td>凯利公式：投 100 块和投 100 万都是错的</td>
+        </tr>
+        <tr>
+          <td>3️⃣</td>
+          <td><strong>自动化 + 逆情绪</strong></td>
+          <td>把规则写进程序，触发即执行</td>
+          <td>群聊狂热 = 极度贪婪信号 → 应离场</td>
+        </tr>
+        <tr>
+          <td>4️⃣</td>
+          <td><strong>小心过拟合</strong></td>
+          <td>机器学习的核心陷阱（考生背答案）</td>
+          <td>过去 30 年 1 月都涨 ≠ 1 月梭哈</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">防过拟合的三条具体做法</h3>
+    <ol>
+      <li><strong>不仅找规律，还要能解释机制</strong> — 解释不出 = 大概率巧合</li>
+      <li><strong>80% 数据建模 / 20% 数据检测</strong>（样本外测试）</li>
+      <li><strong>模型越简单越鲁棒（Robust）</strong> — 抗外部扰动 / 异常数据</li>
+    </ol>
+
+    <blockquote>
+      <p>机器可以是黑箱，但人不得盲目。研究员必须先有假设（先验），再用机器验证。机器随机挖出来的大概率是过拟合。</p>
+      <p>— 西蒙斯</p>
+    </blockquote>
+
+    <h3 class="subhead">仓位管理 > 选股</h3>
+    <ul>
+      <li>西蒙斯原话："在我们公司，<strong>风险管理是花最多人的部门</strong>，比做研究的人还多"</li>
+      <li>凯利公式最终逻辑：<strong>有把握时可以多投一些，但不要 all in</strong></li>
+    </ul>
+
+    <div class="insight">"过去 30 年 1 月都涨，所以 1 月梭哈" = 典型过拟合。样本内有显著性 ≠ 样本外有效。</div>
+  </div>
+
+  <!-- ============ S5 ============ -->
+  <div class="section" id="s5">
+    <div class="section-head">
+      <div class="section-badge">伍</div>
+      <div class="section-title">AI 大爆炸：谁是最大赢家？</div>
+      <span class="section-anchor">30:00 – 35:00</span>
+    </div>
+
+    <p style="color:#8a7b58;font-size:13px;margin-bottom:20px">—— 主持人以"2026 年穿越者"身份提问</p>
+
+    <h3 class="subhead">西蒙斯反问："AI 出现后，谁是最大赢家？"</h3>
+
+    <blockquote>
+      <p>每一次性技术出现，最大的赢家永远都是那些已经在这个领域有积累的人。互联网出现的时候，最大的赢家不是普通用户，是已经有内容、有渠道的公司。</p>
+      <p>— 西蒙斯</p>
+    </blockquote>
+
+    <ul>
+      <li><span class="tag-ok">✅ 西蒙斯判断</span>：AI 出现后最大赢家是<strong>有数据、有算力的玩家</strong>，不是散户</li>
+      <li>普通人 vs 顶级 AI：你能买 1000 元的英伟达，但他们能挖出 GPU 内部信号</li>
+    </ul>
+
+    <h3 class="subhead">AI 时代的量化变革</h3>
+    <table>
+      <thead>
+        <tr><th>维度</th><th>短期</th><th>长期</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>散户</td><td>AI 加成后更容易赚小钱</td><td>越来越难跑赢市场</td></tr>
+        <tr><td>小机构</td><td>门槛降低</td><td>被顶级机构碾压</td></tr>
+        <tr><td>顶级机构</td><td>信号发现速度差扩大</td><td>垄断超额收益</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">普通人的应对：换战场</h3>
+    <ul>
+      <li>不要在二级市场拼策略 — 你赢的概率非常低</li>
+      <li>普通人的优势 = <strong>时间长度</strong></li>
+      <li>机构有季度考核 / 客户赎回压力 / 杠杆约束</li>
+      <li>普通人<strong>可以拿 20 年</strong></li>
+    </ul>
+
+    <blockquote>
+      <p>普通人的最大武器不是选股精准度，而是<strong>耐性的长度</strong>。市场是把钱从缺乏耐性的人手里转移到有耐性的人手里的工具。</p>
+      <p>— 西蒙斯（与巴菲特/林奇殊途同归）</p>
+    </blockquote>
+  </div>
+
+  <!-- ============ S6 ============ -->
+  <div class="section" id="s6">
+    <div class="section-head">
+      <div class="section-badge">陆</div>
+      <div class="section-title">加密货币 + 稳定币</div>
+      <span class="section-anchor">35:00 – 42:00</span>
+    </div>
+
+    <h3 class="subhead">比特币：未开垦的肥肉，但西蒙斯不买</h3>
+    <p>从量化交易者角度，比特币是<strong>未开垦的肥肉</strong>，但西蒙斯本人不做：</p>
+    <ul>
+      <li><span class="tag-ok">✅ 肥肉原因</span>：24 小时交易 / 散户主导 / 情绪化 / 交易所大量价差 / 衍生品与现货脱节</li>
+      <li><span class="tag-ok">✅ 不做原因</span>：合规问题 + 容量上限 + 没有现金流</li>
+      <li>西蒙斯原话："如果我今天 30 岁，<strong>一定会创办一个加密量化基金</strong>"</li>
+    </ul>
+
+    <h3 class="subhead">对比特币的判断</h3>
+    <ul>
+      <li>没有现金流 → 价值完全靠"下一个人愿出更高价"</li>
+      <li>数学上无法证伪 → 不在框架内</li>
+      <li><strong>短期有大量套利 = 资产长期可能价值归零</strong>（反向信号）</li>
+      <li>只能作为<strong>交易标的</strong>，不是<strong>投资标的</strong></li>
+    </ul>
+
+    <h3 class="subhead">稳定币：美元霸权新基础设施 ⭐⭐</h3>
+    <table>
+      <thead>
+        <tr><th>指标</th><th>数据</th><th>对比</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>全球稳定币总市值</td><td>&gt; 2500 亿美元</td><td>持续增长</td></tr>
+        <tr><td>日链上交易量</td><td>&gt; Visa</td><td>已超传统支付</td></tr>
+        <tr><td>渗透国家</td><td>土耳其 / 尼日利亚 / 阿根廷</td><td>本币贬值国</td></tr>
+      </tbody>
+    </table>
+
+    <blockquote>
+      <p>美国没意识到，他们刚发明了一种<strong>新形态的美元</strong>。银行 / Swift / 代理行通道被绕过，普通人 5 分钟开个钱包就拥有美元。美元渗透率会暴增 — 以前渗透不到的地方现在都能渗透。</p>
+      <p>— 西蒙斯</p>
+    </blockquote>
+
+    <div class="insight">稳定币对美元的意义：跳过银行系统、跳过监管、跳过国界。<strong>美元霸权的新基础设施已悄然建成</strong> — 这是 2026 年最被低估的全球宏观趋势。</div>
+  </div>
+
+  <!-- ============ S7 ============ -->
+  <div class="section" id="s7">
+    <div class="section-head">
+      <div class="section-badge">柒</div>
+      <div class="section-title">市场状态切换：机制转换 vs 正常状态</div>
+      <span class="section-anchor">42:00 – 50:00</span>
+    </div>
+
+    <h3 class="subhead">西蒙斯市场分类法</h3>
+    <table>
+      <thead>
+        <tr><th>状态</th><th>特征</th><th>策略</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>正常状态</strong></td><td>统计规律有效</td><td>量化可以大行其道</td></tr>
+        <tr><td><strong>机制转换状态</strong><br>（Regime Shift）</td><td>游戏规则本身在变</td><td>所有历史方法全失效</td></tr>
+      </tbody>
+    </table>
+
+    <blockquote>
+      <p>我做了 40 年市场。市场有两种状态：正常状态（量化大行其道）和机制转换状态（历史方法全失效）。</p>
+      <p>— 西蒙斯</p>
+    </blockquote>
+
+    <h3 class="subhead">2026 年是不是机制转换期？</h3>
+    <ul>
+      <li><span class="tag-ok">✅ 西蒙斯判断</span>：AI 算不算机制转换？<strong>算</strong></li>
+      <li>不能完全相信历史规律 — 股票可能涨到 5 倍不回调</li>
+      <li>这是"全新的事情"</li>
+    </ul>
+
+    <h3 class="subhead">机制转换期，普通人应对三原则</h3>
+    <ol>
+      <li><strong>降低杠杆</strong> — 最大敌人不是判断错，是<strong>被动出局</strong>。要活下来。</li>
+      <li><strong>资产分散</strong> — 不相干篮子：股票 / 债券 / 黄金 / 现金 / 不同市场</li>
+      <li><strong>降低对自己判断的信心</strong> — 三个月研究在机制转换期可能归零</li>
+    </ol>
+
+    <div class="insight"><strong>关键洞察</strong>：量化最怕的不是波动，是<strong>规则变化</strong>。市场跌 50% 没关系（统计可适应），但规则变了模型就废。这也是西蒙斯不做 A 股量化的核心原因 — 政策是不可量化变量。</div>
+  </div>
+
+  <!-- ============ S8 ============ -->
+  <div class="section" id="s8">
+    <div class="section-head">
+      <div class="section-badge">捌</div>
+      <div class="section-title">被动投资的双刃剑</div>
+      <span class="section-anchor">50:00 – 57:00</span>
+    </div>
+
+    <h3 class="subhead">被动资金规模已超主动管理</h3>
+    <p>2026 年现状：全球指数基金 + ETF 规模<strong>已超过主动管理</strong>。西蒙斯立场：<strong>个人认为是好事</strong></p>
+
+    <ul>
+      <li>越多被动 → 越少主动选股 → 主动玩家更容易找到错误定价</li>
+      <li>"被动的钱越多，<strong>主动的钱越好做</strong>"</li>
+    </ul>
+
+    <h3 class="subhead">但隐藏三大隐患</h3>
+    <table>
+      <thead>
+        <tr><th>#</th><th>隐患</th><th>机制</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>泡沫和崩盘会更剧烈</td><td>没人做主动平衡，闭眼买指数</td></tr>
+        <tr><td>2</td><td>市场对信息反应变慢</td><td>好公司未必即时被奖励，坏公司未必即时被惩罚</td></tr>
+        <tr><td>3</td><td>价格发现功能被破坏</td><td>市场最重要的功能是给资产定合理价</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">对 90% 普通人的最终建议</h3>
+    <ul>
+      <li><strong>定投宽基 ETF</strong> + 长期持有 + 不折腾</li>
+      <li>用 1000 小时研究股票，最后跑赢指数 2% — <strong>这个机会成本比 2% 贵得多</strong></li>
+      <li>用指数投资省下时间 → 陪伴家人 / 健身 / 读书</li>
+    </ul>
+
+    <blockquote>
+      <p>投资是工具，<strong>生活才是目的</strong>。你用 1000 小时研究股票，最后跑赢指数 2%，这个时间按你的时薪算，可能比那两个百分点贵得多。</p>
+      <p>— 西蒙斯</p>
+    </blockquote>
+
+    <div class="insight">顶级的人讲的最后是同一件事 — 巴菲特、利弗莫尔、芒格、西蒙斯<strong>殊途同归：耐性 + 不要把投资当目的</strong>。</div>
+  </div>
+
+  <!-- ============ S9 ============ -->
+  <div class="section" id="s9">
+    <div class="section-head">
+      <div class="section-badge">玖</div>
+      <div class="section-title">A 股量化：信号强，但政策是大变量</div>
+      <span class="section-anchor">55:00 – 62:00</span>
+    </div>
+
+    <h3 class="subhead">A 股为什么信号更强（量化视角）</h3>
+    <ol>
+      <li><strong>散户多 / 韭菜多</strong> — 行为更情绪化、更可预测</li>
+      <li><strong>做空机制不完善</strong> — 错误定价难修正</li>
+      <li><strong>信息流通效率低</strong> — 地区/投资者反应时差大</li>
+    </ol>
+
+    <p>理论上，A 股是量化天堂。但西蒙斯本人不做：</p>
+
+    <ul>
+      <li>政策是不可量化变量</li>
+      <li>量化模型最大输入如果是"几个人的决定"，统计模型大概率失效</li>
+      <li>政策变化 → 规则变 → 模型全废</li>
+    </ul>
+
+    <h3 class="subhead">对 A 股量化的三条建议</h3>
+    <table>
+      <thead>
+        <tr><th>#</th><th>建议</th><th>原因</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>仓位比美国市场更保守</td><td>政策冲击可能瞬间归零</td></tr>
+        <tr><td>2</td><td>策略要分散</td><td>不过度集中</td></tr>
+        <tr><td>3</td><td>不依赖市场结构策略</td><td>做空 / 套利规则随时变</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">外资量化新动向（2026）</h3>
+    <ul>
+      <li>全球顶级量化 <strong>SIG（海纳国际）</strong> 准备在上海建立分布</li>
+      <li>主持人吐槽："一边建设量化生态，一边让量化收割自己"</li>
+      <li>未来趋势：海外量化进入 → 本土散户"可能不太够用了"</li>
+    </ul>
+
+    <div class="insight">A股量化最大风险不是波动，是<strong>政策</strong>。西蒙斯对 A 股量化的态度：<strong>仓位保守 + 策略分散 + 不依赖市场结构</strong> — 三个原则的根源都是"规则随时会变"。</div>
+  </div>
+
+  <!-- ============ S10 ============ -->
+  <div class="section" id="s10">
+    <div class="section-head">
+      <div class="section-badge">拾</div>
+      <div class="section-title">科技股 IPO 超级周期：2025-2026 估值警报 ⭐⭐⭐</div>
+      <span class="section-anchor">62:00 – 67:00</span>
+    </div>
+
+    <h3 class="subhead">三家头部未上市科技公司估值（2026）</h3>
+    <table>
+      <thead>
+        <tr><th>公司</th><th>估值</th><th>业务</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>SpaceX</td><td>&gt; 1 万亿</td><td>火箭 / 卫星</td></tr>
+        <tr><td>OpenAI</td><td>~ 8000 亿</td><td>大模型</td></tr>
+        <tr><td>Anthropic</td><td>~ 8000 亿</td><td>Claude 大模型</td></tr>
+        <tr style="background:#fdf0c8"><td><strong>合计</strong></td><td><strong>~ 2.6 万亿</strong></td><td><strong>超过整个印度股市前十大之和</strong></td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">西蒙斯的核心判断：AI 这一波像 90 年代互联网</h3>
+    <ul>
+      <li>泡沫的共同特征：<strong>"懂的人在卖，不懂的人在买"</strong></li>
+      <li>关键信号：创始人 / 早期员工 / 投资人开始大量套现</li>
+      <li><strong>SEC Form 4 内部人卖出数据</strong>是最直接的观察窗口</li>
+    </ul>
+
+    <h3 class="subhead">普通人对 IPO 的三条具体建议</h3>
+    <table>
+      <thead>
+        <tr><th>#</th><th>建议</th><th>核心逻辑</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1️⃣</td>
+          <td><strong>不赌单一公司</strong></td>
+          <td>哪怕坚信 AI 是未来，也不等于某家公司是未来 → 买宽基 / 行业 ETF</td>
+        </tr>
+        <tr>
+          <td>2️⃣</td>
+          <td><strong>IPO 后等 12-18 个月</strong></td>
+          <td>锁定期效应：6-12 个月解禁后会有抛压；最佳买入是<strong>承兑落定 + 预期落地</strong></td>
+        </tr>
+        <tr>
+          <td>3️⃣</td>
+          <td><strong>问自己：跌 50% 能不能拿</strong></td>
+          <td>"要跑"= 没真正研究过；"加仓"= 真有资格持有</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <blockquote>
+      <p>市场上最后被淘汰的，不是判断错的人，而是<strong>判断没底、被情绪带走的人</strong>。要嘛真懂，要嘛不要碰。</p>
+      <p>— 西蒙斯</p>
+    </blockquote>
+
+    <h3 class="subhead">1999 亚马逊的警示</h3>
+    <ul>
+      <li>1999 年亚马逊 IPO 价 ~$10，2024 年 ~$200（涨 20 倍）</li>
+      <li><strong>但 1999 年买入 → 2009 年才回本（10 年煎熬）</strong></li>
+      <li>"技术改变世界"和"我买这家公司能赚钱"之间，可能差 10 年</li>
+      <li>关键问题：<strong>你扛得住吗？</strong></li>
+    </ul>
+
+    <div class="insight">IPO 锁定期 12-18 个月原则是西蒙斯给的最具体可操作的策略 — 真正要买，等解禁后承兑落定再说。同时持续观察 <strong>Form 4 内部人卖出数据</strong>，这是判断泡沫破裂最早期的信号。</div>
+  </div>
+
+  <!-- ============ S11 ============ -->
+  <div class="section" id="s11">
+    <div class="section-head">
+      <div class="section-badge">终</div>
+      <div class="section-title">三句投资金句 + 库哥视角</div>
+      <span class="section-anchor">67:00 – 68:00</span>
+    </div>
+
+    <h3 class="subhead">给年轻人的三句金句</h3>
+    <p>主持人问："能不能给 2026 年刚开始投资的人一句话？"</p>
+    <p>西蒙斯答三句：</p>
+
+    <ol>
+      <li><strong>"Be guided by beauty"</strong>（被美所引导）— 看企业本质</li>
+      <li><strong>"Surround yourself with smart people"</strong>（和聪明人在一起）</li>
+      <li><strong>"Don't be a fool, easy"</strong>（不要放弃，但也不要做傻事）</li>
+    </ol>
+
+    <p>主持人吐槽：这些好像以前都听过了。西蒙斯回：</p>
+
+    <blockquote>
+      <p>真理是重要的东西不会变。市场每天变、技术每年变、AI 每月变，但小注分散、耐心、诚实面对自己、和优秀的人在一起 — 这些我从 1978 年到现在一直没变过。</p>
+      <p>— 西蒙斯</p>
+    </blockquote>
+
+    <h3 class="subhead">西蒙斯 vs 林奇：两个相反方向，同一个终点</h3>
+    <table>
+      <thead>
+        <tr><th>对比维度</th><th>林奇（费雪派）</th><th>西蒙斯（量化派）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>出发点</td><td>生活 — 你看到你用到你知道</td><td>市场 — 你看不到也算不出</td></tr>
+        <tr><td>核心方法</td><td>投你所了解的</td><td>承认你不知道</td></tr>
+        <tr><td>投资者类型</td><td>普通散户可学</td><td>需要顶级基础设施</td></tr>
+        <tr><td>最终建议</td><td>长期持有好公司</td><td>长期持有宽基 ETF</td></tr>
+        <tr style="background:#fdf0c8"><td><strong>共同终点</strong></td><td colspan="2" style="text-align:center"><strong>耐心 + 时间 + 不要把投资当目的</strong></td></tr>
+      </tbody>
+    </table>
+
+    <hr style="margin:32px 0;border:none;border-top:2px solid #f4ecd6">
+
+    <h3 class="subhead">📌 对库哥的核心启发</h3>
+
+    <ol>
+      <li>
+        <strong>对当前黄金期货的间接关联</strong>
+        <ul>
+          <li>被动资金 + ETF 规模超主动 → 价格发现变慢 → 黄金 ETF 也是同样机制</li>
+          <li>"耐心"是西蒙斯对普通人最重要的建议 — 与黄金期货长周期持有逻辑一致</li>
+        </ul>
+      </li>
+      <li>
+        <strong>对 RPS / 选股体系的反思</strong>
+        <ul>
+          <li>西蒙斯"承认你不知道" → 库哥 RPS 体系本质是数据驱动而非故事驱动，方向对</li>
+          <li>"防过拟合" → RPS 三线（50/120/250）已经是简化版，避免过拟合</li>
+        </ul>
+      </li>
+      <li>
+        <strong>对 A 股量化的态度</strong>
+        <ul>
+          <li>西蒙斯明确说政策是不可量化变量 — 库哥应继续"研究为主，量化为辅"</li>
+        </ul>
+      </li>
+      <li>
+        <strong>对科技股 IPO 投资纪律</strong>
+        <ul>
+          <li>"懂的人卖，不懂的人买" — 库哥可跟踪 SpaceX / OpenAI / Anthropic 上市后内部人 Form 4</li>
+          <li>IPO 锁定期 12-18 个月原则 — 真要买，等解禁后再说</li>
+        </ul>
+      </li>
+    </ol>
+
+    <div class="insight"><strong>最大的元启发</strong>：从西蒙斯到林奇到巴菲特，顶级投资者讲到最后是同一件事 — <strong>耐心 + 诚实 + 不要把投资当目的</strong>。库哥目前的 RPS 体系 + 黄金期货长周期持有 + 标普 500 长期持有的三角框架，已经踩在这条主线上。</div>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <div class="footer">
+    <div class="brand">播客转录笔记 · 一劳永逸 EP88</div>
+    <p>原始转录稿：<code>/tmp/openclaw/podcast_transcript.txt</code>（2710 段，含完整时间戳）</p>
+    <p>工具链：faster-whisper base → OpenCC 繁转简 → AI 结构化提炼</p>
+    <p style="margin-top:12px">📡 Git 双端同步：<a href="https://github.com/wintermelon27/agent_research">GitHub</a> · <a href="https://gitee.com/wintermeloncurry/agent_research">Gitee</a></p>
+  </div>
+
+</div>
+</body>
+</html>
