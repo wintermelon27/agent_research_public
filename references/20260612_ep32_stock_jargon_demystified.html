@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EP32 股市黑话祛魅 · 播客转录笔记</title>
+<style>
+  /* ===== Reset & Base ===== */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;font-size:16px;scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:#faf7f2;
+    color:#2b2a26;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* ===== Layout ===== */
+  .wrap{max-width:780px;margin:0 auto;padding:48px 28px 96px}
+
+  /* ===== Cover ===== */
+  .cover{
+    background:linear-gradient(135deg,#1a1814 0%,#2c2417 50%,#1a1814 100%);
+    color:#f5e9c8;
+    border-radius:18px;
+    padding:56px 40px 48px;
+    margin-bottom:48px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 12px 36px rgba(20,18,12,.18);
+  }
+  .cover::before{
+    content:"";
+    position:absolute;top:-50%;right:-30%;
+    width:520px;height:520px;
+    background:radial-gradient(circle,rgba(212,175,55,.25) 0%,rgba(212,175,55,0) 70%);
+    pointer-events:none;
+  }
+  .cover .eyebrow{
+    display:inline-block;
+    font-size:11px;letter-spacing:3px;font-weight:600;
+    color:#d4af37;text-transform:uppercase;
+    border:1px solid rgba(212,175,55,.4);
+    padding:5px 12px;border-radius:30px;
+    margin-bottom:22px;
+  }
+  .cover h1{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC","Songti SC",serif;
+    font-size:38px;line-height:1.3;font-weight:700;
+    color:#faf7f2;
+    margin-bottom:18px;
+    letter-spacing:-0.5px;
+  }
+  .cover .subtitle{
+    font-size:15px;line-height:1.7;
+    color:#d4af37;
+    margin-bottom:32px;
+    font-weight:500;
+  }
+  .cover .meta-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);
+    gap:18px 32px;
+    padding-top:24px;
+    border-top:1px solid rgba(212,175,55,.25);
+  }
+  .cover .meta-item{display:flex;flex-direction:column;gap:4px}
+  .cover .meta-label{font-size:11px;letter-spacing:1.5px;color:#a8893d;text-transform:uppercase;font-weight:600}
+  .cover .meta-value{font-size:14px;color:#f5e9c8;font-weight:500}
+
+  /* ===== TOC ===== */
+  .toc{
+    background:#fff;
+    border:1px solid #ece6d8;
+    border-radius:14px;
+    padding:32px 36px;
+    margin-bottom:36px;
+    box-shadow:0 2px 12px rgba(40,30,15,.04);
+  }
+  .toc-title{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:13px;font-weight:600;letter-spacing:1.5px;
+    color:#a8893d;
+    margin-bottom:20px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .toc-list{list-style:none}
+  .toc-list li{
+    display:flex;align-items:flex-start;gap:14px;
+    padding:10px 0;
+    border-bottom:1px solid #f4ecd6;
+  }
+  .toc-list li:last-child{border-bottom:none}
+  .toc-num{
+    flex-shrink:0;
+    width:26px;height:26px;border-radius:50%;
+    background:#d4af37;color:#1a1814;
+    font-size:12px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    margin-top:2px;
+  }
+  .toc-text{flex:1;font-size:14.5px;color:#2b2a26;line-height:1.5}
+  .toc-text strong{color:#a8893d;font-weight:600}
+  .toc-time{font-size:12px;color:#8a7b58;flex-shrink:0;font-family:monospace}
+
+  /* ===== Section ===== */
+  .section{
+    background:#fff;
+    border:1px solid #ece6d8;
+    border-radius:14px;
+    padding:36px 40px;
+    margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(40,30,15,.04);
+  }
+  .section-head{
+    display:flex;align-items:flex-start;gap:18px;
+    margin-bottom:24px;padding-bottom:18px;
+    border-bottom:2px solid #f4ecd6;
+  }
+  .section-badge{
+    flex-shrink:0;
+    width:44px;height:44px;border-radius:12px;
+    background:linear-gradient(135deg,#d4af37 0%,#a8893d 100%);
+    color:#1a1814;
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:20px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 10px rgba(168,137,61,.25);
+  }
+  .section-title-wrap{flex:1}
+  .section-title{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:24px;line-height:1.35;font-weight:700;
+    color:#1a1814;margin-bottom:6px;
+    letter-spacing:-0.3px;
+  }
+  .section-anchor{
+    font-size:12.5px;color:#8a7b58;
+    font-family:monospace;
+    display:flex;align-items:center;gap:6px;
+  }
+  .section-anchor::before{content:"⏱";font-size:11px}
+
+  /* ===== Subhead ===== */
+  .subhead{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:18px;font-weight:600;
+    color:#a8893d;
+    margin:28px 0 14px;
+    padding-left:14px;
+    border-left:3px solid #d4af37;
+    line-height:1.4;
+  }
+  .subhead:first-child{margin-top:0}
+
+  /* ===== Paragraph ===== */
+  p{margin-bottom:14px;font-size:15.5px;line-height:1.85;color:#2b2a26}
+  p strong{color:#1a1814;font-weight:600}
+
+  /* ===== Lists ===== */
+  ul,ol{margin:14px 0 18px;padding-left:24px}
+  ul li,ol li{margin-bottom:8px;font-size:15px;line-height:1.7}
+  ul li::marker{color:#d4af37}
+
+  /* ===== Table ===== */
+  .table-wrap{overflow-x:auto;margin:18px 0 22px;border-radius:10px;border:1px solid #ece6d8}
+  table{
+    width:100%;border-collapse:collapse;
+    font-size:14px;background:#fff;
+  }
+  thead{
+    background:linear-gradient(135deg,#1a1814 0%,#2c2417 100%);
+    color:#faf7f2;
+  }
+  th{
+    text-align:left;padding:14px 18px;
+    font-weight:600;font-size:13.5px;letter-spacing:0.3px;
+    color:#d4af37;
+    border-bottom:2px solid #d4af37;
+  }
+  td{
+    padding:13px 18px;
+    border-bottom:1px solid #f4ecd6;
+    color:#2b2a26;vertical-align:top;
+  }
+  tbody tr:nth-child(even) td{background:#fdfaf3}
+  tbody tr:hover td{background:#fdf8e8}
+  tbody tr:last-child td{border-bottom:none}
+  td code{font-family:monospace;background:#f4ecd6;color:#a8893d;padding:2px 6px;border-radius:4px;font-size:13px}
+
+  /* ===== Blockquote ===== */
+  blockquote{
+    position:relative;
+    margin:24px 0;
+    padding:24px 28px 24px 56px;
+    background:linear-gradient(135deg,#fdf8e8 0%,#f4ecd6 100%);
+    border-radius:12px;
+    border-left:4px solid #d4af37;
+    font-size:15.5px;line-height:1.85;
+    color:#2b2a26;
+  }
+  blockquote::before{
+    content:"\201C";
+    position:absolute;top:8px;left:18px;
+    font-family:"Source Han Serif SC",serif;
+    font-size:56px;font-weight:700;
+    color:#d4af37;
+    line-height:1;opacity:0.4;
+  }
+  blockquote p{margin-bottom:6px}
+  blockquote p:last-child{margin-bottom:0}
+  blockquote .cite{
+    display:block;margin-top:10px;
+    font-size:13px;color:#a8893d;
+    font-style:normal;font-weight:600;
+  }
+
+  /* ===== Insight Box ===== */
+  .insight{
+    margin:22px 0;
+    padding:20px 24px;
+    background:linear-gradient(135deg,#fef9e7 0%,#fdf3d0 100%);
+    border:1px solid #f0d896;
+    border-radius:10px;
+    font-size:14.5px;line-height:1.75;
+    color:#5a4a25;
+  }
+  .insight::before{
+    content:"💡 ";
+    margin-right:6px;
+  }
+  .insight strong{color:#a8893d;font-weight:600}
+
+  /* ===== Chip ===== */
+  .chip{
+    display:inline-block;
+    padding:3px 10px;border-radius:12px;
+    font-size:12px;font-weight:600;letter-spacing:0.3px;
+    vertical-align:middle;
+  }
+  .chip-ok{background:#e8f3ec;color:#2e7d4f;border:1px solid #b5dac3}
+  .chip-warn{background:#fef3e0;color:#b35900;border:1px solid #f0c98c}
+  .chip-guess{background:#ebeaf2;color:#5e5e8a;border:1px solid #c5c3d8}
+  .chip-default{background:#f4ecd6;color:#a8893d;border:1px solid #e0d4a8}
+
+  /* ===== Inline code ===== */
+  code{
+    font-family:"SF Mono",Consolas,monospace;
+    background:#fdf8e8;color:#a8893d;
+    padding:2px 7px;border-radius:5px;
+    font-size:13.5px;
+  }
+
+  /* ===== Footer ===== */
+  .footer{
+    margin-top:56px;padding-top:28px;
+    border-top:2px dashed #ece6d8;
+    text-align:center;
+    font-size:13px;color:#8a7b58;line-height:1.7;
+  }
+  .footer .brand{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:15px;font-weight:600;
+    color:#a8893d;margin-bottom:8px;
+  }
+  .footer .sync{
+    margin-top:10px;display:flex;justify-content:center;gap:14px;
+    font-size:12px;flex-wrap:wrap;
+  }
+  .footer .sync span{
+    padding:3px 10px;background:#fff;border:1px solid #ece6d8;
+    border-radius:20px;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width:640px){
+    .wrap{padding:32px 16px 64px}
+    .cover{padding:40px 24px 32px;border-radius:14px}
+    .cover h1{font-size:28px}
+    .cover .meta-grid{grid-template-columns:1fr;gap:14px}
+    .section{padding:24px 22px;border-radius:12px}
+    .section-title{font-size:20px}
+    .toc{padding:22px 22px}
+    .table-wrap{margin:14px -4px}
+    th,td{padding:10px 12px;font-size:12.5px}
+    blockquote{padding:20px 20px 20px 44px;font-size:14.5px}
+    blockquote::before{font-size:44px;top:6px;left:12px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- =================== COVER =================== -->
+  <div class="cover">
+    <span class="eyebrow">财搭子 · 发财搭子</span>
+    <h1>EP32 股市黑话祛魅<br>技术面的底层原理</h1>
+    <p class="subtitle">涨停板的溢价 / 龙头战法 / 高低切 — 把术语拆回价格、成交量、承接、资金拥挤、情绪</p>
+    <div class="meta-grid">
+      <div class="meta-item">
+        <span class="meta-label">主播</span>
+        <span class="meta-value">马克汤（发财搭子）</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">时长</span>
+        <span class="meta-value">41 分钟</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">录制</span>
+        <span class="meta-value">2026-06-12 20:00</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">发布</span>
+        <span class="meta-value">2026-06-16 · 小宇宙</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== TOC =================== -->
+  <nav class="toc">
+    <div class="toc-title">📑 目录 · Table of Contents</div>
+    <ol class="toc-list">
+      <li><span class="toc-num">1</span><span class="toc-text"><strong>技术面为何重要</strong> — 行动比语言更真实</span><span class="toc-time">00:38</span></li>
+      <li><span class="toc-num">2</span><span class="toc-text"><strong>基础概念祛魅</strong> — 成交量 / 换手率 / 支撑阻力位</span><span class="toc-time">04:51</span></li>
+      <li><span class="toc-num">3</span><span class="toc-text"><strong>涨停板四态</strong> — 封板 / 开板 / 炸板 / 烂板</span><span class="toc-time">08:44</span></li>
+      <li><span class="toc-num">4</span><span class="toc-text"><strong>承接</strong> — 开板后最该看的指标</span><span class="toc-time">12:22</span></li>
+      <li><span class="toc-num">5</span><span class="toc-text"><strong>核按钮 vs 反核</strong> — 流动性挤兑的两种结局</span><span class="toc-time">13:47</span></li>
+      <li><span class="toc-num">6</span><span class="toc-text"><strong>如何识别主线</strong> — 三个条件 + 经受考验</span><span class="toc-time">19:15</span></li>
+      <li><span class="toc-num">7</span><span class="toc-text"><strong>龙头 / 中军 / 后排</strong> — 题材三段式分工</span><span class="toc-time">26:57</span></li>
+      <li><span class="toc-num">8</span><span class="toc-text"><strong>高低切 & 高位抱团风险</strong></span><span class="toc-time">31:32</span></li>
+      <li><span class="toc-num">9</span><span class="toc-text"><strong>格局 / 洗盘 / 出货</strong> — 屁股决定脑袋</span><span class="toc-time">34:40</span></li>
+      <li><span class="toc-num">10</span><span class="toc-text"><strong>长期 vs 短线</strong> — 关注分野</span><span class="toc-time">收尾</span></li>
+    </ol>
+  </nav>
+
+  <!-- =================== SECTION 1 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">壹</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">技术面为何重要——行动比语言更真实</h2>
+        <div class="section-anchor">00:38</div>
+      </div>
+    </div>
+
+    <blockquote>
+      <p>技术面这些词拆开，本质上还是在告诉我们<strong>价格现在是怎么动的、资金是怎么动的、人心又是怎么变的</strong>。</p>
+      <p>不要把"盘面状态"误读成"必然结论"。</p>
+      <span class="cite">— 马克汤</span>
+    </blockquote>
+
+    <div class="subhead">核心论点</div>
+    <p><strong>想法可以骗人，行动不会骗人。</strong>K 线、成交量、换手率是买卖双方在市场上留下的"痕迹"。</p>
+    <p>一只股票在盘中可能没有任何公告/新闻，但股价仍在动 → 一定是市场情绪和资金在博弈。技术面记录了买卖双方出手的痕迹和表象，<strong>不能完全证明动机，也不能预测未来</strong>，但能帮助识别基础的风险和机会。</p>
+
+    <div class="subhead">长期 vs 短线的关注分野</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>视角</th><th>关注重点</th></tr></thead>
+        <tbody>
+          <tr><td>长期</td><td>产业变动、定单、财务业绩</td></tr>
+          <tr><td>短线</td><td>技术面 + 资金面 + 情绪面</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="insight">
+      这条原则（"痕迹 &gt; 言论"）其实是技术分析合法性的根本论据。Fama 的 EMH 理论否定短线技术分析，但这期播客的论证路径是"市场参与者的共识"而非"价格包含一切信息"，避开了 EMH 的硬核冲突。
+    </div>
+  </section>
+
+  <!-- =================== SECTION 2 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">贰</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">基础概念祛魅——市场共识，不是黄金铁律</h2>
+        <div class="section-anchor">04:51</div>
+      </div>
+    </div>
+
+    <div class="subhead">2.1 四个基础概念</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>术语</th><th>含义</th><th>关键信号</th></tr></thead>
+        <tbody>
+          <tr><td><strong>成交量 / 成交额</strong></td><td>多少手 / 总金额</td><td>放量 = 资金参与度高；缩量 = 关注度低</td></tr>
+          <tr><td><strong>换手率</strong></td><td>高换手</td><td>反映筹码交换（承接）还是分歧（震荡）</td></tr>
+          <tr><td><strong>支撑位</strong></td><td>跌到此价附近买盘变多的位置</td><td>人为共识（均线、画线、历史密集区）</td></tr>
+          <tr><td><strong>阻力位</strong></td><td>涨到此价附近卖盘变多的位置</td><td>同上</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subhead">2.2 关键心法：动态性</div>
+    <blockquote>
+      <p>我们一定要动态地去理解支撑位到底是什么意思，<strong>不要把它当成一条黄金铁率</strong>。</p>
+      <span class="cite">— 马克汤</span>
+    </blockquote>
+
+    <p>支撑位/阻力位的本质都是市场参与者的共识，会动态变化。</p>
+
+    <div class="subhead">支撑位失效的信号</div>
+    <ul>
+      <li>跌到位置后没人接盘</li>
+      <li>下来的速度变快</li>
+      <li>成交量放大 + 放量突破 → 完蛋，支撑位失效</li>
+    </ul>
+
+    <div class="subhead">阻力位突破的信号</div>
+    <ul>
+      <li>跑到阻力位时放量突破</li>
+      <li>大家认为阻力位不再是阻力</li>
+      <li>资金继续涌入 → 吸引更多资金 → 寻找下一个阻力位</li>
+    </ul>
+
+    <div class="insight">
+      这是经典的"支撑位 → 阻力位"角色互换逻辑（Support becomes Resistance, S/R Flip）。技术派的核心交易信号之一，但可靠性高度依赖个股的流动性结构和参与者结构。
+    </div>
+  </section>
+
+  <!-- =================== SECTION 3 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">叁</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">涨停板四态——A 股的特色机制</h2>
+        <div class="section-anchor">08:44</div>
+      </div>
+    </div>
+
+    <div class="subhead">3.1 涨跌幅限制</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>板块</th><th>单日涨跌幅限制</th></tr></thead>
+        <tbody>
+          <tr><td>主板</td><td>±10%</td></tr>
+          <tr><td>创业板、科创板</td><td>±20%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subhead">3.2 "打板"策略的底层逻辑</div>
+    <blockquote>
+      <p>打板 = 股票涨幅超过 9% 加速到 10% 时买入。</p>
+      <p>赌的不是 9.5% → 10% 的 0.5% 差价，而是<strong>第二天早上还能吃到溢价</strong>（高开一点点直接卖出）。</p>
+    </blockquote>
+
+    <p><strong>为什么 A 股打板胜率高？</strong></p>
+    <ul>
+      <li>限制幅度制造"价格停住"现象</li>
+      <li>市场对利好预期 = 20-30 个点，但实际只涨 10% 就停</li>
+      <li>→ 第二天接着再上一个板（"连板"）</li>
+      <li>量化基金速度快，能抢到 9.5% → 10% 的瞬间</li>
+    </ul>
+
+    <div class="insight">
+      "打板套利"的存在依赖 A 股的特殊涨跌幅制度。如果未来 T+0 或放宽涨跌幅，套利空间会消失。打板策略容量极小，量化主导，散户难以持续盈利。
+    </div>
+
+    <div class="subhead">3.3 涨停板的四种状态</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>术语</th><th>状态</th><th>含义</th></tr></thead>
+        <tbody>
+          <tr><td><strong>封板</strong></td><td>涨停后没人卖只有人买</td><td>价格"死住"，第二天可能继续往上</td></tr>
+          <tr><td><strong>开板</strong></td><td>涨停后被卖盘打开</td><td>卖盘出现 + 买盘没跟上 → 价格回落</td></tr>
+          <tr><td><strong>炸板</strong></td><td>开板后卖盘更猛烈地砸</td><td>"门被吹开" → 信心崩盘</td></tr>
+          <tr><td><strong>烂板</strong></td><td>开板后反复在涨停价附近震荡</td><td>资金分歧严重，封得不彻底</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>烂板的核心特征：</strong>10% → 下来 → 10% → 下来 → 来回拉锯，反映资金不认可这个价格，信心不足。</p>
+  </section>
+
+  <!-- =================== SECTION 4 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">肆</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">承接——开板后最该看的指标</h2>
+        <div class="section-anchor">12:22</div>
+      </div>
+    </div>
+
+    <blockquote>
+      <p>承接 = 跌下来后<strong>有没有买盘接住 + 接回来</strong>。</p>
+    </blockquote>
+
+    <div class="subhead">承接的两层判断</div>
+    <ol>
+      <li><strong>接不接得住</strong> — 卖盘出来后有没有买盘出现</li>
+      <li><strong>接完稳不稳</strong> — 接住后能否推回去</li>
+    </ol>
+
+    <div class="subhead">承接的两种结局</div>
+    <ul>
+      <li>接住了 + 推上去 → 健康，市场分歧未散</li>
+      <li>没接住 → 卖压压过买压 → 直接变成<strong>炸板</strong></li>
+    </ul>
+
+    <div class="insight">
+      "承接"是这期播客里最被强调的实战指标。它本质上是 Level-2 行情（买一到买五、卖一到卖五）的实时解读，普通人只能看 K 线分时，但机构能看到逐笔成交。
+    </div>
+
+    <blockquote>
+      <p>如果大家是玩短线的，那你也捧好好上班了，你基本上就没办法好好上班，因为你一直得盯着那个线。</p>
+      <span class="cite">— 马克汤</span>
+    </blockquote>
+  </section>
+
+  <!-- =================== SECTION 5 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">伍</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">核按钮 vs 反核——流动性挤兑的两种结局</h2>
+        <div class="section-anchor">13:47</div>
+      </div>
+    </div>
+
+    <div class="subhead">5.1 核按钮 = 集体踩踏</div>
+    <blockquote>
+      <p>核按钮 = 开盘低开快速下杀 → 砸到跌停。</p>
+    </blockquote>
+
+    <p><strong>触发机制：</strong></p>
+    <ul>
+      <li>集体踩踏 → 没有承接地往下跌</li>
+      <li>9:25 集合竞价结束核心票低开 8% = 很多卖盘已经按核按钮了</li>
+      <li>本质是<strong>"流动性挤兑"</strong>：从抢着买 → 抢着卖</li>
+      <li>大家不讨论价格合不合理，只讨论"我能不能先出去再说"</li>
+    </ul>
+
+    <div class="subhead">5.2 反核 = 接飞刀</div>
+    <blockquote>
+      <p>反核 = 别人恐慌我贪婪，深跌后逆势买入。</p>
+    </blockquote>
+
+    <p><strong>反核的判断维度</strong>（决定是"成功"还是"接刀"）：</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>阶段</th><th>核按钮出现 = ？</th></tr></thead>
+        <tbody>
+          <tr><td>题材<strong>刚走强</strong>时</td><td>大分歧，但有修复机会</td></tr>
+          <tr><td>题材<strong>退潮</strong>时</td><td>还没结束，下跌加速</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>反核成功的关键信号：</strong></p>
+    <ul>
+      <li>跌停的加速减少</li>
+      <li>板块核心票止跌</li>
+      <li>指数没有继续往下砸</li>
+      <li>恐慌<strong>没有扩散</strong>到中军/后排</li>
+    </ul>
+
+    <p><strong>反核失败的特征：</strong>龙头票核按钮跌停 + 没有承接 → 后排/中军扛不住 → 恐慌扩散。</p>
+
+    <div class="insight">
+      "反核"是 A 股独有的流动性叙事。播客里没有提到的是：反核策略在小盘题材股上有效性远高于大盘股，因为小盘股流动性挤兑后修复弹性大。
+    </div>
+  </section>
+
+  <!-- =================== SECTION 6 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">陆</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">如何识别"主线"——市场共识 + 用脚投票</h2>
+        <div class="section-anchor">19:15</div>
+      </div>
+    </div>
+
+    <blockquote>
+      <p>主线 = 短线语境下"<strong>市场共识的故事 + 资金共同的买卖</strong>"。</p>
+    </blockquote>
+
+    <div class="subhead">6.1 主线的三个条件</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>条件</th><th>检验方式</th></tr></thead>
+        <tbody>
+          <tr><td><strong>故事硬</strong></td><td>来自最新政策 / 产业趋势 / 技术变化 / 大事件催化</td></tr>
+          <tr><td><strong>故事有纵深</strong></td><td>不是一个点，是一条产业链（机器人 → 减速器 → 传感器 → 控制器）</td></tr>
+          <tr><td><strong>市场用脚投票</strong></td><td>成交量大、涨停有扩散、板块指数强势</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subhead">6.2 主线的"经历考验"标准</div>
+    <p>真正的成熟主线必须经得起第一次大分歧：</p>
+    <ol>
+      <li>当天涨得好 + 故事硬 → 板块热度确认</li>
+      <li>出现卖盘分歧 → 第一次考验</li>
+      <li><strong>关键看分歧后：</strong>
+        <ul>
+          <li>前排能修复 ✅</li>
+          <li>中军能稳住 ✅</li>
+          <li>后排持续扩散 ✅</li>
+          <li>承接住抛压 ✅</li>
+        </ul>
+      </li>
+      <li>= 成熟主线</li>
+    </ol>
+
+    <div class="subhead">6.3 伪主线的特征（"一日游"）</div>
+    <ul>
+      <li>第一天高开 → 下午落下来</li>
+      <li>第二天没人讨论</li>
+      <li>持续低走，没有亮点</li>
+    </ul>
+
+    <div class="subhead">6.4 主线案例：人形机器人板块</div>
+    <p>播客提到去年的人形机器人主线（<span class="chip chip-warn">历史案例</span>，仅作教学）：</p>
+    <ul>
+      <li>Day 1：十几支票涨停</li>
+      <li>Day 2：热度未散，从减速器扩散到传感器</li>
+      <li>Day 3：分歧日，后排回落，但核心小盘股仍能封板，中军未破趋势</li>
+      <li>Day 4：资金回流，第一梯队的分支开始补涨</li>
+      <li>= 经典主线叙事</li>
+    </ul>
+  </section>
+
+  <!-- =================== SECTION 7 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">柒</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">龙头 / 中军 / 后排——题材三段式分工</h2>
+        <div class="section-anchor">26:57</div>
+      </div>
+    </div>
+
+    <blockquote>
+      <p>龙头战法 = 在主线题材里识别三类标的。</p>
+    </blockquote>
+
+    <div class="subhead">三种角色的核心特征</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>角色</th><th>核心特征</th><th>用途</th><th>风险</th></tr></thead>
+        <tbody>
+          <tr><td><strong>龙头</strong></td><td>最具人气，打出情绪高度，"破圈票"</td><td>题材情绪的标杆</td><td>散户难介入，容易"站岗"</td></tr>
+          <tr><td><strong>中军</strong></td><td>市值大、成交量大、走势稳、压舱石</td><td>判断题材能否稳住</td><td>涨幅有限，需配合资金动向</td></tr>
+          <tr><td><strong>后排</strong></td><td>关注度弱，产业链下游/上游</td><td>题材扩散的潜力</td><td>退潮时最先被遗忘</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subhead">龙头战法的难点</div>
+    <blockquote>
+      <p>龙头战法听着就能挣钱是吧，但<strong>龙头并不一定是普通散户能玩着来的东西</strong>。</p>
+    </blockquote>
+    <ul>
+      <li>人气最高的票 → 等你识别完主线准备进 → 已经涨停连板</li>
+      <li>等你追进去 → 接盘 / 站岗</li>
+      <li>真正能赚到龙头钱 = 在<strong>冰点/分歧日</strong>识别"没破位" → 介入</li>
+    </ul>
+
+    <div class="subhead">中军的关键作用</div>
+    <blockquote>
+      <p>中军是我们用来判断题材在分歧时能不能稳住的重要指标。</p>
+    </blockquote>
+    <p><strong>核心原则：玩龙头也要看中军。</strong></p>
+    <ul>
+      <li>中军稳 = 题材稳</li>
+      <li>中军不稳 = 资金开始漏</li>
+      <li>资金一漏 = 板块被打下来 = 大主线进入退潮</li>
+    </ul>
+
+    <div class="subhead">后排的本质</div>
+    <ul>
+      <li>龙头炒完 → 中军炒完 → 资金往上游/下游挖 → 才轮到后排</li>
+      <li>后排参与时间晚</li>
+      <li>退潮时最先退潮</li>
+      <li>唯一的安全垫 = 变成新主线的核心环节</li>
+    </ul>
+
+    <div class="subhead">总结性金句</div>
+    <div class="insight">
+      <strong>龙头</strong> = 整个题材的<strong>情绪高度</strong><br>
+      <strong>中军</strong> = 整个题材的<strong>资金容量</strong><br>
+      <strong>后排</strong> = 题材扩散的<strong>潜力和质量</strong>
+    </div>
+
+    <div class="insight">
+      这是经典 A 股题材炒作的"三段式"分工：情绪（龙头）→ 容量（中军）→ 扩散（后排）。投资者风险偏好匹配不同角色——激进选龙头，稳健选中军，潜伏选后排。
+    </div>
+  </section>
+
+  <!-- =================== SECTION 8 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">捌</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">高低切 & 高位抱团风险</h2>
+        <div class="section-anchor">31:32</div>
+      </div>
+    </div>
+
+    <div class="subhead">8.1 高低切</div>
+    <blockquote>
+      <p>高低切 = 资金从<strong>高位热门板块</strong> → 切换到<strong>低位/便宜/安全</strong>方向。</p>
+    </blockquote>
+
+    <p><strong>典型案例（播客举例）：</strong></p>
+    <ul>
+      <li>AI 硬件 → 白酒</li>
+      <li>AI 硬件 → 银行</li>
+    </ul>
+
+    <p><strong>触发条件：</strong></p>
+    <ul>
+      <li>龙头已翻倍</li>
+      <li>中军已涨很多</li>
+      <li>大家觉得方向太拥挤 → 撤出来</li>
+      <li>资金总要找地方去 → 切到便宜方向</li>
+    </ul>
+
+    <div class="subhead">8.2 高切高</div>
+    <blockquote>
+      <p>高切高 = 资金<strong>不撤到低位</strong>，只在强势板块/强势股之间切换。</p>
+    </blockquote>
+
+    <p><strong>典型案例（播客举例）：</strong>AI 内部：CPU → 存储 → PCB</p>
+    <p><strong>含义：</strong>市场整体风险偏好还在，不选安全边际更高的方向，选更有辨识度、更主动的高位核心。</p>
+
+    <div class="subhead">8.3 ⚠️ 高位抱团的危险信号</div>
+    <blockquote>
+      <p>现在的市场处于一个高位抱团的状态……<strong>对于我们散户来说，这种时候就是危险系数非常高的时候</strong>。</p>
+      <span class="cite">— 马克汤</span>
+    </blockquote>
+
+    <p><strong>抱团恶化的几个特征：</strong></p>
+    <ul>
+      <li>资金一直留在高位，<strong>不去切</strong></li>
+      <li>场内的买盘越来越少</li>
+      <li>板块越来越拥挤</li>
+      <li>只在强势股之间切 → 节奏快、波动大</li>
+      <li>"一天天都是上上下下的，速度也很快"</li>
+      <li>→ 一旦开始找人接盘，<strong>杀伤力会很大</strong></li>
+    </ul>
+
+    <div class="insight">
+      高位抱团 = 拥挤交易 + 风险偏好未消退。历史上多次抱团瓦解的导火索都是外部事件（政策/利率/汇率）而非内部自发破裂。这期播客的"杀伤力很大"预警在 2026 年市场环境下值得跟踪。
+    </div>
+  </section>
+
+  <!-- =================== SECTION 9 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">玖</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">格局 / 洗盘 / 出货——屁股决定脑袋</h2>
+        <div class="section-anchor">34:40</div>
+      </div>
+    </div>
+
+    <div class="subhead">9.1 格局 = 体面的套牢</div>
+    <blockquote>
+      <p>我套牢了，听着很难听对吧，那我就说我要格局，我格局大，我能忍，再让他爹爹吧……<strong>格局本质上就是你当时看上的是情绪和资金的热度，现在情绪退了、股价也跌了，但你什么都没买</strong>。</p>
+      <span class="cite">— 马克汤</span>
+    </blockquote>
+
+    <p><strong>核心：</strong>格局 = 套牢的体面说法 = 亏钱后的心理防御机制</p>
+
+    <div class="subhead">9.2 洗盘 vs 出货 = 屁股决定脑袋</div>
+    <p>同样一根 K 线：</p>
+    <ul>
+      <li><strong>持枪者</strong>（持仓）："这是洗盘，主力故意把不坚定的人洗出去"</li>
+      <li><strong>空枪者</strong>（空仓）："这明显是出货，主力都撤退了"</li>
+    </ul>
+    <p><strong>本质：</strong>同样一根实体阴线 = 卖方卖压非常高</p>
+
+    <blockquote>
+      <p>一定不要被代跑骗，你不要一听这是洗盘，你就真的认为资金真的在洗盘……<strong>你是主力心里的肚子里的回丑？你知道它是洗盘还是撤退？你不知道，你就别瞎说</strong>。</p>
+      <span class="cite">— 马克汤</span>
+    </blockquote>
+
+    <div class="subhead">9.3 实战原则</div>
+    <blockquote>
+      <p>你该走就走，你要<strong>设置好你的止损条件</strong>。</p>
+    </blockquote>
+
+    <p><strong>设置监控任务的建议：</strong></p>
+    <ul>
+      <li>例：所有关注的股票如果出现"跌幅超过 2%" → 提醒止损</li>
+      <li>高级条件单（券商软件做不到的）：
+        <ul>
+          <li>比较放量跌破 10 日均线 → 卖出</li>
+          <li>微信智能体出现新新闻 → 买入 50%</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+  <!-- =================== SECTION 10 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">拾</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">长期 vs 短线——关注分野</h2>
+        <div class="section-anchor">收尾</div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>视角</th><th>关注重点</th></tr></thead>
+        <tbody>
+          <tr><td><strong>长期投资</strong></td><td>基本面假设是否成立、竞争格局是否变化、产业逻辑是否变化、估值是否变化</td></tr>
+          <tr><td><strong>短线投资</strong></td><td>情绪面、资金面、技术面是否出现新情况、主线出来后选龙头/中军/后排</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="insight">
+      这其实是 Graham（基本面）+ Soros（反身性）+ 技术分析三流派的整合框架。播客的"长期看基本面、短期看情绪"的二元划分是普通投资者最容易落地的简化版本。
+    </div>
+  </section>
+
+  <!-- =================== FOOTER =================== -->
+  <div class="footer">
+    <div class="brand">🎙️ 财搭子 · EP32 股市黑话祛魅</div>
+    <div>原始转录稿：<code>/tmp/podcast_transcript.txt</code>（1214 行）</div>
+    <div>数据来源：小宇宙 xyzcdn.net CDN + faster-whisper (base, CPU int8)</div>
+    <div class="sync">
+      <span>📁 GitHub · wintermelon27/agent_research</span>
+      <span>📁 Gitee · wintermeloncurry/agent_research</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
