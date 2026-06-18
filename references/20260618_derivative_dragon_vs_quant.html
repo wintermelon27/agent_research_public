@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>龙头战法 vs 量化策略 · EP32 衍生分析</title>
+<style>
+  /* ===== Reset & Base ===== */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;font-size:16px;scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:#faf7f2;
+    color:#2b2a26;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* ===== Layout ===== */
+  .wrap{max-width:780px;margin:0 auto;padding:48px 28px 96px}
+
+  /* ===== Cover ===== */
+  .cover{
+    background:linear-gradient(135deg,#1a1814 0%,#2c2417 50%,#1a1814 100%);
+    color:#f5e9c8;
+    border-radius:18px;
+    padding:56px 40px 48px;
+    margin-bottom:48px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 12px 36px rgba(20,18,12,.18);
+  }
+  .cover::before{
+    content:"";
+    position:absolute;top:-50%;right:-30%;
+    width:520px;height:520px;
+    background:radial-gradient(circle,rgba(212,175,55,.25) 0%,rgba(212,175,55,0) 70%);
+    pointer-events:none;
+  }
+  .cover .eyebrow{
+    display:inline-block;
+    font-size:11px;letter-spacing:3px;font-weight:600;
+    color:#d4af37;text-transform:uppercase;
+    border:1px solid rgba(212,175,55,.4);
+    padding:5px 12px;border-radius:30px;
+    margin-bottom:22px;
+  }
+  .cover h1{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC","Songti SC",serif;
+    font-size:38px;line-height:1.3;font-weight:700;
+    color:#faf7f2;
+    margin-bottom:18px;
+    letter-spacing:-0.5px;
+  }
+  .cover .subtitle{
+    font-size:15px;line-height:1.7;
+    color:#d4af37;
+    margin-bottom:32px;
+    font-weight:500;
+  }
+  .cover .meta-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);
+    gap:18px 32px;
+    padding-top:24px;
+    border-top:1px solid rgba(212,175,55,.25);
+  }
+  .cover .meta-item{display:flex;flex-direction:column;gap:4px}
+  .cover .meta-label{font-size:11px;letter-spacing:1.5px;color:#a8893d;text-transform:uppercase;font-weight:600}
+  .cover .meta-value{font-size:14px;color:#f5e9c8;font-weight:500}
+
+  /* ===== TOC ===== */
+  .toc{
+    background:#fff;
+    border:1px solid #ece6d8;
+    border-radius:14px;
+    padding:32px 36px;
+    margin-bottom:36px;
+    box-shadow:0 2px 12px rgba(40,30,15,.04);
+  }
+  .toc-title{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:13px;font-weight:600;letter-spacing:1.5px;
+    color:#a8893d;
+    margin-bottom:20px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .toc-list{list-style:none}
+  .toc-list li{
+    display:flex;align-items:flex-start;gap:14px;
+    padding:10px 0;
+    border-bottom:1px solid #f4ecd6;
+  }
+  .toc-list li:last-child{border-bottom:none}
+  .toc-num{
+    flex-shrink:0;
+    width:26px;height:26px;border-radius:50%;
+    background:#d4af37;color:#1a1814;
+    font-size:12px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    margin-top:2px;
+  }
+  .toc-text{flex:1;font-size:14.5px;color:#2b2a26;line-height:1.5}
+  .toc-text strong{color:#a8893d;font-weight:600}
+  .toc-time{font-size:12px;color:#8a7b58;flex-shrink:0;font-family:monospace}
+
+  /* ===== Section ===== */
+  .section{
+    background:#fff;
+    border:1px solid #ece6d8;
+    border-radius:14px;
+    padding:36px 40px;
+    margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(40,30,15,.04);
+  }
+  .section-head{
+    display:flex;align-items:flex-start;gap:18px;
+    margin-bottom:24px;padding-bottom:18px;
+    border-bottom:2px solid #f4ecd6;
+  }
+  .section-badge{
+    flex-shrink:0;
+    width:44px;height:44px;border-radius:12px;
+    background:linear-gradient(135deg,#d4af37 0%,#a8893d 100%);
+    color:#1a1814;
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:20px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 10px rgba(168,137,61,.25);
+  }
+  .section-title-wrap{flex:1}
+  .section-title{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:24px;line-height:1.35;font-weight:700;
+    color:#1a1814;margin-bottom:6px;
+    letter-spacing:-0.3px;
+  }
+  .section-anchor{
+    font-size:12.5px;color:#8a7b58;
+    font-family:monospace;
+    display:flex;align-items:center;gap:6px;
+  }
+  .section-anchor::before{content:"⏱";font-size:11px}
+
+  /* ===== Subhead ===== */
+  .subhead{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:18px;font-weight:600;
+    color:#a8893d;
+    margin:28px 0 14px;
+    padding-left:14px;
+    border-left:3px solid #d4af37;
+    line-height:1.4;
+  }
+  .subhead:first-child{margin-top:0}
+
+  /* ===== Paragraph ===== */
+  p{margin-bottom:14px;font-size:15.5px;line-height:1.85;color:#2b2a26}
+  p strong{color:#1a1814;font-weight:600}
+
+  /* ===== Lists ===== */
+  ul,ol{margin:14px 0 18px;padding-left:24px}
+  ul li,ol li{margin-bottom:8px;font-size:15px;line-height:1.7}
+  ul li::marker{color:#d4af37}
+
+  /* ===== Table ===== */
+  .table-wrap{overflow-x:auto;margin:18px 0 22px;border-radius:10px;border:1px solid #ece6d8}
+  table{
+    width:100%;border-collapse:collapse;
+    font-size:14px;background:#fff;
+  }
+  thead{
+    background:linear-gradient(135deg,#1a1814 0%,#2c2417 100%);
+    color:#faf7f2;
+  }
+  th{
+    text-align:left;padding:14px 18px;
+    font-weight:600;font-size:13.5px;letter-spacing:0.3px;
+    color:#d4af37;
+    border-bottom:2px solid #d4af37;
+  }
+  td{
+    padding:13px 18px;
+    border-bottom:1px solid #f4ecd6;
+    color:#2b2a26;vertical-align:top;
+  }
+  tbody tr:nth-child(even) td{background:#fdfaf3}
+  tbody tr:hover td{background:#fdf8e8}
+  tbody tr:last-child td{border-bottom:none}
+  td code{font-family:monospace;background:#f4ecd6;color:#a8893d;padding:2px 6px;border-radius:4px;font-size:13px}
+
+  /* ===== Blockquote ===== */
+  blockquote{
+    position:relative;
+    margin:24px 0;
+    padding:24px 28px 24px 56px;
+    background:linear-gradient(135deg,#fdf8e8 0%,#f4ecd6 100%);
+    border-radius:12px;
+    border-left:4px solid #d4af37;
+    font-size:15.5px;line-height:1.85;
+    color:#2b2a26;
+  }
+  blockquote::before{
+    content:"\201C";
+    position:absolute;top:8px;left:18px;
+    font-family:"Source Han Serif SC",serif;
+    font-size:56px;font-weight:700;
+    color:#d4af37;
+    line-height:1;opacity:0.4;
+  }
+  blockquote p{margin-bottom:6px}
+  blockquote p:last-child{margin-bottom:0}
+  blockquote .cite{
+    display:block;margin-top:10px;
+    font-size:13px;color:#a8893d;
+    font-style:normal;font-weight:600;
+  }
+
+  /* ===== Insight Box ===== */
+  .insight{
+    margin:22px 0;
+    padding:20px 24px;
+    background:linear-gradient(135deg,#fef9e7 0%,#fdf3d0 100%);
+    border:1px solid #f0d896;
+    border-radius:10px;
+    font-size:14.5px;line-height:1.75;
+    color:#5a4a25;
+  }
+  .insight::before{
+    content:"💡 ";
+    margin-right:6px;
+  }
+  .insight strong{color:#a8893d;font-weight:600}
+
+  /* ===== Chip ===== */
+  .chip{
+    display:inline-block;
+    padding:3px 10px;border-radius:12px;
+    font-size:12px;font-weight:600;letter-spacing:0.3px;
+    vertical-align:middle;
+  }
+  .chip-ok{background:#e8f3ec;color:#2e7d4f;border:1px solid #b5dac3}
+  .chip-warn{background:#fef3e0;color:#b35900;border:1px solid #f0c98c}
+  .chip-guess{background:#ebeaf2;color:#5e5e8a;border:1px solid #c5c3d8}
+  .chip-default{background:#f4ecd6;color:#a8893d;border:1px solid #e0d4a8}
+
+  /* ===== Inline code ===== */
+  code{
+    font-family:"SF Mono",Consolas,monospace;
+    background:#fdf8e8;color:#a8893d;
+    padding:2px 7px;border-radius:5px;
+    font-size:13.5px;
+  }
+
+  /* ===== Footer ===== */
+  .footer{
+    margin-top:56px;padding-top:28px;
+    border-top:2px dashed #ece6d8;
+    text-align:center;
+    font-size:13px;color:#8a7b58;line-height:1.7;
+  }
+  .footer .brand{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:15px;font-weight:600;
+    color:#a8893d;margin-bottom:8px;
+  }
+  .footer .sync{
+    margin-top:10px;display:flex;justify-content:center;gap:14px;
+    font-size:12px;flex-wrap:wrap;
+  }
+  .footer .sync span{
+    padding:3px 10px;background:#fff;border:1px solid #ece6d8;
+    border-radius:20px;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width:640px){
+    .wrap{padding:32px 16px 64px}
+    .cover{padding:40px 24px 32px;border-radius:14px}
+    .cover h1{font-size:28px}
+    .cover .meta-grid{grid-template-columns:1fr;gap:14px}
+    .section{padding:24px 22px;border-radius:12px}
+    .section-title{font-size:20px}
+    .toc{padding:22px 22px}
+    .table-wrap{margin:14px -4px}
+    th,td{padding:10px 12px;font-size:12.5px}
+    blockquote{padding:20px 20px 20px 44px;font-size:14.5px}
+    blockquote::before{font-size:44px;top:6px;left:12px}
+  }
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===== COVER ===== -->
+<div class="cover">
+  <div class="eyebrow">EP32 衍生分析 · DERIVATIVE REPORT</div>
+  <h1>龙头战法 vs 量化策略<br>当"识情绪"遇上"算速度"</h1>
+  <div class="subtitle">EP32《股市黑话祛魅》第七节深度延伸 + 2026 年 A 股短线市场实况</div>
+  <div class="meta-grid">
+    <div class="meta-item">
+      <div class="meta-label">源节目</div>
+      <div class="meta-value">财搭子 EP32 · 股市黑话祛魅</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">原片时长</div>
+      <div class="meta-value">第七节 26:57 起</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">衍生日期</div>
+      <div class="meta-value">2026-06-18</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">核心结论</div>
+      <div class="meta-value">情绪流是"前哨"，量化是"收割机"——共生而非替代</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOC ===== -->
+<div class="toc">
+  <div class="toc-title">📑 目录 · Contents</div>
+  <ul class="toc-list">
+    <li><span class="toc-num">1</span><span class="toc-text"><strong>一句话总结</strong><br>情绪流 vs 量化的核心定位差异</span></li>
+    <li><span class="toc-num">2</span><span class="toc-text"><strong>EP32 原声回放</strong><br>第七节龙头/中军/后排核心金句</span></li>
+    <li><span class="toc-num">3</span><span class="toc-text"><strong>正面对决</strong><br>哲学差异 + 量化如何"收割"龙头 + 反制手段</span></li>
+    <li><span class="toc-num">4</span><span class="toc-text"><strong>新周期四大演变</strong><br>市值/模式/资金/逻辑 2026 年最新特征</span></li>
+    <li><span class="toc-num">5</span><span class="toc-text"><strong>量化"一进二"案例</strong><br>45% 胜率如何做到 268% 年化</span></li>
+    <li><span class="toc-num">6</span><span class="toc-text"><strong>龙头战法的量化改造</strong><br>人机结合的 BigQuant 实盘模板</span></li>
+    <li><span class="toc-num">7</span><span class="toc-text"><strong>散户的可行路径</strong><br>纯情绪派 / 量化辅助派 / 趋势跟随派</span></li>
+    <li><span class="toc-num">8</span><span class="toc-text"><strong>终极思考</strong><br>为什么两种玩法都不会消失</span></li>
+  </ul>
+</div>
+
+<!-- ===== Section 1: 一句话总结 ===== -->
+<div class="section">
+  <span class="section-num">壹</span>
+  <h2 class="section-title">一句话总结</h2>
+  <div class="callout">
+    <strong>龙头战法是人心的博弈，量化策略是规则的收割。</strong>两者不是替代关系，而是<em>"前哨"与"收割机"</em>的关系——情绪流负责感知拐点，量化负责执行套利。
+  </div>
+  <p>这期衍生报告的逻辑主线是：</p>
+  <ul>
+    <li>EP32 第七节给的是<strong>传统龙头战法的人心模型</strong>（冰点/分歧日识别）</li>
+    <li>但 2026 年的 A 股市场，<strong>量化资金已经重塑了短线生态</strong>（万丰奥威、正丹股份 A 字杀）</li>
+    <li>因此，<strong>"纯情绪派"和"纯量化派"都在失效</strong>，真正可行的路径是<strong>人机结合</strong></li>
+  </ul>
+</div>
+
+<!-- ===== Section 2: EP32 原声回放 ===== -->
+<div class="section">
+  <span class="section-num">贰</span>
+  <h2 class="section-title">EP32 原声回放 · 龙头/中军/后排</h2>
+  <p>第七节 26:57 起，财搭子给出了一套经典的"三段式"分工模型：</p>
+
+  <table>
+    <thead>
+      <tr><th>角色</th><th>含义</th><th>散户可参与度</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>龙头</strong></td><td>最具人气，打出情绪高度，"破圈票"</td><td>⭐ 难介入，易"站岗"</td></tr>
+      <tr><td><strong>中军</strong></td><td>市值大、成交量大、走势稳、压舱石</td><td>⭐⭐⭐ 涨幅有限但稳</td></tr>
+      <tr><td><strong>后排</strong></td><td>关注度弱，产业链上下游</td><td>⭐⭐ 退潮时最先被遗忘</td></tr>
+    </tbody>
+  </table>
+
+  <div class="quote-block">
+    <p>"龙头战法听着就能挣钱是吧，但龙头并不一定是普通散户能玩着来的东西。"</p>
+    <div class="quote-cite">— 财搭子 EP32 · 龙头战法的难点</div>
+  </div>
+
+  <div class="quote-block">
+    <p>"中军是我们用来判断题材在分歧时能不能稳住的重要指标。"</p>
+    <div class="quote-cite">— 财搭子 EP32 · 中军的关键作用</div>
+  </div>
+
+  <h3 class="subhead">EP32 核心警示</h3>
+  <ul>
+    <li><strong>关于高位抱团：</strong>"现在的市场处于一个高位抱团的状态……对于我们散户来说，这种时候就是危险系数非常高的时候。"</li>
+    <li><strong>关于洗盘/出货：</strong>"不要被代跑骗，你不要一听这是洗盘，你就真的认为资金真的在洗盘……你是主力心里的肚子里的回丑？你知道它是洗盘还是撤退？你不知道，你就别瞎说。"</li>
+    <li><strong>关于玩法：</strong>EP32 给出的玩法是——<strong>冰点/分歧日识别"没破位" → 介入中军 → 跟随情绪发酵 → 高潮离场</strong></li>
+  </ul>
+</div>
+
+<!-- ===== Section 3: 正面对决 ===== -->
+<div class="section">
+  <span class="section-num">叁</span>
+  <h2 class="section-title">正面对决 · 龙头战法 vs 量化策略</h2>
+
+  <h3 class="subhead">3.1 哲学差异：人心 vs 规则</h3>
+  <table>
+    <thead>
+      <tr><th>维度</th><th>🧠 龙头战法（情绪流）</th><th>🤖 量化策略</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>核心假设</td><td>市场由人性驱动，情绪周期可识别</td><td>市场由数据驱动，规律可计算</td></tr>
+      <tr><td>决策依据</td><td>K线、分时、龙虎榜、盘口情绪</td><td>因子打分、模型预测、统计回测</td></tr>
+      <tr><td>持仓周期</td><td>1-5 天超短</td><td>1 秒 - 5 天（高频/中低频皆可）</td></tr>
+      <tr><td>收益来源</td><td>情绪溢价 + 资金接力</td><td>统计套利 + 速度优势</td></tr>
+      <tr><td>核心能力</td><td>盘感、纪律、心态</td><td>数学、编程、算力</td></tr>
+      <tr><td>失败模式</td><td>站岗、格局、追高</td><td>因子失效、过度拟合</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight">
+    <span class="insight-icon">💡</span>
+    <div class="insight-body">
+      <strong>AI 推断：</strong>这两种哲学其实对应了 EP32 提到的两种资金——<strong>游资（情绪派）</strong>和<strong>机构（量化派）</strong>。A 股短线市场长期是这两股力量的博弈场。
+    </div>
+  </div>
+
+  <h3 class="subhead">3.2 量化如何"收割"龙头战法</h3>
+  <p>今日头条《量化时代的龙头战法还能做吗？》一文指出，量化对传统龙头战法有三大冲击：</p>
+
+  <div class="callout">
+    <strong>量化资金的"三板斧"：</strong>
+    <ol>
+      <li><strong>量化高频交易</strong>：用速度优势抢到 9.5% → 10% 的瞬间（封板瞬间打板）</li>
+      <li><strong>T+0 机器人</strong>：量化底仓做 T，加剧龙头波动，破坏技术形态</li>
+      <li><strong>情绪识别模型</strong>：监控涨停板、封单金额、龙虎榜席位，预测情绪拐点</li>
+    </ol>
+  </div>
+
+  <p><span class="chip chip-warn">📌 关键案例</span> <strong>万丰奥威、正丹股份的 A 字杀</strong>——量化资金在情绪高点撤离，散户接最后一棒。</p>
+
+  <h3 class="subhead">3.3 龙头战法如何"反制"量化</h3>
+  <table>
+    <thead>
+      <tr><th>反制手段</th><th>原理</th><th>难度</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>看龙虎榜识别量化席位</td><td>华鑫上海分公司等量化席位出现时谨慎接力</td><td>⭐⭐</td></tr>
+      <tr><td>关注"非量化抱团"标的</td><td>走趋势而非连板的标的（流通市值 50-500 亿）</td><td>⭐⭐</td></tr>
+      <tr><td>避开纯小票题材</td><td>20CM 涨跌停后，纯小票游资玩法空间被压缩</td><td>⭐</td></tr>
+      <tr><td>跟随机构+游资共振</td><td>龙虎榜买一到买五同时出现机构和知名游资</td><td>⭐⭐⭐</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== Section 4: 新周期四大演变 ===== -->
+<div class="section">
+  <span class="section-num">肆</span>
+  <h2 class="section-title">新周期下龙头的四大演变（2026 现状）</h2>
+  <p>新浪财经《"龙头战法"失效了吗？》一文拆解了新旧周期的关键差异：</p>
+
+  <h3 class="subhead">特征一：市值体量演变</h3>
+  <ul>
+    <li><strong>旧周期（2020-2021）：</strong>流通盘 50 亿以下，股价 10 元以内（如京城股份 30 亿以下走出多波连板）</li>
+    <li><strong>新周期（2025-2026）：</strong>流通盘 50-500 亿（如通宇通讯 200 亿+ 也能走出 30%+ 周涨幅）</li>
+  </ul>
+  <div class="insight">
+    <span class="insight-icon">💡</span>
+    <div class="insight-body">
+      <strong>AI 推断：</strong>量化资金的容量需求 + 机构话语权提升 + 注册制下小票退市风险，共同推高龙头市值门槛。
+    </div>
+  </div>
+
+  <h3 class="subhead">特征二：上涨模式演变</h3>
+  <ul>
+    <li><strong>旧周期：</strong>纯连板（3板定龙头、5板成妖股）</li>
+    <li><strong>新周期：</strong>"1-2板启动 + 趋势拉升"，穿插涨停加速（如广联航空的波段趋势）</li>
+  </ul>
+  <p><strong>应对方法：</strong>放弃"无脑追连板"，重点关注"断板后的弱转强"和"趋势中的回调低吸"。</p>
+
+  <h3 class="subhead">特征三：资金结构演变</h3>
+  <ul>
+    <li><strong>旧周期：</strong>游资"独角戏"（涨停板敢死队主导）</li>
+    <li><strong>新周期：</strong>必须"<strong>机构 + 游资共振</strong>"（如广联航空龙虎榜同时出现机构和知名游资席位）</li>
+  </ul>
+
+  <h3 class="subhead">特征四：驱动逻辑演变</h3>
+  <ul>
+    <li><strong>旧周期：</strong>纯题材、蹭热点</li>
+    <li><strong>新周期：</strong>基本面 + 政策双重支撑（如 2025 年商业航天龙头：政策红利 + 火箭需求增长 + 业绩兑现）</li>
+  </ul>
+</div>
+
+<!-- ===== Section 5: 量化一进二案例 ===== -->
+<div class="section">
+  <span class="section-num">伍</span>
+  <h2 class="section-title">量化"一进二"策略案例研究</h2>
+  <p>搜狐《龙头战法｜短线交易如何把握龙头股的连板接力机会？》一文给出了严格的量化连板规则：</p>
+
+  <h3 class="subhead">5.1 四大维度筛选标准（全部满足方可接力）</h3>
+  <ol>
+    <li><strong>市场情绪维度：</strong>涨停家数 ≥ 30 家，连板晋级率 ≥ 50%</li>
+    <li><strong>连板梯队维度：</strong>标的为最高连板 / 梯队前列（3板及以上）</li>
+    <li><strong>标的自身维度：</strong>流通市值 50-200亿，换手率 5%-15%，价涨量增</li>
+    <li><strong>资金面维度：</strong>封单金额 ≥ 1亿，主力+北向资金净流入，买入占比 ≥ 60%</li>
+  </ol>
+
+  <h3 class="subhead">5.2 仓位与风控</h3>
+  <table>
+    <thead>
+      <tr><th>连板阶段</th><th>单标仓位</th><th>总仓位</th><th>风控止损</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>2 板</td><td>0.3-0.5 成</td><td>≤ 1 成</td><td>30 分钟内开板无回封</td></tr>
+      <tr><td>3 板+</td><td>0.2-0.3 成</td><td>≤ 0.5 成</td><td>次日低开 ≥ 3% 离场</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="subhead">5.3 历史回测数据（2024.01 - 2025.09）</h3>
+  <table>
+    <thead>
+      <tr><th>指标</th><th>数值</th><th>解读</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>总收益</td><td><span class="chip chip-success">809.36%</span></td><td>接近 10 倍</td></tr>
+      <tr><td>年化收益</td><td><span class="chip chip-success">268.66%</span></td><td>年化近 3 倍</td></tr>
+      <tr><td>超额收益</td><td>585.73%</td><td>跑赢沪深 300 约 18 倍</td></tr>
+      <tr><td>最大回撤</td><td><span class="chip chip-warn">26.05%</span></td><td>波动较大</td></tr>
+      <tr><td>胜率</td><td><span class="chip chip-warn">45.3%</span></td><td>不到一半，靠盈亏比弥补</td></tr>
+      <tr><td>盈亏比</td><td>1.875</td><td>赚时 1.87，亏时 1.0</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight">
+    <span class="insight-icon">💡</span>
+    <div class="insight-body">
+      <strong>AI 推断：</strong>量化"一进二"看似暴利，但<strong>45% 胜率 + 268% 年化</strong>意味着这是一道严格的纪律题——一旦破坏"快进快出、不隔夜、不格局"铁律，曲线会迅速劣化。
+    </div>
+  </div>
+</div>
+
+<!-- ===== Section 6: 龙头战法的量化改造 ===== -->
+<div class="section">
+  <span class="section-num">陆</span>
+  <h2 class="section-title">龙头战法的量化改造（人机结合路径）</h2>
+  <p>BigQuant 案例《龙头战法实盘+AI-量化大赛 NO.3-中证150增强》提供了人机结合模板：</p>
+
+  <h3 class="subhead">6.1 选股思路：缩小范围到 100-300 只</h3>
+  <ul>
+    <li>赛道抱团股（市值 100 亿+，核心资产）</li>
+    <li>流动性充足，股性活跃</li>
+    <li>在 <strong>5000 选一 vs 300 选一</strong> 之间，显著降低噪音</li>
+  </ul>
+
+  <h3 class="subhead">6.2 择时三条件（MACD 体系）</h3>
+  <div class="code-block">
+    <pre>cond1 = sum(ta_macd_dif(close, 2, 4, 4), 5) &gt; sum(ta_macd_dea(close, 2, 4, 4), 5)
+cond2 = close &gt; mean(close, 25)   # 25日均线不破
+cond3 = sum(ta_macd_dea(close, 2, 4, 4), 5) &gt; 0.2</pre>
+  </div>
+
+  <h3 class="subhead">6.3 三大因子</h3>
+  <table>
+    <thead>
+      <tr><th>因子</th><th>含义</th><th>作用</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>avg_turn_15/turn_0</code></td><td>换手率因子</td><td>找流动性好的股</td></tr>
+      <tr><td><code>mf_net_amount_xl_0</code></td><td>超大单资金流</td><td>短期买点爆发力</td></tr>
+      <tr><td><code>alpha4</code></td><td>量价复合因子</td><td>趋势强度</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>核心启示：</strong>龙头战法不一定非要"纯人工"——把情绪识别交给人，把执行交给机器，可能是更可持续的路径。
+  </div>
+</div>
+
+<!-- ===== Section 7: 散户的可行路径 ===== -->
+<div class="section">
+  <span class="section-num">柒</span>
+  <h2 class="section-title">散户的可行路径（综合建议）</h2>
+
+  <h3 class="subhead">🅰️ 纯情绪派（保留龙头战法灵魂）</h3>
+  <ul>
+    <li><strong>适用人群：</strong>有充足盯盘时间 + 强纪律性 + 心态稳定</li>
+    <li><strong>核心策略：</strong>EP32 提到的"冰点分歧日识别 → 介入中军 → 高潮离场"</li>
+    <li><strong>关键纪律：</strong>不格局、不追高、不重仓单一龙头</li>
+    <li><strong>避坑指南：</strong>远离纯小票、纯题材、无机构参与的连板股</li>
+  </ul>
+
+  <h3 class="subhead">🅱️ 量化辅助派（情绪 + 规则）</h3>
+  <ul>
+    <li><strong>适用人群：</strong>有编程能力 / 会用量化平台（BigQuant、米筐、聚宽）</li>
+    <li><strong>核心策略：</strong>量化筛选龙头池 + 人工判断情绪拐点</li>
+    <li><strong>关键纪律：</strong>严格执行模型信号，不人工干预模型决策</li>
+  </ul>
+
+  <h3 class="subhead">🅲️ 趋势跟随派（放弃连板博弈）</h3>
+  <ul>
+    <li><strong>适用人群：</strong>没时间盯盘、风险偏好低</li>
+    <li><strong>核心策略：</strong>跟随"机构+游资共振"的中大市值趋势龙头</li>
+    <li><strong>核心标的：</strong>流通市值 50-500 亿 + 政策+基本面支撑 + 趋势波段</li>
+    <li><strong>操作节奏：</strong>少做高位接力，多做"断板弱转强"和"趋势回调低吸"</li>
+  </ul>
+
+  <h3 class="subhead">📊 三种路径对比矩阵</h3>
+  <table>
+    <thead>
+      <tr><th>维度</th><th>🅰️ 纯情绪派</th><th>🅱️ 量化辅助派</th><th>🅲️ 趋势跟随派</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>时间投入</td><td>🔴 高</td><td>🟡 中</td><td>🟢 低</td></tr>
+      <tr><td>资金容量</td><td>🟢 小（百万级）</td><td>🟢 中（小千万级）</td><td>🟢 大（亿级）</td></tr>
+      <tr><td>收益弹性</td><td>🔴 高（盈亏同源）</td><td>🟡 中（受模型约束）</td><td>🟢 稳（趋势捕捉）</td></tr>
+      <tr><td>心理压力</td><td>🔴 极高</td><td>🟡 中</td><td>🟢 低</td></tr>
+      <tr><td>量化冲击</td><td>🔴 最受冲击</td><td>🟢 主动适应</td><td>🟢 几乎免疫</td></tr>
+      <tr><td>学习曲线</td><td>🔴 陡（盘感）</td><td>🔴 陡（数学+编程）</td><td>🟢 缓（趋势分析）</td></tr>
+      <tr><td>适合库哥吗？</td><td>⭐⭐（时间不足）</td><td>⭐⭐⭐（半量半人）</td><td>⭐⭐⭐（已偏向此路径）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>💎 给库哥的具体建议：</strong>
+    <ol>
+      <li><strong>若继续做超短</strong> → 学习量化筛选工具，把龙头池从 5000 缩到 100，再人工判断</li>
+      <li><strong>若转中短线</strong> → 关注"机构+游资共振"的趋势龙头，按 25 日均线持有</li>
+      <li><strong>无论哪条路</strong> → 都不要"格局"，这是 EP32 给出的最大警示</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ===== Section 8: 终极思考 ===== -->
+<div class="section">
+  <span class="section-num">捌</span>
+  <h2 class="section-title">终极思考 · 为什么两种玩法都不会消失？</h2>
+
+  <h3 class="subhead">8.1 市场结构使然</h3>
+  <p>A 股 5000+ 只股票，<strong>永远有"非量化标的"留给情绪流</strong>，同时<strong>永远有"高频套利空间"留给量化</strong>。</p>
+
+  <h3 class="subhead">8.2 监管与制度使然</h3>
+  <ul>
+    <li><strong>T+1 制度保留</strong> → 隔日溢价空间存在</li>
+    <li><strong>涨跌停制度保留</strong> → 涨停板套利空间存在</li>
+    <li><strong>散户占比仍高</strong> → 情绪波动剧烈，给情绪流生存土壤</li>
+  </ul>
+
+  <h3 class="subhead">8.3 信息层级使然</h3>
+  <ul>
+    <li>量化做的是<strong>已发生数据</strong>的反应（慢半拍）</li>
+    <li>情绪流做的是<strong>未发生情绪</strong>的预判（快半拍）</li>
+    <li>真正稀缺的是<strong>"数据 + 情绪"复合视角</strong>——这是人机结合的最大价值</li>
+  </ul>
+
+  <div class="quote-block">
+    <p>"辨龙先辨势，势在龙在，势去龙散。择时先择情，情绪是短线交易的唯一锚点。"</p>
+    <div class="quote-cite">— 雪球情绪流派 2026 年 1-2 月实战复盘总结</div>
+  </div>
+</div>
+
+<!-- ===== Section 9: 引用来源 ===== -->
+<div class="section">
+  <span class="section-num">玖</span>
+  <h2 class="section-title">引用来源</h2>
+
+  <h3 class="subhead">🎙️ 核心来源</h3>
+  <ul>
+    <li>财搭子 EP32《股市黑话祛魅》第七节（2026-06-12 录制）</li>
+  </ul>
+
+  <h3 class="subhead">🌐 网络参考（2026 年最新观点）</h3>
+  <ol>
+    <li>雪球《情绪流·龙头战法视角下 2026 年 1-2 月总结》</li>
+    <li>新浪财经《"龙头战法"失效了吗？拆解新旧周期下龙头股的四大演变特征》（2026-01-29）</li>
+    <li>今日头条《量化时代的龙头战法还能做吗？顶级游资的生存法则！》</li>
+    <li>搜狐《龙头战法｜短线交易如何把握龙头股的连板接力机会？量化接力规则》（2026-04-20）</li>
+    <li>BigQuant《龙头战法实盘+AI-量化大赛NO.3-中证150增强》（2026-05-19）</li>
+    <li>知识铺《策略深度解析｜量化"一进二"策略-龙头战法（年化 268%）》</li>
+  </ol>
+
+  <div class="callout">
+    <strong>⚠️ 数据标注说明：</strong>
+    <ul style="margin-top:8px;margin-bottom:0">
+      <li><span class="chip chip-success">✅ 确认</span> 原文 / 公开数据直接引用</li>
+      <li><span class="chip chip-warn">⚠️ 推断</span> 基于多方观点的合理综合分析</li>
+      <li><span class="chip">🔮 猜测</span> 假设性判断，已明确标注</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== Footer ===== -->
+<div class="footer">
+  <p>📊 衍生报告 · 龙头战法 vs 量化策略 · 基于 EP32 第七节延伸</p>
+  <p>Generated by 库氏Jarvis · 2026-06-18</p>
+  <p class="sync-status">📡 同步状态 · GitHub master ✅ · Gitee master ✅</p>
+</div>
+
+</div>
+</body>
+</html>
