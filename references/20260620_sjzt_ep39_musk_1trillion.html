@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ep.39 马斯克的1万亿美元 · 播客转录笔记</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;font-size:16px;scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:#faf7f2;color:#2b2a26;line-height:1.85;
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:48px 28px 96px}
+  .cover{
+    background:linear-gradient(135deg,#1a1814 0%,#2c2417 50%,#1a1814 100%);
+    color:#f5e9c8;border-radius:18px;padding:56px 40px 48px;margin-bottom:48px;
+    position:relative;overflow:hidden;
+    box-shadow:0 12px 36px rgba(20,18,12,.18);
+  }
+  .cover::before{
+    content:"";position:absolute;top:-50%;right:-30%;
+    width:520px;height:520px;
+    background:radial-gradient(circle,rgba(212,175,55,.25) 0%,rgba(212,175,55,0) 70%);
+    pointer-events:none;
+  }
+  .cover .eyebrow{
+    display:inline-block;font-size:11px;letter-spacing:3px;font-weight:600;
+    color:#d4af37;text-transform:uppercase;
+    border:1px solid rgba(212,175,55,.4);
+    padding:5px 12px;border-radius:30px;margin-bottom:22px;
+  }
+  .cover h1{
+    font-family:"Source Han Serif","Noto Serif CJK SC","Songti SC",serif;
+    font-size:38px;line-height:1.25;font-weight:700;
+    color:#fff;margin-bottom:14px;letter-spacing:.5px;
+  }
+  .cover .subtitle{font-size:16px;color:rgba(245,233,200,.78);margin-bottom:30px;line-height:1.6}
+  .cover .meta{
+    display:grid;grid-template-columns:repeat(2,1fr);
+    gap:14px 24px;padding-top:24px;
+    border-top:1px solid rgba(212,175,55,.2);font-size:13px;
+  }
+  .cover .meta-item{display:flex;flex-direction:column;gap:2px}
+  .cover .meta-label{color:rgba(245,233,200,.5);font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
+  .cover .meta-value{color:#f5e9c8;font-weight:500}
+  .section{
+    background:#fff;border-radius:14px;padding:36px 36px 32px;
+    margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(40,30,15,.04);
+    border:1px solid #ece6d8;
+  }
+  .section-head{
+    display:flex;align-items:center;gap:14px;margin-bottom:24px;
+    padding-bottom:18px;border-bottom:2px solid #f4ecd6;
+  }
+  .section-badge{
+    display:flex;align-items:center;justify-content:center;
+    width:48px;height:48px;border-radius:12px;
+    background:linear-gradient(135deg,#d4af37 0%,#b8941f 100%);
+    color:#fff;font-weight:700;font-size:20px;
+    font-family:"Source Han Serif","Noto Serif CJK SC",serif;
+    box-shadow:0 4px 10px rgba(212,175,55,.25);flex-shrink:0;
+  }
+  .section-title{
+    font-family:"Source Han Serif","Noto Serif CJK SC","Songti SC",serif;
+    font-size:24px;font-weight:700;color:#1a1814;line-height:1.3;flex:1;
+  }
+  .section-anchor{
+    display:inline-block;font-size:11px;font-weight:600;letter-spacing:1px;
+    color:#a8893d;background:#fdf8e8;
+    padding:4px 10px;border-radius:20px;border:1px solid #ebd9a4;
+  }
+  h3.subhead{
+    font-family:"Source Han Serif","Noto Serif CJK SC",serif;
+    font-size:17px;font-weight:600;color:#5a4a25;margin:24px 0 12px;
+    padding-left:12px;border-left:3px solid #d4af37;line-height:1.4;
+  }
+  p{margin-bottom:14px;font-size:15.5px;color:#3a362d}
+  strong{color:#1a1814;font-weight:700;background:linear-gradient(transparent 60%,#fdf0c8 60%);padding:0 2px}
+  ul,ol{margin:10px 0 16px;padding-left:24px}
+  li{margin-bottom:8px;font-size:15.5px;color:#3a362d}
+  li::marker{color:#c9a646}
+  blockquote{
+    position:relative;background:linear-gradient(135deg,#fdf8e8 0%,#f9f0d4 100%);
+    border-left:4px solid #d4af37;border-radius:0 10px 10px 0;
+    padding:20px 24px 20px 56px;margin:18px 0;
+    font-size:15.5px;color:#5a4a25;font-style:italic;
+  }
+  blockquote::before{
+    content:"\201C";position:absolute;left:14px;top:6px;
+    font-family:Georgia,serif;font-size:48px;line-height:1;
+    color:#d4af37;opacity:.5;
+  }
+  blockquote p{margin-bottom:6px;color:#5a4a25}
+  blockquote p:last-child{margin-bottom:0;font-style:normal;font-size:13px;color:#8a7434;font-weight:500}
+  table{
+    width:100%;border-collapse:collapse;margin:18px 0 22px;
+    font-size:14.5px;background:#fff;border-radius:10px;overflow:hidden;
+    box-shadow:0 1px 4px rgba(40,30,15,.05);border:1px solid #ece6d8;
+  }
+  thead{background:linear-gradient(180deg,#2c2417 0%,#1a1814 100%)}
+  th{padding:13px 14px;text-align:left;color:#d4af37;font-weight:600;font-size:13px;letter-spacing:.5px}
+  td{padding:12px 14px;border-top:1px solid #f0e8d4;color:#3a362d;vertical-align:top}
+  tbody tr{transition:background .15s ease}
+  tbody tr:hover{background:#fdf8e8}
+  tbody tr:nth-child(even){background:#faf6ea}
+  tbody tr:nth-child(even):hover{background:#fdf3d4}
+  code{background:#f4ecd6;color:#5a4a25;padding:1px 6px;border-radius:4px;font-family:"SF Mono","Menlo",monospace;font-size:13.5px}
+  .tag-ok{color:#2e7d4f;font-weight:600}
+  .tag-warn{color:#b35900;font-weight:600}
+  .tag-guess{color:#5e5e8a;font-weight:600}
+  .insight{
+    background:linear-gradient(135deg,#fff7e0 0%,#fceed5 100%);
+    border:1px solid #ebd9a4;border-left:4px solid #d4af37;border-radius:8px;
+    padding:14px 18px;margin:16px 0;font-size:14.5px;color:#5a4a25;
+  }
+  .insight::before{
+    content:"💡 推断";display:inline-block;font-weight:700;color:#a8893d;
+    font-size:13px;letter-spacing:1px;margin-right:6px;
+  }
+  .src-line{
+    display:flex;align-items:center;gap:8px;font-size:12.5px;color:#8a7b58;
+    background:#f8f3e2;padding:8px 14px;border-radius:6px;margin:10px 0 16px;
+    border:1px dashed #e0d4a8;
+  }
+  .src-line::before{content:"🎙️";font-size:14px}
+  .footer{
+    text-align:center;margin-top:48px;padding:24px 16px;
+    color:#a89878;font-size:12.5px;border-top:1px solid #ece6d8;
+  }
+  .footer a{color:#a8893d;text-decoration:none}
+  .footer .brand{
+    font-family:"Source Han Serif","Noto Serif CJK SC",serif;
+    font-size:14px;font-weight:600;color:#5a4a25;margin-bottom:6px;
+  }
+  .toc{
+    background:#fff;border:1px solid #ece6d8;border-radius:14px;
+    padding:24px 28px;margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(40,30,15,.04);
+  }
+  .toc-title{
+    font-size:11px;font-weight:700;letter-spacing:2.5px;
+    color:#a8893d;text-transform:uppercase;margin-bottom:14px;
+  }
+  .toc-list{list-style:none;padding:0;margin:0}
+  .toc-list li{margin:0;padding:0}
+  .toc-list a{
+    display:flex;align-items:center;gap:10px;padding:8px 0;
+    color:#3a362d;text-decoration:none;font-size:14.5px;
+    border-bottom:1px dashed #f0e8d4;transition:color .15s;
+  }
+  .toc-list li:last-child a{border-bottom:none}
+  .toc-list a:hover{color:#a8893d}
+  .toc-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:22px;height:22px;border-radius:50%;
+    background:#f4ecd6;color:#a8893d;font-size:11px;font-weight:700;flex-shrink:0;
+  }
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 18px}
+  .chip{
+    display:inline-flex;align-items:center;gap:4px;
+    font-size:12px;font-weight:500;padding:5px 11px;border-radius:14px;
+    background:#fdf8e8;color:#5a4a25;border:1px solid #ebd9a4;
+  }
+  .chip.dark{background:#1a1814;color:#d4af37;border-color:#3a3220}
+  @media (max-width:640px){
+    .wrap{padding:24px 14px 60px}
+    .cover{padding:36px 24px 32px;border-radius:14px}
+    .cover h1{font-size:28px}
+    .cover .meta{grid-template-columns:1fr;gap:10px}
+    .section{padding:26px 20px 22px;border-radius:12px}
+    .section-title{font-size:20px}
+    .section-badge{width:40px;height:40px;font-size:17px}
+    th,td{padding:10px 8px;font-size:13px}
+    blockquote{padding:16px 18px 16px 44px}
+    blockquote::before{font-size:36px;left:10px;top:8px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ COVER ============ -->
+  <div class="cover">
+    <span class="eyebrow">Podcast · 投研笔记</span>
+    <h1>马斯克的1万亿美元<br>到底有多少？</h1>
+    <div class="subtitle">ep.39 · SpaceX 史上最大 IPO 后 · 太空创业圈的"黄埔军校"效应</div>
+    <div class="meta">
+      <div class="meta-item">
+        <span class="meta-label">节目</span>
+        <span class="meta-value">世界这七天</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">主播</span>
+        <span class="meta-value">Fay（飞）</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">时长</span>
+        <span class="meta-value">23 分钟（1396s）</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">发布</span>
+        <span class="meta-value">2026-06-16</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TOC ============ -->
+  <div class="toc">
+    <div class="toc-title">📑 目录</div>
+    <ul class="toc-list">
+      <li><a href="#s1"><span class="toc-num">1</span>1万亿美元到底有多少？把抽象变具体</a></li>
+      <li><a href="#s2"><span class="toc-num">2</span>SpaceX IPO 最大赢家盘点（员工/基金/大学）</a></li>
+      <li><a href="#s3"><span class="toc-num">3</span>马斯克的"最"字诀哲学</a></li>
+      <li><a href="#s4"><span class="toc-num">4</span>太空创业圈的新一轮投资热潮</a></li>
+      <li><a href="#s5"><span class="toc-num">5</span>关键数字卡片与投资观察</a></li>
+    </ul>
+  </div>
+
+  <!-- ============ S1 ============ -->
+  <div class="section" id="s1">
+    <div class="section-head">
+      <div class="section-badge">壹</div>
+      <div class="section-title">1万亿美元到底有多少？</div>
+      <span class="section-anchor">00:00 – 06:37</span>
+    </div>
+
+    <div class="src-line">SpaceX 上周五（2026-06-12）完成史上最大 IPO，股价飙升近 20%，公司估值突破 2 万亿美元</div>
+
+    <h3 class="subhead">1.1 认知实验：横线测试</h3>
+    <p>主播让听众想象一条横线——<strong>左端是 100 万美元，右端是 1 万亿美元</strong>，问 11 亿美元该标在哪里？</p>
+    <table>
+      <thead><tr><th>数值</th><th>大多数人直觉</th><th>正确答案</th></tr></thead>
+      <tbody>
+        <tr><td>11 亿美元</td><td>中间偏左</td><td><strong>最左端紧挨 100 万</strong>，即整条线的前 0.1% 位置</td></tr>
+      </tbody>
+    </table>
+    <div class="insight">直觉得出错误结论的比例非常高——人脑对"万"级别以上的数字没有直觉</div>
+
+    <h3 class="subhead">1.2 时间具象法：把金额换成秒数</h3>
+    <blockquote>
+      <p>100 万秒 ≈ 两周前；11 亿秒 ≈ 1994 年（《低俗小说》上映那年）；1 万亿秒 = 地球还处于冰河时代。</p>
+      <p>— Fay</p>
+    </blockquote>
+    <table>
+      <thead><tr><th>秒数</th><th>对应现实时间</th></tr></thead>
+      <tbody>
+        <tr><td>100 万秒</td><td>两周前</td></tr>
+        <tr><td>11 亿秒</td><td>1994 年</td></tr>
+        <tr><td><strong>1 万亿秒</strong></td><td><strong>冰河时代（再往前数千年）</strong></td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">1.3 空间具象法：1美元硬币叠起来</h3>
+    <p>25 万枚硬币 ≈ 纽约帝国大厦高度；100 万枚 ≈ 1600 米；<strong>1 万亿枚 = 地球到月球两个来回的高度</strong>。</p>
+
+    <h3 class="subhead">1.4 一个对照：马斯克 vs 五巨头</h3>
+    <table>
+      <thead><tr><th>富豪</th><th>财富</th></tr></thead>
+      <tbody>
+        <tr><td>马斯克</td><td><strong>1.2 万亿美元</strong></td></tr>
+        <tr><td>后续 5 位科技巨头（Page / Brin / 扎克伯格 / 贝佐斯 / 埃里森）</td><td>总和 <strong>1.3 万亿美元</strong></td></tr>
+      </tbody>
+    </table>
+    <p>✅ 关键洞察：<strong>一个人 ≈ 后面 5 个人加起来</strong>。这个对比很有冲击力。</p>
+
+    <h3 class="subhead">1.5 认知心理学解释</h3>
+    <blockquote>
+      <p>我们生活在一个天生就无法完全理解的世界里。</p>
+      <p>— Randy（Indiana 大学神经科学教授）</p>
+    </blockquote>
+    <ul>
+      <li>大数字会被认知系统自动压缩为"个、十、百、千、万"</li>
+      <li>但 1 万亿 与 1 亿的差距是 <strong>1 万倍</strong>，完全不是线性叠加</li>
+      <li>"即使受过专业数学训练的学者，面对如此庞大的数字也会感到很吃力"</li>
+    </ul>
+  </div>
+
+  <!-- ============ S2 ============ -->
+  <div class="section" id="s2">
+    <div class="section-head">
+      <div class="section-badge">贰</div>
+      <div class="section-title">SpaceX IPO 最大赢家盘点</div>
+      <span class="section-anchor">06:37 – 09:51</span>
+    </div>
+
+    <div class="src-line">上市当日股价飙升近 20%，公司估值突破 2 万亿美元，马斯克身家破万亿——但赢家远不止他一人</div>
+
+    <h3 class="subhead">2.1 公司内部人士</h3>
+    <table>
+      <thead><tr><th>角色</th><th>收益</th></tr></thead>
+      <tbody>
+        <tr><td>马斯克（CEO，持 42% 股份）</td><td>8000 亿 SpaceX + 2800 亿特斯拉 = 1 万亿+</td></tr>
+        <tr><td>格温·肖特韦尔（总裁，20+ 年元老）</td><td>持有 1260 万股，净资产突破 10 亿美元</td></tr>
+        <tr><td>前工程师（已离职 10+ 年）</td><td>手中仍持有 <strong>2800 万美元</strong> 股份</td></tr>
+        <tr><td>新员工（工作 2 年，10% 工资转股权）</td><td>决策被证明非常正确</td></tr>
+        <tr><td>长期合同工</td><td>已陆续卖股买房，IPO 时手上仍持有 88 万美元</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">2.2 对冲基金与家族办公室</h3>
+    <ul>
+      <li><strong>83 岁共同基金经理 Ron Baron（伦巴伦）</strong>：马斯克坚定支持者，在 SpaceX 重仓，晚年大赚一笔</li>
+      <li><strong>Sana Capital Partners</strong>：2019 年首投，目前持仓价值 <strong>超 100 亿美元</strong></li>
+      <li><strong>富达前投资主管 Adam Barker（贝文·贝克）</strong>：任职期间和离职后均大量押注 SpaceX</li>
+    </ul>
+
+    <h3 class="subhead">2.3 大学捐赠基金（意想不到的赢家）</h3>
+    <table>
+      <thead><tr><th>学校</th><th>投资动作</th></tr></thead>
+      <tbody>
+        <tr><td>哈佛</td><td>2020-2021 建仓，当时估值从 740 亿升至 1000 亿美元</td></tr>
+        <tr><td>华盛顿大学</td><td>曾投资，IPO 前部分套现</td></tr>
+        <tr><td>北卡罗来纳大学</td><td>曾投资，IPO 前部分套现</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ============ S3 ============ -->
+  <div class="section" id="s3">
+    <div class="section-head">
+      <div class="section-badge">叁</div>
+      <div class="section-title">马斯克的"最"字诀哲学</div>
+      <span class="section-anchor">09:51 – 16:06</span>
+    </div>
+
+    <h3 class="subhead">3.1 起点：一颗没有送上火星的种子（2000 年前后）</h3>
+    <ul>
+      <li>那时马斯克还没成首富，刚卖掉 PayPal，<strong>对太空着迷的年轻人</strong></li>
+      <li>NASA 预算缩水，登月荣光褪色，没人关心外太空</li>
+      <li>马斯克想做公关噱头：把一罐植物种子送上火星，叫"火星上的首个生命"</li>
+      <li>斯坦福活动上他说：<strong>"公众往往对先例和'最'字头的事物产生共鸣——最好、最早。"</strong></li>
+    </ul>
+
+    <h3 class="subhead">3.2 转向：发现真问题不是技术是钱</h3>
+    <blockquote>
+      <p>太空旅行最大的障碍不是技术，不是意志力，而是钱。具体来说就是一次性火箭的成本——你把一枚火箭射上去，它就没了，这笔账永远都算不过来。</p>
+      <p>— Fay</p>
+    </blockquote>
+    <p>2002 年创立 SpaceX，目标只有一个：<strong>造出可以反复使用的火箭</strong>。</p>
+
+    <h3 class="subhead">3.3 早期连续三次爆炸（2006-2008）</h3>
+    <ul>
+      <li>马斯克几乎把自己从 PayPal 套现的钱全部压进去</li>
+      <li>2008 年第三枚火箭失败后<strong>几乎山穷水尽</strong></li>
+      <li>但就在那一年，<strong>猎鹰 1 号第 4 次发射成功</strong>，成为历史上第一枚由私人公司送入地球轨道的液体燃料火箭</li>
+    </ul>
+
+    <h3 class="subhead">3.4 SpaceX 的"最"字清单</h3>
+    <table>
+      <thead><tr><th>"最"</th><th>含义</th></tr></thead>
+      <tbody>
+        <tr><td>✅ 最早</td><td>由私人公司送入地球轨道的液体燃料火箭（2008）</td></tr>
+        <tr><td>✅ 最早</td><td>成功回收轨道火箭的公司</td></tr>
+        <tr><td>✅ 最大</td><td>全球太空发射业务</td></tr>
+        <tr><td>✅ 最大</td><td>低轨卫星互联网（Starlink）</td></tr>
+      </tbody>
+    </table>
+    <div class="insight">"最"字背后是一条线：把"不可回收"变成"可回收"，从而把单位成本打到底</div>
+
+    <h3 class="subhead">3.5 个人源头：29 岁在非洲差点死掉</h3>
+    <p>那次感染疟疾的经历让他思考：<strong>"我活着是为了什么？"</strong></p>
+    <blockquote>
+      <p>人类不能把所有鸡蛋都放在地球这一个篮子里，我们需要成为多行星物种。</p>
+      <p>— Elon Musk</p>
+    </blockquote>
+    <p>"到今天人类的脚还是没有能够踏上火星。"围绕"先登月还是先登火星"还在搞政治博弈，但<strong>"这场讨论本身的存在就是马斯克的功劳"</strong>。</p>
+
+    <h3 class="subhead">3.6 马斯克的争议面</h3>
+    <ul>
+      <li>资金和声援帮特朗普当选</li>
+      <li>在政府效率部（DOGE）四处碰壁，未取得成果</li>
+      <li>社交媒体上就移民、多元化、跨性别议题发表争议性言论</li>
+      <li>"批评者担心他已经变得过于强大、过于鲁莽、过于以自我为中心"</li>
+    </ul>
+    <p>但有一点很难否认：<strong>"马斯克的这些'最'已经改变了世界上很多人对什么是可能的这个问题的答案"</strong>。</p>
+  </div>
+
+  <!-- ============ S4 ============ -->
+  <div class="section" id="s4">
+    <div class="section-head">
+      <div class="section-badge">肆</div>
+      <div class="section-title">太空创业圈的新一轮投资热潮</div>
+      <span class="section-anchor">16:06 – end</span>
+    </div>
+
+    <h3 class="subhead">4.1 2025 年太空融资规模飙升</h3>
+    <table>
+      <thead><tr><th>年份</th><th>美国太空科技 VC 融资额</th></tr></thead>
+      <tbody>
+        <tr><td>2024</td><td>&lt; 25 亿美元</td></tr>
+        <tr><td><strong>2025</strong></td><td><strong>71 亿美元（2021 年以来最高）</strong></td></tr>
+        <tr><td>2021</td><td>~40 亿美元</td></tr>
+      </tbody>
+    </table>
+    <p>✅ 数据来源：Pitchbox</p>
+
+    <h3 class="subhead">4.2 2025-2026 年代表性融资</h3>
+    <table>
+      <thead><tr><th>公司</th><th>方向</th><th>融资金额</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Observable Space</strong></td><td>激光通信与传输设备</td><td>9000 万美元</td></tr>
+        <tr><td><strong>Northwood Space</strong></td><td>地面系统</td><td>数亿美元</td></tr>
+        <tr><td><strong>SSM Astro</strong></td><td>太空系统与电子产品</td><td>4.7 亿美元</td></tr>
+        <tr><td><strong>Astrins</strong></td><td>小型卫星（2.2 万英里轨道）</td><td>富兰克林邓普顿等机构</td></tr>
+        <tr><td><strong>Impulse Space</strong>（前 SpaceX 高管 Tom Mueller 创立）</td><td>太空机动</td><td>5 亿美元</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">4.3 公开市场点火：750 亿美元</h3>
+    <p>公开市场的投资者一口气向 SpaceX 砸了 <strong>750 亿美元</strong>，这成为整个赛道的引爆点。</p>
+
+    <h3 class="subhead">4.4 资金性质变了</h3>
+    <ul>
+      <li><strong>以前</strong>：主流 VC 几乎不碰太空项目，除非领头人是马斯克这种已证明能创造回报的人</li>
+      <li><strong>现在</strong>：风气和资金面彻底转变，太空行业已用实际成果证明能对赌承诺</li>
+    </ul>
+
+    <h3 class="subhead">4.5 风险也在放大</h3>
+    <table>
+      <thead><tr><th>事件</th><th>教训</th></tr></thead>
+      <tbody>
+        <tr><td>蓝色起源火箭 5 月爆炸</td><td>直接炸坏佛罗里达发射台，正在争分夺秒重建</td></tr>
+        <tr><td>小型初创公司</td><td>一次失败就可能扛不住</td></tr>
+        <tr><td>Virgin Orbit 2021 年借 SPAC 上市</td><td>不到一年半破产倒闭</td></tr>
+        <tr><td><strong>2021 年 SPAC 上市的太空公司</strong></td><td><strong>普遍表现很差，投资者被坑过</strong></td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">4.6 大客户：五角大楼</h3>
+    <p>美国国防预算可能迎来历史性增长，数十亿美元新资金流入太空项目。<strong>K2 Space</strong>（造 2 吨重军用卫星）CEO Karan Kunzour 表示商业+政府两条线进展，截至去年底已签 5 亿美元合同。</p>
+  </div>
+
+  <!-- ============ S5 ============ -->
+  <div class="section" id="s5">
+    <div class="section-head">
+      <div class="section-badge">伍</div>
+      <div class="section-title">关键数字卡片与投资观察</div>
+      <span class="section-anchor">综合</span>
+    </div>
+
+    <h3 class="subhead">📌 关键数字卡片</h3>
+    <table>
+      <thead><tr><th>项目</th><th>数值</th></tr></thead>
+      <tbody>
+        <tr><td>SpaceX 估值</td><td>2 万亿美元+</td></tr>
+        <tr><td>马斯克身家</td><td>1.2 万亿美元</td></tr>
+        <tr><td>后续 5 位科技巨头总和</td><td>1.3 万亿美元</td></tr>
+        <tr><td>SpaceX IPO 公开市场认购</td><td>750 亿美元</td></tr>
+        <tr><td>2025 美国太空 VC 融资</td><td>71 亿美元（2024 为 &lt;25 亿）</td></tr>
+        <tr><td>蓝色起源 5 月事故</td><td>火箭爆炸 + 发射台损毁</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">💡 投资观察（库哥角度）</h3>
+    <div class="insight"><strong>SpaceX 上市后的"溢出效应"</strong>已经体现在二级市场（A股/港股的商业航天板块）和一级市场（Observable Space / Northwood Space 等小公司融资）。这是一个<strong>值得跟踪的中长期主题</strong>，但要注意：<br>① 2021 年 SPAC 上市的教训（Virgin Orbit 不到一年半破产，<strong>概念热 ≠ 公司能活</strong>）<br>② <strong>巨头的玩法和小公司不同</strong>：SpaceX 扛得住爆炸，小公司一次失败就垮<br>③ <strong>军用 + 商业双重需求</strong>才是真正的护城河（参考 K2 Space 模式）</div>
+
+    <div class="insight"><strong>马斯克的"最"字诀哲学</strong>——"公众对先例和'最'字头的事物产生共鸣"——这个商业逻辑同样适用于投资叙事。<strong>"首个万亿富豪"本身就是最强催化剂</strong>，后续"最"字的标的（首个 X 万亿 IPO、首个商业火星任务）都会获得估值溢价。</div>
+
+    <div class="insight"><strong>认知偏差提醒</strong>——这一期最有价值的不是 SpaceX 故事，而是开头那个横线实验。我们对"万亿"这种数量级没有直觉，所以：<br>① 别被"万亿""万亿俱乐部"这类叙事带节奏<br>② 回到<strong>单位价值（每股盈利、ROIC、现金流）</strong>才是根本<br>③ 投资中类似的认知偏差还有"十倍股""百倍股"叙事——多数人对"10 倍"也没直觉</div>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <div class="footer">
+    <div class="brand">🎙️ 库氏Jarvis · 播客转录三件套</div>
+    <div>原始转录稿：/tmp/openclaw/podcast_transcript.txt（480 段，含完整时间戳）</div>
+    <div>音频来源：小宇宙 xyzcdn.net CDN</div>
+    <div>本期索引：ep.39 · 世界这七天 · 2026-06-16 发布</div>
+    <div style="margin-top:10px">
+      <a href="https://www.xiaoyuzhoufm.com/episode/6a31c66a43a22a695584fc3e">🎧 小宇宙原节目</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
