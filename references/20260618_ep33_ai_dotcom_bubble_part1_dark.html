@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EP33 高位抱团的AI与科网泡沫（上）· 播客转录笔记 · 深色模式</title>
+<style>
+
+  /* ===== Reset & Base ===== */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;font-size:16px;scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:#0f0d08;
+    color:#e8dec8;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* ===== Layout ===== */
+  .wrap{max-width:780px;margin:0 auto;padding:48px 28px 96px}
+
+  /* ===== Cover ===== */
+  .cover{
+    background:linear-gradient(135deg,#1a1410 0%,#2a2014 50%,#15100a 100%);
+    color:#f5e9c8;
+    border-radius:18px;
+    padding:56px 40px 48px;
+    margin-bottom:48px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 12px 36px rgba(0,0,0,.5), inset 0 1px 0 rgba(212,175,55,.08);
+    border:1px solid #3a2e1a;
+  }
+  .cover::before{
+    content:"";
+    position:absolute;top:-50%;right:-30%;
+    width:520px;height:520px;
+    background:radial-gradient(circle,rgba(212,175,55,.18) 0%,rgba(212,175,55,0) 70%);
+    pointer-events:none;
+  }
+  .cover .eyebrow{
+    display:inline-block;
+    font-size:11px;letter-spacing:3px;font-weight:600;
+    color:#e6c14a;text-transform:uppercase;
+    border:1px solid rgba(230,193,74,.4);
+    padding:5px 12px;border-radius:30px;
+    margin-bottom:22px;
+    background:rgba(230,193,74,.06);
+  }
+  .cover h1{
+    font-family:"Source Han Serif","Noto Serif CJK SC","Songti SC",serif;
+    font-size:36px;line-height:1.25;font-weight:700;
+    color:#fff;margin-bottom:14px;letter-spacing:.5px;
+  }
+  .cover .subtitle{
+    font-size:16px;color:rgba(245,233,200,.72);
+    margin-bottom:30px;line-height:1.6;
+  }
+  .cover .meta{
+    display:grid;grid-template-columns:repeat(2,1fr);
+    gap:14px 24px;
+    padding-top:24px;
+    border-top:1px solid rgba(230,193,74,.18);
+    font-size:13px;
+  }
+  .cover .meta-item{display:flex;flex-direction:column;gap:2px}
+  .cover .meta-label{color:rgba(245,233,200,.45);font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
+  .cover .meta-value{color:#f5e9c8;font-weight:500}
+
+  /* ===== Section Cards ===== */
+  .section{
+    background:#1c1810;
+    border-radius:14px;
+    padding:36px 36px 32px;
+    margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(0,0,0,.4);
+    border:1px solid #2e2618;
+  }
+  .section-head{
+    display:flex;align-items:center;gap:14px;
+    margin-bottom:24px;padding-bottom:18px;
+    border-bottom:2px solid #2e2618;
+  }
+  .section-badge{
+    display:flex;align-items:center;justify-content:center;
+    width:48px;height:48px;border-radius:12px;
+    background:linear-gradient(135deg,#e6c14a 0%,#b8941f 100%);
+    color:#1a1410;font-weight:700;font-size:20px;
+    font-family:"Source Han Serif","Noto Serif CJK SC",serif;
+    box-shadow:0 4px 10px rgba(230,193,74,.3);
+    flex-shrink:0;
+  }
+  .section-title{
+    font-family:"Source Han Serif","Noto Serif CJK SC","Songti SC",serif;
+    font-size:23px;font-weight:700;color:#f5e9c8;line-height:1.3;
+    flex:1;
+  }
+  .section-anchor{
+    display:inline-block;
+    font-size:11px;font-weight:600;letter-spacing:1px;
+    color:#e6c14a;background:rgba(230,193,74,.08);
+    padding:4px 10px;border-radius:20px;
+    border:1px solid rgba(230,193,74,.3);
+  }
+
+  h3.subhead{
+    font-family:"Source Han Serif","Noto Serif CJK SC",serif;
+    font-size:17px;font-weight:600;color:#e6c14a;
+    margin:24px 0 12px;
+    padding-left:12px;
+    border-left:3px solid #e6c14a;
+    line-height:1.4;
+  }
+
+  p{margin-bottom:14px;font-size:15.5px;color:#d4c8a8}
+  strong{color:#fff;font-weight:700;background:linear-gradient(transparent 60%,rgba(230,193,74,.22) 60%);padding:0 2px}
+
+  /* ===== Lists ===== */
+  ul,ol{margin:10px 0 16px;padding-left:24px}
+  li{margin-bottom:8px;font-size:15.5px;color:#d4c8a8}
+  li::marker{color:#c9a646}
+
+  /* ===== Blockquote / Pull-quote ===== */
+  blockquote{
+    position:relative;
+    background:linear-gradient(135deg,rgba(230,193,74,.08) 0%,rgba(230,193,74,.03) 100%);
+    border-left:4px solid #e6c14a;
+    border-radius:0 10px 10px 0;
+    padding:20px 24px 20px 56px;
+    margin:18px 0;
+    font-size:15.5px;
+    color:#e6d9b8;
+    font-style:italic;
+  }
+  blockquote::before{
+    content:"\201C";
+    position:absolute;
+    left:14px;top:6px;
+    font-family:Georgia,serif;
+    font-size:48px;line-height:1;
+    color:#e6c14a;opacity:.4;
+  }
+  blockquote p{margin-bottom:6px;color:#e6d9b8}
+  blockquote p:last-child{margin-bottom:0;font-style:normal;font-size:13px;color:#a89878;font-weight:500}
+
+  /* ===== Tables ===== */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:18px 0 22px;
+    font-size:14.5px;
+    background:#1c1810;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 1px 4px rgba(0,0,0,.3);
+    border:1px solid #2e2618;
+  }
+  thead{background:linear-gradient(180deg,#2a2014 0%,#1a1410 100%)}
+  th{
+    padding:13px 14px;
+    text-align:left;
+    color:#e6c14a;
+    font-weight:600;
+    font-size:13px;letter-spacing:.5px;
+  }
+  td{
+    padding:12px 14px;
+    border-top:1px solid #2e2618;
+    color:#d4c8a8;
+    vertical-align:top;
+  }
+  tbody tr{transition:background .15s ease}
+  tbody tr:hover{background:rgba(230,193,74,.06)}
+  tbody tr:nth-child(even){background:rgba(0,0,0,.2)}
+  tbody tr:nth-child(even):hover{background:rgba(230,193,74,.08)}
+
+  /* ===== Inline code & markers ===== */
+  code{
+    background:#2e2618;color:#e6c14a;
+    padding:1px 6px;border-radius:4px;
+    font-family:"SF Mono","Menlo",monospace;
+    font-size:13.5px;
+  }
+
+  /* ===== Annotation tags ===== */
+  .tag-ok{color:#6dd49a;font-weight:600}
+  .tag-warn{color:#f0a85a;font-weight:600}
+  .tag-guess{color:#a8a8e0;font-weight:600}
+
+  /* ===== Highlight box (推断) ===== */
+  .insight{
+    background:linear-gradient(135deg,rgba(230,193,74,.1) 0%,rgba(230,193,74,.04) 100%);
+    border:1px solid rgba(230,193,74,.25);
+    border-left:4px solid #e6c14a;
+    border-radius:8px;
+    padding:14px 18px;
+    margin:16px 0;
+    font-size:14.5px;
+    color:#e6d9b8;
+  }
+  .insight::before{
+    content:"💡 推断";
+    display:inline-block;
+    font-weight:700;color:#e6c14a;
+    font-size:13px;letter-spacing:1px;
+    margin-right:6px;
+  }
+
+  /* ===== Data source tag row ===== */
+  .src-line{
+    display:flex;align-items:center;gap:8px;
+    font-size:12.5px;color:#a89878;
+    background:rgba(0,0,0,.3);
+    padding:8px 14px;border-radius:6px;
+    margin:10px 0 16px;
+    border:1px dashed #3a2e1a;
+  }
+  .src-line::before{content:"🎙️";font-size:14px}
+
+  /* ===== Footer ===== */
+  .footer{
+    text-align:center;
+    margin-top:48px;padding:24px 16px;
+    color:#7a6f55;font-size:12.5px;
+    border-top:1px solid #2e2618;
+  }
+  .footer a{color:#e6c14a;text-decoration:none}
+  .footer .brand{
+    font-family:"Source Han Serif","Noto Serif CJK SC",serif;
+    font-size:14px;font-weight:600;
+    color:#c9b988;margin-bottom:6px;
+  }
+
+  /* ===== TOC ===== */
+  .toc{
+    background:#1c1810;
+    border:1px solid #2e2618;
+    border-radius:14px;
+    padding:24px 28px;
+    margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(0,0,0,.4);
+  }
+  .toc-title{
+    font-size:13px;font-weight:700;letter-spacing:1.5px;
+    color:#e6c14a;
+    margin-bottom:14px;
+  }
+  .toc-list{list-style:none;padding:0;margin:0}
+  .toc-list li{margin:0;padding:0}
+  .toc-list a{
+    display:flex;align-items:center;gap:10px;
+    padding:8px 0;
+    color:#d4c8a8;text-decoration:none;
+    font-size:14.5px;
+    border-bottom:1px dashed #2e2618;
+    transition:color .15s;
+  }
+  .toc-list li:last-child a{border-bottom:none}
+  .toc-list a:hover{color:#e6c14a}
+  .toc-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:22px;height:22px;border-radius:50%;
+    background:rgba(230,193,74,.12);color:#e6c14a;
+    font-size:11px;font-weight:700;
+    flex-shrink:0;
+  }
+
+  /* ===== Chip ===== */
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 18px}
+  .chip{
+    display:inline-flex;align-items:center;gap:4px;
+    font-size:12px;font-weight:500;
+    padding:5px 11px;border-radius:14px;
+    background:rgba(230,193,74,.08);color:#e6c14a;
+    border:1px solid rgba(230,193,74,.25);
+  }
+  .chip.dark{background:#0f0d08;color:#e6c14a;border-color:#3a2e1a}
+  .chip.green{background:rgba(109,212,154,.1);color:#6dd49a;border-color:rgba(109,212,154,.3)}
+  .chip.amber{background:rgba(240,168,90,.1);color:#f0a85a;border-color:rgba(240,168,90,.3)}
+
+  /* ===== Responsive ===== */
+  @media (max-width:640px){
+    .wrap{padding:24px 14px 60px}
+    .cover{padding:36px 24px 32px;border-radius:14px}
+    .cover h1{font-size:26px}
+    .cover .meta{grid-template-columns:1fr;gap:10px}
+    .section{padding:26px 20px 22px;border-radius:12px}
+    .section-title{font-size:19px}
+    .section-badge{width:40px;height:40px;font-size:17px}
+    th,td{padding:10px 8px;font-size:13px}
+    blockquote{padding:16px 18px 16px 44px}
+    blockquote::before{font-size:36px;left:10px;top:8px}
+  }
+
+</style>
+</head>
+<body>
+
+</head>
+<body>
+<div class="wrap">
+
+  <!-- COVER -->
+  <div class="cover">
+    <span class="eyebrow">发财搭子 · EP33 上集</span>
+    <h1>高位抱团的 AI 像极了当年的科网泡沫</h1>
+    <div class="subtitle">惊人相似的宏观环境 · 不容有失的产业指标<br><span style="font-size:14px;color:rgba(245,233,200,.55);">1995-2000 复盘 × AI 行情位置感</span></div>
+    <div class="meta">
+      <div class="meta-item"><span class="meta-label">主播</span><span class="meta-value">马克汤 · MIT/CFA/FRM</span></div>
+      <div class="meta-item"><span class="meta-label">嘉宾</span><span class="meta-value">壹叁伍 · 公募基金经理（TMT）</span></div>
+      <div class="meta-item"><span class="meta-label">录制时间</span><span class="meta-value">2026-06-16 20:00</span></div>
+      <div class="meta-item"><span class="meta-label">发布时间</span><span class="meta-value">2026-06-18 · 62 分钟（上集）</span></div>
+      <div class="meta-item"><span class="meta-label">数据源</span><span class="meta-value">FRED / EIA / 高盛 / Fed</span></div>
+      <div class="meta-item"><span class="meta-label">转录工具</span><span class="meta-value">faster-whisper base · zh</span></div>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <nav class="toc">
+    <div class="toc-title">📑 目录</div>
+    <ul class="toc-list">
+      <li><a href="#ch1"><span class="toc-num">壹</span>逻辑没破 ≠ 安全 · 景气度投资的拐点问题 <span style="margin-left:auto;color:#a8893d;font-size:12px;">02:29</span></a></li>
+      <li><a href="#ch2"><span class="toc-num">贰</span>三层框架：宏观 / 产业 / 市场信号 <span style="margin-left:auto;color:#a8893d;font-size:12px;">06:35</span></a></li>
+      <li><a href="#ch3"><span class="toc-num">叁</span>高油价、通胀、加息：不是科技股见顶的充分条件 <span style="margin-left:auto;color:#a8893d;font-size:12px;">07:57</span></a></li>
+      <li><a href="#ch4"><span class="toc-num">肆</span>Greenspan Put → Trump TACO：托底预期 <span style="margin-left:auto;color:#a8893d;font-size:12px;">14:35</span></a></li>
+      <li><a href="#ch5"><span class="toc-num">伍</span>10Y-2Y 利差：债券市场的衰退定价信号 <span style="margin-left:auto;color:#a8893d;font-size:12px;">20:09</span></a></li>
+      <li><a href="#ch6"><span class="toc-num">陆</span>中国 vs 日本：第二大经济体的 AI 角色差异 <span style="margin-left:auto;color:#a8893d;font-size:12px;">25:22</span></a></li>
+      <li><a href="#ch7"><span class="toc-num">柒</span>NVIDIA ≠ Cisco：三家公司合体的超级巨头 <span style="margin-left:auto;color:#a8893d;font-size:12px;">32:00</span></a></li>
+      <li><a href="#ch8"><span class="toc-num">捌</span>大模型公司与新入口：OpenAI / Anthropic / 中国模型 <span style="margin-left:auto;color:#a8893d;font-size:12px;">41:35</span></a></li>
+      <li><a href="#ch9"><span class="toc-num">玖</span>产业风险清单：capex / 毛利率 / NVIDIA 财报 <span style="margin-left:auto;color:#a8893d;font-size:12px;">51:03</span></a></li>
+      <li><a href="#ch10"><span class="toc-num">拾</span>关键结论 & 可监控信号清单 <span style="margin-left:auto;color:#a8893d;font-size:12px;">收尾</span></a></li>
+    </ul>
+  </nav>
+
+  <!-- CH1 -->
+  <section class="section" id="ch1">
+    <div class="section-head">
+      <div class="section-badge">壹</div>
+      <div class="section-title">逻辑没破 ≠ 安全</div>
+      <span class="section-anchor">02:29</span>
+    </div>
+
+    <p>散户判断 AI 行情的两类误区：</p>
+    <ul>
+      <li><strong>只看逻辑是否成立</strong>——但逻辑是慢变量，证伪需要时间</li>
+      <li><strong>即使逻辑成立，估值是否高估</strong>是另一个独立问题</li>
+    </ul>
+
+    <h3 class="subhead">历史案例对照</h3>
+    <ul>
+      <li><strong>2024 年新消费（泡泡玛特等）</strong> → 逻辑没破，6-7 月见顶后创新药接力</li>
+      <li><strong>创新药</strong> → 2024 年 8-9 月之后持续调整至 2026 年仍未结束</li>
+      <li><strong>机器人、商业航天</strong> → 逻辑都没破，但估值跑太快</li>
+    </ul>
+
+    <div class="insight">机构做法：景气度跟踪 + 产业链订单/增速验证。但单纯景气度跟踪的问题是——<strong>增速下行或拐点出现时无效</strong>（参考核心资产、新能源）。本轮 AI 的位置感判断，不能停留在"逻辑是否成立"，必须叠加估值+拐点双维度。</div>
+  </section>
+
+  <!-- CH2 -->
+  <section class="section" id="ch2">
+    <div class="section-head">
+      <div class="section-badge">贰</div>
+      <div class="section-title">三层框架：宏观 / 产业 / 市场信号</div>
+      <span class="section-anchor">06:35</span>
+    </div>
+
+    <p>对比 1995-2000 科网泡沫，从三层维度做深度复盘：</p>
+
+    <table>
+      <thead>
+        <tr><th>维度</th><th>关注点</th><th>对比锚点</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>宏观</strong></td><td>利率、油价、托底预期、第二大经济体</td><td>99.6-00.5 加息 175BP；油价 11→30 美元</td></tr>
+        <tr><td><strong>产业</strong></td><td>基础设施龙头估值/生态位；大模型入口之争</td><td>Cisco+Intel+Sun vs NVIDIA</td></tr>
+        <tr><td><strong>市场信号</strong></td><td>10Y-2Y 利差、capex 指引、毛利率</td><td>00 年 1 月利差倒挂 = 衰退定价</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CH3 -->
+  <section class="section" id="ch3">
+    <div class="section-head">
+      <div class="section-badge">叁</div>
+      <div class="section-title">高油价、通胀、加息：不是见顶充分条件</div>
+      <span class="section-anchor">07:57</span>
+    </div>
+
+    <h3 class="subhead">1999-2000 历史复盘 <span class="tag-ok">✅原文数据</span></h3>
+    <ul>
+      <li><strong>油价</strong>：1999 年初 11 美元/桶 → 最高 30 美元/桶</li>
+      <li><strong>加息</strong>：1999.6 启动，2000.5 结束，<strong>累计 175BP</strong>，目标利率 6.5%</li>
+      <li><strong>纳斯达克</strong>：99 下半年顶着加息加速上涨，2000.3 才见顶</li>
+      <li><strong>泡沫破灭</strong>：纳斯达克 5000+ → 2000 点以下，<strong>整体跌幅 75%</strong></li>
+      <li><strong>微软</strong>：2000 年见顶后消化了 13-14 年才回到原点</li>
+    </ul>
+
+    <h3 class="subhead">核心逻辑 <span class="tag-warn">⚠️推断</span></h3>
+    <blockquote>
+      <p>当科技增速完全能消化估值、并覆盖加息影响时，科技股反而成为相对抱团去处——因为其他行业对利率更敏感，资金反而加速流入高成长行业。</p>
+      <p>— 壹叁伍</p>
+    </blockquote>
+
+    <h3 class="subhead">对当下的启示</h3>
+    <ul>
+      <li>2026 也是加息周期，AI 仍在上涨——历史剧本正在重演</li>
+      <li>今年两轮"AI 是否见顶"讨论：① 霍尔木兹海峡事件后油价暴涨 ② AI 巨幅波动后达成协议</li>
+      <li><strong>风险警示</strong>：破灭时跌幅可能极大（70-80%）</li>
+    </ul>
+  </section>
+
+  <!-- CH4 -->
+  <section class="section" id="ch4">
+    <div class="section-head">
+      <div class="section-badge">肆</div>
+      <div class="section-title">Greenspan Put → Trump TACO</div>
+      <span class="section-anchor">14:35</span>
+    </div>
+
+    <h3 class="subhead">格林斯潘 Put <span class="tag-ok">✅原文</span></h3>
+    <ul>
+      <li>三个特征：① 对技术进步、生产率提升友好 ② 极度关注海外危机与金融稳定（LTCM 爆雷后立即干预）③ 即使面对疯狂泡沫也不过多干预，直到油价+CPI 起来才加息</li>
+      <li>市场预期：<strong>只要股市跌多了 / 金融稳定出问题，美联储就会救市</strong></li>
+    </ul>
+
+    <h3 class="subhead">Trump TACO <span class="tag-guess">🔮当前映射</span></h3>
+    <ul>
+      <li>特朗普 TACO：30 年美债破 5% 后，必然从财政/关税/舆论出手救市</li>
+      <li><strong>核心差异</strong>：格林斯潘能直接降息+释放流动性，特朗普只能口头+财政+关税缓冲</li>
+    </ul>
+
+    <div class="insight">TACO 能否成立，<strong>关键变量是 6 月 18 日鲍威尔继任者的就职演说</strong>——他是否会宣誓维护美联储独立性。1 月 30 日黄金暴跌那天，恰好是其提名日。市场解读：他不算"特别鸽"，之前在美联储内部表态非常多。继任者是否维护独立性，是 TACO 能否兑现的最重要前置条件。</div>
+  </section>
+
+  <!-- CH5 -->
+  <section class="section" id="ch5">
+    <div class="section-head">
+      <div class="section-badge">伍</div>
+      <div class="section-title">10Y-2Y 利差：债券市场的衰退定价信号</div>
+      <span class="section-anchor">20:09</span>
+    </div>
+
+    <h3 class="subhead">2000 年案例 <span class="tag-ok">✅原文</span></h3>
+    <ul>
+      <li><strong>关键时点</strong>：2000 年 1 月，10 年期美债利率开始掉头向下</li>
+      <li><strong>2000 年 2 月</strong>：10Y-2Y 利差首次倒挂 30-40BP —— 距 3 月科网泡沫破灭<strong>仅 1 个月</strong></li>
+      <li>背后逻辑：债券市场开始交易<strong>美国经济衰退</strong>，而当时美国经济唯一支撑就是科技革命</li>
+    </ul>
+
+    <h3 class="subhead">现在的数据 <span class="tag-ok">✅原文（2026-06-16 录制时点）</span></h3>
+    <table>
+      <thead><tr><th>期限</th><th>利率</th></tr></thead>
+      <tbody>
+        <tr><td>30 年期美债</td><td><strong>4.94%</strong></td></tr>
+        <tr><td>10 年期美债</td><td><strong>4.44%</strong></td></tr>
+        <tr><td>2 年期美债</td><td><strong>4.05%</strong></td></tr>
+        <tr><td><strong>10Y-2Y 利差</strong></td><td><strong>+39BP</strong>（未倒挂，需密切监控）</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">利差原理科普 <span class="tag-ok">✅原文</span></h3>
+    <p>2Y = 短期利率，10Y = 长期利率。正常应长期 &gt; 短期。倒挂发生条件：市场预期美联储短期会加息 → 2Y 利率快速上行 → 压缩利差。</p>
+
+    <div class="insight">本轮最关键的可量化信号：<strong>若 10Y-2Y 再次倒挂 → 债券市场开始交易美国衰退</strong>。现在美国经济 K 型分化，AI 是唯一上行支撑。<strong>倒挂 = 市场不再相信 AI 能继续拉动美国经济 → AI 行情拐点信号</strong>。建议在财搭子设置监控任务，10Y-2Y 利差收窄到历史分位数/转负时自动提醒 + 模拟仓一键卖出科技股。</div>
+  </section>
+
+  <!-- CH6 -->
+  <section class="section" id="ch6">
+    <div class="section-head">
+      <div class="section-badge">陆</div>
+      <div class="section-title">中国 vs 日本：第二大经济体的 AI 角色差异</div>
+      <span class="section-anchor">25:22</span>
+    </div>
+
+    <h3 class="subhead">相似点 vs 关键差异</h3>
+    <table>
+      <thead><tr><th>维度</th><th>日本（2000）</th><th>中国（2026）</th></tr></thead>
+      <tbody>
+        <tr><td>地位</td><td>世界第二大经济体</td><td>世界第二大经济体</td></tr>
+        <tr><td>状态</td><td>通缩压力</td><td>通缩压力讨论仍在</td></tr>
+        <tr><td>传统板块</td><td>消费地产缺乏新增长点</td><td>内需、社零、固投疲软</td></tr>
+        <tr><td>5 月最新数据</td><td>—</td><td>外需有亮点，<strong>核心亮点来自 AI 产业链</strong></td></tr>
+        <tr><td><strong>关键差异</strong></td><td>科技革命基本全在美国，日本只是被动溢出</td><td><strong>AI 是中美双轨</strong>，中国是除美国外最大受益国和产出国</td></tr>
+      </tbody>
+    </table>
+
+    <div class="insight">中国 AI 公司还在"教育市场"阶段——开源社区、AI 应用公司都起到推动作用。<strong>智谱、MiniMax 等全球大模型前两股都是中国公司，早于 OpenAI 和 Anthropic 上市</strong>。中国不仅是上游供应链国家，也是 AI 大下游消费国。<strong>宏观层面需警惕的中国尾部风险</strong>：中国经济走弱 + 新质生产力/支柱产业转型不及预期——这两条任一出现，对全球 AI 投资都是大冲击（供应链 + 下游消费双重打击）。</div>
+  </section>
+
+  <!-- CH7 -->
+  <section class="section" id="ch7">
+    <div class="section-head">
+      <div class="section-badge">柒</div>
+      <div class="section-title">NVIDIA ≠ Cisco：三家公司合体的超级巨头</div>
+      <span class="section-anchor">32:00</span>
+    </div>
+
+    <h3 class="subhead">为什么不能用指数对比 <span class="tag-warn">⚠️推断</span></h3>
+    <ul>
+      <li>2000 年科技在 GDP / 股市占比<strong>都很低</strong></li>
+      <li>2026 年 AI 巨头（中美）市场占比<strong>不低于 30%</strong></li>
+      <li>单纯指数 K 线叠图没意义，<strong>必须做公司层面映射</strong></li>
+    </ul>
+
+    <h3 class="subhead">NVIDIA 的市场地位 <span class="tag-ok">✅原文</span></h3>
+    <table>
+      <thead><tr><th>维度</th><th>NVIDIA 数据</th></tr></thead>
+      <tbody>
+        <tr><td>训练卡市占率</td><td>&gt; 90%（即使是 Google TPU，大规模预训练仍需 NVIDIA）</td></tr>
+        <tr><td>推理卡市占率</td><td>过去半年急速上涨，最新约 <strong>60%+</strong></td></tr>
+        <tr><td>当前主力产品</td><td>GB300、NV72 系列机柜</td></tr>
+        <tr><td>毛利率</td><td>砍掉 H20 中国特供版后，<strong>毛利率持续抬升</strong>，已接近"印钞"水平</td></tr>
+        <tr><td>生态壁垒</td><td>CUDA + 软件系统 + 机器人仿真训练环境 + 开发者标准 + 服务器核心组件</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">NVIDIA vs 科网泡沫三家映射 <span class="tag-warn">⚠️推断</span></h3>
+    <p>NVIDIA 是 <strong>Cisco + Intel + Sun Microsystems</strong> 三家合体：</p>
+
+    <table>
+      <thead><tr><th>NVIDIA</th><th>科网时代对照公司</th><th>对应业务</th></tr></thead>
+      <tbody>
+        <tr><td>网络设备（NVLink、交换机）</td><td><strong>Cisco（思科）</strong></td><td>卖铲子的网络设备商</td></tr>
+        <tr><td>底层标准计算芯片（GPU/加速计算）</td><td><strong>Intel（英特尔）</strong></td><td>PC/服务器时代核心芯片标准化</td></tr>
+        <tr><td>服务器 + 开发环境（CUDA + DGX）</td><td><strong>Sun Microsystems</strong></td><td>高端服务器工作站 + Java + "网络就是计算机"</td></tr>
+      </tbody>
+    </table>
+
+    <blockquote>
+      <p>NVIDIA 比当年三家的"质量更高"——是真正有营收、有毛利、有现金流的硬科技。它还在自己切 CPU 市场（Vera CPU + Rubin GPU），进一步垄断。</p>
+      <p>甚至有点像当年加了一点微软的味道——CUDA 平台 = 操作系统级壁垒。</p>
+    </blockquote>
+  </section>
+
+  <!-- CH8 -->
+  <section class="section" id="ch8">
+    <div class="section-head">
+      <div class="section-badge">捌</div>
+      <div class="section-title">大模型公司与新入口：OpenAI / Anthropic / 中国模型</div>
+      <span class="section-anchor">41:35</span>
+    </div>
+
+    <h3 class="subhead">大模型公司很难在科网时代找到直接对照 <span class="tag-warn">⚠️推断</span></h3>
+    <p>当年的 Netscape、Yahoo、AOL 都只是单一功能。现在的大模型<strong>能切入所有行业、重做所有产业</strong>——业务范围完全不同。</p>
+
+    <h3 class="subhead">三个类比框架</h3>
+    <table>
+      <thead><tr><th>大模型公司</th><th>科网时代对照</th><th>对应逻辑</th></tr></thead>
+      <tbody>
+        <tr><td>OpenAI / Anthropic</td><td><strong>Netscape（网景）</strong></td><td>第一次让市场相信"互联网会成为新入口平台"——现在大模型也是"新入口"</td></tr>
+        <tr><td>OpenAI / Anthropic</td><td><strong>AOL</strong></td><td>美国人第一次上网靠它，打包上网服务+聊天室+新闻+通讯——现在大模型也打包流量入口+内容分发+订阅</td></tr>
+        <tr><td>OpenAI / Anthropic</td><td><strong>Yahoo（雅虎）</strong></td><td>门户逻辑——有流量靠广告变现。OpenAI 年底要"重新杀回广告"</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">大模型 = 新入口 <span class="tag-warn">⚠️推断</span></h3>
+    <ul>
+      <li>早上打开 Claude/GPT 看行动晨报</li>
+      <li>收盘打开财搭子看晚报</li>
+      <li><strong>未来可能不再需要那么多 APP</strong>——所有服务通过大模型分发</li>
+      <li>大模型 = <strong>操作系统级别的收口</strong>——把 APP 一个个的入口收走</li>
+      <li>中国版：腾讯元宝、字节豆包、支付宝 AI、微信智能体 → 都在抢"操作系统席位"</li>
+    </ul>
+
+    <blockquote>
+      <p>OpenAI/Anthropic 抢的是<strong>网页端/浏览器端入口</strong>；NVIDIA 抢的是<strong>机器端/底层操作系统</strong>（CUDA = 操作系统）。Cloud Code、Codex 已经从系统层面打包——未来不需要手动操控各 APP。</p>
+      <p>— 壹叁伍 / 马克汤</p>
+    </blockquote>
+
+    <h3 class="subhead">中国大模型 vs 美国大模型 <span class="tag-warn">⚠️推断</span></h3>
+    <ul>
+      <li>智谱、MiniMax、MiniMax、腾讯元宝等都在照搬 OpenAI/Anthropic 路径</li>
+      <li><strong>本土化改造</strong>：国央企私有化部署、本土方案</li>
+      <li>关键问题：<strong>谁能在中国杀出"百度级别的流量收口"？</strong></li>
+    </ul>
+  </section>
+
+  <!-- CH9 -->
+  <section class="section" id="ch9">
+    <div class="section-head">
+      <div class="section-badge">玖</div>
+      <div class="section-title">产业风险清单：capex / 毛利率 / NVIDIA 财报</div>
+      <span class="section-anchor">51:03</span>
+    </div>
+
+    <h3 class="subhead">风险点 1：云厂商资本开支 <span class="tag-warn">⚠️推断</span></h3>
+    <ul>
+      <li>美国 GDP 增长<strong>绝大部分来自七姐妹 capex</strong></li>
+      <li>一旦任何一家出现：① capex 指引下修 ② 实际数字下修 ③ 不及预期</li>
+      <li><strong>毁灭性打击</strong>——直接证伪"AI 需要无限投入"+"算力供不应求"+需求端逻辑</li>
+      <li>2026 年云厂商 capex：<strong>~7000 亿美元</strong>；2027 上修中，<strong>可能 9000 亿-1 万亿</strong></li>
+    </ul>
+    <p><span class="tag-warn">⚠️首次下修 = 立即警惕</span></p>
+
+    <h3 class="subhead">风险点 2：高毛利率公司的毛利率变化 <span class="tag-warn">⚠️推断</span></h3>
+    <p>很多公司毛利率堪比"印钞"：存储（美光、海力士、三星、长鑫）、GPU、光模块。高毛利的两个支撑：</p>
+    <ol>
+      <li><strong>技术规格提升</strong>（PCB 从 3-5 层到十几层、HBM 架构升级）</li>
+      <li><strong>供需失衡</strong>（供不应求 → 涨价）</li>
+    </ol>
+
+    <div class="insight"><strong>毛利率下修 = 危险信号</strong>——需求不再旺盛 / 供给开始超过需求。案例对照：<br>
+    • 博通 Q1 毛利率"不及预期" → <strong>但是产品结构调整</strong>（A6 芯片占比提升）导致，是正常的<br>
+    • 中国光模块 Q1——只有新易盛、中际旭创真正超预期，其他都 miss<br>
+    • 但市场仍选择新易盛——<strong>miss 不全是 capex 不足，也可能是物料/供需错配</strong></div>
+
+    <h3 class="subhead">风险点 3：NVIDIA 财报——不能 miss</h3>
+    <blockquote>
+      <p>NVIDIA 不能 miss——是整个主线最强的中军。</p>
+      <p>— 壹叁伍</p>
+    </blockquote>
+    <ul>
+      <li>华尔街分析师<strong>已经把 NVIDIA 供应链上下游全部盯完</strong>（出货量、机柜安装数、技术研发）</li>
+      <li>给出的预期<strong>相对保守</strong>——但 NVIDIA 财报依然<strong>必须 miss 都不能 miss</strong></li>
+      <li>这几期 NVIDIA 财报<strong>盘后表现都不特别好</strong>——市场已经消化了分析师给的"安全垫"</li>
+      <li>允许"中规中矩 / 刚好达预期"，但不允许"miss"</li>
+    </ul>
+    <p><span class="tag-warn">⚠️</span> 这是 AI 整个产业的<strong>最强基本面锚点</strong></p>
+  </section>
+
+  <!-- CH10 -->
+  <section class="section" id="ch10">
+    <div class="section-head">
+      <div class="section-badge">拾</div>
+      <div class="section-title">关键结论 & 可监控信号清单</div>
+      <span class="section-anchor">收尾</span>
+    </div>
+
+    <h3 class="subhead">⚠️ 六大可监控信号</h3>
+    <table>
+      <thead><tr><th>信号</th><th>当前状态（2026-06-16）</th><th>警戒阈值</th><th>影响维度</th></tr></thead>
+      <tbody>
+        <tr><td><strong>10Y-2Y 利差</strong></td><td>+39BP</td><td>转负 = 衰退定价 = AI 拐点</td><td>宏观/全市场</td></tr>
+        <tr><td><strong>云厂商 capex 指引</strong></td><td>2026 ~7000亿；2027 上修中</td><td>首次下修 = 毁灭性</td><td>产业/全链条</td></tr>
+        <tr><td><strong>NVIDIA 财报</strong></td><td>盘后表现一般（预期已消化）</td><td>miss = AI 主线破灭</td><td>中军/信心锚</td></tr>
+        <tr><td><strong>核心公司毛利率</strong></td><td>存储/GPU/光模块 = 印钞水平</td><td>共需驱动的下修（vs 产品结构调整的正常下修）</td><td>产业/供需</td></tr>
+        <tr><td><strong>美联储继任者</strong></td><td>6 月 18 日就职</td><td>是否维护独立性</td><td>TACO 能否兑现</td></tr>
+        <tr><td><strong>中国转型风险</strong></td><td>新质生产力转型持续</td><td>走弱 + 转型不及预期</td><td>全球 AI 需求</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">📊 量化对照表（1999-2000 科网泡沫 vs 2026 AI 浪潮）</h3>
+    <table>
+      <thead><tr><th>对比维度</th><th>1999-2000 科网泡沫</th><th>2026 AI 浪潮</th></tr></thead>
+      <tbody>
+        <tr><td>油价</td><td>11 → 30 美元</td><td>高位（特朗普决策核心）</td></tr>
+        <tr><td>加息周期</td><td>99.6-00.5，累计 175BP，目标利率 6.5%</td><td>加息周期中</td></tr>
+        <tr><td>科技股表现</td><td>99 下半年加速涨，00.3 见顶</td><td>持续创新高</td></tr>
+        <tr><td>见顶前债市信号</td><td>00.1 利差掉头；00.2 倒挂 30-40BP</td><td>需密切监控</td></tr>
+        <tr><td>龙头基础设施</td><td>Cisco+Intel+Sun 三家</td><td>NVIDIA 一家通吃</td></tr>
+        <tr><td>第二大经济体</td><td>日本（通缩+被动溢出）</td><td>中国（通缩+主动 AI 玩家）</td></tr>
+        <tr><td>入口之争</td><td>Netscape/AOL/Yahoo</td><td>OpenAI/Anthropic/中国大模型</td></tr>
+        <tr><td>破灭后龙头恢复</td><td>微软 13-14 年才回原点</td><td>未知</td></tr>
+        <tr><td>整体回撤</td><td>纳斯达克 75%</td><td>未知</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">📚 参考资料</h3>
+    <ul style="font-size:13.5px;color:#8a7b58;">
+      <li>FRED: 10-Year Treasury Constant Maturity Minus 2-Year Treasury Constant Maturity</li>
+      <li>Federal Reserve: March 21, 2000 FOMC statement</li>
+      <li>EIA: Europe Brent Spot Price FOB</li>
+      <li>Goldman Sachs: The Late 1990s Dot-Com Bubble Implodes in 2000</li>
+      <li>Federal Reserve: Status of Y2K preparedness, Alan Greenspan, 1999</li>
+    </ul>
+
+    <div class="src-line">原始转录稿 1395 行 · faster-whisper base 模型 (zh, beam=5) · 503 秒完成</div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="brand">库哥的投资笔记 · OpenClaw AI Agent</div>
+    <div>📂 <a href="https://gitee.com/wintermeloncurry/agent_research">Gitee</a> · <a href="https://github.com/wintermelon27/agent_research">GitHub</a> · <code>references/20260618_ep33_ai_dotcom_bubble_part1.html</code></div>
+    <div style="margin-top:6px;">仅供研究学习，不构成投资建议</div>
+  </div>
+
+</div>
+
+</body>
+</html>
