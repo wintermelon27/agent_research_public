@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>聊聊国产芯片到底走到哪了？· 播客转录笔记</title>
+<style>
+  /* ===== Reset & Base ===== */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;font-size:16px;scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:#faf7f2;
+    color:#2b2a26;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* ===== Layout ===== */
+  .wrap{max-width:780px;margin:0 auto;padding:48px 28px 96px}
+
+  /* ===== Cover ===== */
+  .cover{
+    background:linear-gradient(135deg,#1a1814 0%,#2c2417 50%,#1a1814 100%);
+    color:#f5e9c8;
+    border-radius:18px;
+    padding:56px 40px 48px;
+    margin-bottom:48px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 12px 36px rgba(20,18,12,.18);
+  }
+  .cover::before{
+    content:"";
+    position:absolute;top:-50%;right:-30%;
+    width:520px;height:520px;
+    background:radial-gradient(circle,rgba(212,175,55,.25) 0%,rgba(212,175,55,0) 70%);
+    pointer-events:none;
+  }
+  .cover .eyebrow{
+    display:inline-block;
+    font-size:11px;letter-spacing:3px;font-weight:600;
+    color:#d4af37;text-transform:uppercase;
+    border:1px solid rgba(212,175,55,.4);
+    padding:5px 12px;border-radius:30px;
+    margin-bottom:22px;
+  }
+  .cover h1{
+    font-family:"Source Han Serif","Noto Serif CJK SC","Songti SC",serif;
+    font-size:36px;line-height:1.25;font-weight:700;
+    color:#fff;margin-bottom:14px;letter-spacing:.5px;
+  }
+  .cover .subtitle{
+    font-size:16px;color:rgba(245,233,200,.78);
+    margin-bottom:30px;line-height:1.6;
+  }
+  .cover .meta{
+    display:grid;grid-template-columns:repeat(2,1fr);
+    gap:14px 24px;
+    padding-top:24px;
+    border-top:1px solid rgba(212,175,55,.2);
+    font-size:13px;
+  }
+  .cover .meta-item{display:flex;flex-direction:column;gap:2px}
+  .cover .meta-label{color:rgba(245,233,200,.5);font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
+  .cover .meta-value{color:#f5e9c8;font-weight:500}
+
+  /* ===== Section Cards ===== */
+  .section{
+    background:#fff;
+    border-radius:14px;
+    padding:36px 36px 32px;
+    margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(40,30,15,.04);
+    border:1px solid #ece6d8;
+  }
+  .section-head{
+    display:flex;align-items:center;gap:14px;
+    margin-bottom:24px;padding-bottom:18px;
+    border-bottom:2px solid #f4ecd6;
+  }
+  .section-badge{
+    display:flex;align-items:center;justify-content:center;
+    width:48px;height:48px;border-radius:12px;
+    background:linear-gradient(135deg,#d4af37 0%,#b8941f 100%);
+    color:#fff;font-weight:700;font-size:20px;
+    font-family:"Source Han Serif","Noto Serif CJK SC",serif;
+    box-shadow:0 4px 10px rgba(212,175,55,.25);
+    flex-shrink:0;
+  }
+  .section-title{
+    font-family:"Source Han Serif","Noto Serif CJK SC","Songti SC",serif;
+    font-size:24px;font-weight:700;color:#1a1814;line-height:1.3;
+    flex:1;
+  }
+  .section-anchor{
+    display:inline-block;
+    font-size:11px;font-weight:600;letter-spacing:1px;
+    color:#a8893d;background:#fdf8e8;
+    padding:4px 10px;border-radius:20px;
+    border:1px solid #ebd9a4;
+  }
+
+  h3.subhead{
+    font-family:"Source Han Serif","Noto Serif CJK SC",serif;
+    font-size:17px;font-weight:600;color:#5a4a25;
+    margin:24px 0 12px;
+    padding-left:12px;
+    border-left:3px solid #d4af37;
+    line-height:1.4;
+  }
+
+  p{margin-bottom:14px;font-size:15.5px;color:#3a362d}
+  strong{color:#1a1814;font-weight:700;background:linear-gradient(transparent 60%,#fdf0c8 60%);padding:0 2px}
+
+  /* ===== Lists ===== */
+  ul,ol{margin:10px 0 16px;padding-left:24px}
+  li{margin-bottom:8px;font-size:15.5px;color:#3a362d}
+  li::marker{color:#c9a646}
+
+  /* ===== Blockquote / Pull-quote ===== */
+  blockquote{
+    position:relative;
+    background:linear-gradient(135deg,#fdf8e8 0%,#f9f0d4 100%);
+    border-left:4px solid #d4af37;
+    border-radius:0 10px 10px 0;
+    padding:20px 24px 20px 56px;
+    margin:18px 0;
+    font-size:15.5px;
+    color:#5a4a25;
+    font-style:italic;
+  }
+  blockquote::before{
+    content:"\201C";
+    position:absolute;
+    left:14px;top:6px;
+    font-family:Georgia,serif;
+    font-size:48px;line-height:1;
+    color:#d4af37;opacity:.5;
+  }
+  blockquote p{margin-bottom:6px;color:#5a4a25}
+  blockquote p:last-child{margin-bottom:0;font-style:normal;font-size:13px;color:#8a7434;font-weight:500}
+
+  /* ===== Tables ===== */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:18px 0 22px;
+    font-size:14.5px;
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 1px 4px rgba(40,30,15,.05);
+    border:1px solid #ece6d8;
+  }
+  thead{background:linear-gradient(180deg,#2c2417 0%,#1a1814 100%)}
+  th{
+    padding:13px 14px;
+    text-align:left;
+    color:#d4af37;
+    font-weight:600;
+    font-size:13px;letter-spacing:.5px;
+  }
+  td{
+    padding:12px 14px;
+    border-top:1px solid #f0e8d4;
+    color:#3a362d;
+    vertical-align:top;
+  }
+  tbody tr{transition:background .15s ease}
+  tbody tr:hover{background:#fdf8e8}
+  tbody tr:nth-child(even){background:#faf6ea}
+  tbody tr:nth-child(even):hover{background:#fdf3d4}
+
+  /* ===== Inline code & markers ===== */
+  code{
+    background:#f4ecd6;color:#5a4a25;
+    padding:1px 6px;border-radius:4px;
+    font-family:"SF Mono","Menlo",monospace;
+    font-size:13.5px;
+  }
+
+  /* ===== Annotation tags (✅ ⚠️ 🔮) ===== */
+  .tag-ok{color:#2e7d4f;font-weight:600}
+  .tag-warn{color:#b35900;font-weight:600}
+  .tag-guess{color:#5e5e8a;font-weight:600}
+
+  /* ===== Highlight box (推断) ===== */
+  .insight{
+    background:linear-gradient(135deg,#fff7e0 0%,#fceed5 100%);
+    border:1px solid #ebd9a4;
+    border-left:4px solid #d4af37;
+    border-radius:8px;
+    padding:14px 18px;
+    margin:16px 0;
+    font-size:14.5px;
+    color:#5a4a25;
+  }
+  .insight::before{
+    content:"💡 推断";
+    display:inline-block;
+    font-weight:700;color:#a8893d;
+    font-size:13px;letter-spacing:1px;
+    margin-right:6px;
+  }
+
+  /* ===== Data source tag row ===== */
+  .src-line{
+    display:flex;align-items:center;gap:8px;
+    font-size:12.5px;color:#8a7b58;
+    background:#f8f3e2;
+    padding:8px 14px;border-radius:6px;
+    margin:10px 0 16px;
+    border:1px dashed #e0d4a8;
+  }
+  .src-line::before{content:"🎙️";font-size:14px}
+
+  /* ===== Footer ===== */
+  .footer{
+    text-align:center;
+    margin-top:48px;padding:24px 16px;
+    color:#a89878;font-size:12.5px;
+    border-top:1px solid #ece6d8;
+  }
+  .footer a{color:#a8893d;text-decoration:none}
+  .footer .brand{
+    font-family:"Source Han Serif","Noto Serif CJK SC",serif;
+    font-size:14px;font-weight:600;
+    color:#5a4a25;margin-bottom:6px;
+  }
+
+  /* ===== TOC ===== */
+  .toc{
+    background:#fff;
+    border:1px solid #ece6d8;
+    border-radius:14px;
+    padding:24px 28px;
+    margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(40,30,15,.04);
+  }
+  .toc-title{
+    font-size:13px;font-weight:700;letter-spacing:1.5px;
+    color:#a8893d;
+    margin-bottom:14px;
+  }
+  .toc-list{list-style:none;padding:0;margin:0}
+  .toc-list li{margin:0;padding:0}
+  .toc-list a{
+    display:flex;align-items:center;gap:10px;
+    padding:8px 0;
+    color:#3a362d;text-decoration:none;
+    font-size:14.5px;
+    border-bottom:1px dashed #f0e8d4;
+    transition:color .15s;
+  }
+  .toc-list li:last-child a{border-bottom:none}
+  .toc-list a:hover{color:#a8893d}
+  .toc-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:22px;height:22px;border-radius:50%;
+    background:#f4ecd6;color:#a8893d;
+    font-size:11px;font-weight:700;
+    flex-shrink:0;
+  }
+
+  /* ===== Highlight header chip (结尾/溯源) ===== */
+  .meta-row{
+    display:flex;flex-wrap:wrap;gap:8px;
+    margin:10px 0 18px;
+  }
+  .chip{
+    display:inline-flex;align-items:center;gap:4px;
+    font-size:12px;font-weight:500;
+    padding:5px 11px;border-radius:14px;
+    background:#fdf8e8;color:#5a4a25;
+    border:1px solid #ebd9a4;
+  }
+  .chip.dark{background:#1a1814;color:#d4af37;border-color:#3a3220}
+  .chip.green{background:#e8f5ec;color:#2e7d4f;border-color:#b8dec1}
+  .chip.amber{background:#fdf0c8;color:#8a5a00;border-color:#e6c878}
+
+  /* ===== Responsive ===== */
+  @media (max-width:640px){
+    .wrap{padding:24px 14px 60px}
+    .cover{padding:36px 24px 32px;border-radius:14px}
+    .cover h1{font-size:26px}
+    .cover .meta{grid-template-columns:1fr;gap:10px}
+    .section{padding:26px 20px 22px;border-radius:12px}
+    .section-title{font-size:20px}
+    .section-badge{width:40px;height:40px;font-size:17px}
+    th,td{padding:10px 8px;font-size:13px}
+    blockquote{padding:16px 18px 16px 44px}
+    blockquote::before{font-size:36px;left:10px;top:8px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ COVER ============ -->
+  <div class="cover">
+    <span class="eyebrow">Podcast · 投研笔记</span>
+    <h1>聊聊国产芯片到底走到哪了？<br>芯片「卡脖子」何时能解决？</h1>
+    <div class="subtitle">有富同享 · 张圣贤（科创芯片 ETF 富国基金经理）× 杨洋（长江证券电子首席）</div>
+    <div class="meta">
+      <div class="meta-item">
+        <span class="meta-label">主播</span>
+        <span class="meta-value">@发财大子</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">嘉宾</span>
+        <span class="meta-value">张圣贤 / 杨洋</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">时长</span>
+        <span class="meta-value">79 分钟</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">发布</span>
+        <span class="meta-value">2026-06-21</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TOC ============ -->
+  <div class="toc">
+    <div class="toc-title">📑 目录</div>
+    <ul class="toc-list">
+      <li><a href="#s1"><span class="toc-num">1</span>基础概念：半导体/芯片/集成电路的关系</a></li>
+      <li><a href="#s2"><span class="toc-num">2</span>芯片四大品类 & CPU vs GPU 配比演变</a></li>
+      <li><a href="#s3"><span class="toc-num">3</span>制程划分与芯片诞生全流程</a></li>
+      <li><a href="#s4"><span class="toc-num">4</span>产业链上中下游 & 光刻机卡脖子真相</a></li>
+      <li><a href="#s5"><span class="toc-num">5</span>自主可控时间表：3-5 年仍是难题</a></li>
+      <li><a href="#s6"><span class="toc-num">6</span>摩尔定律 vs 韬定律（华为提出）</a></li>
+      <li><a href="#s7"><span class="toc-num">7</span>DeepSeek 适配国产芯片的深层意义</a></li>
+      <li><a href="#s8"><span class="toc-num">8</span>AI 驱动行情复盘：全球共振与持续性</a></li>
+      <li><a href="#s9"><span class="toc-num">9</span>国产替代的长逻辑：从政策导向到产业自觉</a></li>
+      <li><a href="#s10"><span class="toc-num">10</span>投资操作：追高 vs 等待 + 设备材料补涨</a></li>
+      <li><a href="#s11"><span class="toc-num">11</span>风险预警 & 终极判断</a></li>
+      <li><a href="#s12"><span class="toc-num">12</span>数据溯源 + 催化跟踪表</a></li>
+    </ul>
+  </div>
+
+  <!-- ============ S1 ============ -->
+  <div class="section" id="s1">
+    <div class="section-head">
+      <div class="section-badge">壹</div>
+      <div class="section-title">基础概念：半导体/芯片/集成电路</div>
+      <span class="section-anchor">01:20 – 04:20</span>
+    </div>
+
+    <h3 class="subhead">三层关系（大小包含）</h3>
+    <p>三个词日常混用，本质是<strong>原料→半成品→成品</strong>的递进关系：</p>
+    <ul>
+      <li><strong>半导体（最大）</strong> = 介于导体和绝缘体之间的材料（硅、锗、砷化镓、碳化镓等）</li>
+      <li><strong>集成电路</strong> = 在硅片上设计出的电路结构（半成品）</li>
+      <li><strong>芯片</strong> = 封装好的集成电路（最终成品）</li>
+    </ul>
+    <p>形象比喻：<strong>半导体是小麦，芯片/集成电路是包子</strong>。投资角度，三个指数的成分股其实差不多。</p>
+
+    <h3 class="subhead">生活应用案例</h3>
+    <table>
+      <thead>
+        <tr><th>生活场景</th><th>所用芯片</th><th>类型</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>充电宝</td><td>电源管理芯片（电压控制、防过载）</td><td>模拟</td></tr>
+        <tr><td>LED 灯</td><td>电能→光能转换</td><td>模拟</td></tr>
+        <tr><td>麦克风</td><td>MEMS 声音传感器</td><td>传感器</td></tr>
+        <tr><td>智能手表（测海拔）</td><td>气压传感器</td><td>传感器</td></tr>
+        <tr><td>手机拍照</td><td>CIS 图像传感器</td><td>传感器</td></tr>
+        <tr><td>Wi-Fi / 蓝牙</td><td>射频（RF）芯片</td><td>通信</td></tr>
+      </tbody>
+    </table>
+    <div class="insight">只要用电的东西基本都需要芯片。芯片"无处不在"，并不只是 CPU/GPU。</div>
+  </div>
+
+  <!-- ============ S2 ============ -->
+  <div class="section" id="s2">
+    <div class="section-head">
+      <div class="section-badge">贰</div>
+      <div class="section-title">芯片四大品类 & CPU:GPU 配比演变</div>
+      <span class="section-anchor">05:41 – 12:30</span>
+    </div>
+
+    <h3 class="subhead">四大品类</h3>
+    <table>
+      <thead>
+        <tr><th>品类</th><th>用途</th><th>代表/规模</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>逻辑芯片</strong></td><td>运算处理（CPU/GPU/MCU 等）</td><td>传统最大品类</td></tr>
+        <tr><td><strong>存储芯片</strong></td><td>DRAM/NAND/HBM 等数据存储</td><td>今年或成最大（涨价驱动）</td></tr>
+        <tr><td><strong>模拟芯片</strong></td><td>模拟信号处理（电源管理、信号链）</td><td>强经验导向</td></tr>
+        <tr><td><strong>传感器芯片</strong></td><td>光/声/气压等物理信号→电信号</td><td>CIS、MEMS 等</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">CPU vs GPU 配比演变（关键拐点）</h3>
+    <p>黄仁勋台北 Computex 刚发布 NVIDIA 自研 CPU —— <strong>CPU 估值重估的信号</strong>。</p>
+    <table>
+      <thead>
+        <tr><th>阶段</th><th>CPU:GPU 配比</th><th>驱动因素</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>H100/B200 时代（1-2 年前）</td><td>1 : 8</td><td>GPU 算力受限</td></tr>
+        <tr><td>GB200/GB300 时代（现在）</td><td>1 : 4</td><td>并发任务管理需求上升</td></tr>
+        <tr><td>未来 1</td><td>1 : 1</td><td>CPU 调度瓶颈显现</td></tr>
+        <tr><td>未来 2</td><td>几 : 1</td><td>CPU 角色更关键</td></tr>
+      </tbody>
+    </table>
+    <div class="insight">GPU 投资逻辑在消退，CPU/调度类芯片会成为下一波关注点——CPU 公司（如海光、龙芯）估值有望重估。</div>
+  </div>
+
+  <!-- ============ S3 ============ -->
+  <div class="section" id="s3">
+    <div class="section-head">
+      <div class="section-badge">叁</div>
+      <div class="section-title">制程划分与芯片诞生全流程</div>
+      <span class="section-anchor">12:36 – 22:40</span>
+    </div>
+
+    <h3 class="subhead">制程划分</h3>
+    <ul>
+      <li><strong>28nm 是分水岭</strong>：28nm 以下先进，28nm 及以上成熟</li>
+      <li>分界线动态迭代：28nm 刚出时是先进制程，现在 14nm 才算</li>
+      <li>命名源自<strong>晶体管栅极宽度</strong>（电路中能做的最小尺寸）</li>
+    </ul>
+
+    <h3 class="subhead">设计 vs 模拟 难度差异</h3>
+    <ul>
+      <li><strong>数字设计（先进制程）</strong>：自动化程度高，工具链成熟</li>
+      <li><strong>模拟设计（成熟制程）</strong>：强经验——同样两连接点，数字画直线，模拟要 45° 斜线效果才好</li>
+    </ul>
+
+    <h3 class="subhead">芯片诞生四阶段</h3>
+    <p><code>设计（EDA/IP）→ 制造（光刻/刻蚀/沉积/清洗）→ 封装 → 测试/销售</code></p>
+    <table>
+      <thead>
+        <tr><th>环节</th><th>关键要素</th><th>成本/难度</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>EDA 软件</td><td>芯片的「CAD」（Cadence/Synopsys）</td><td>海外垄断</td></tr>
+        <tr><td>IP 核</td><td>可复用设计模块（Arm 公版 CPU IP）</td><td>独立行业</td></tr>
+        <tr><td>掩膜版（Mask）</td><td>设计→制造的交付物</td><td><strong>14nm 约一两千万美金/套</strong></td></tr>
+        <tr><td>沙子→硅</td><td>石英砂（不是普通沙子）</td><td>纯度 <strong>11 个 9</strong>（99.999999999%）</td></tr>
+      </tbody>
+    </table>
+    <div class="insight">掩膜版成本是国产替代的天然壁垒：1 万颗和 1 亿颗的掩膜成本一样，必须有规模才能摊薄——这正是 2014 大基金 10 年后见效的逻辑。</div>
+  </div>
+
+  <!-- ============ S4 ============ -->
+  <div class="section" id="s4">
+    <div class="section-head">
+      <div class="section-badge">肆</div>
+      <div class="section-title">产业链上中下游 & 光刻机卡脖子真相</div>
+      <span class="section-anchor">22:43 – 29:15</span>
+    </div>
+
+    <h3 class="subhead">产业链结构 + 中国现状</h3>
+    <table>
+      <thead>
+        <tr><th>环节</th><th>内容</th><th>中国现状</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>上游</strong></td><td>设计 + EDA + IP</td><td>较强（华为海思、寒武纪、地平线）</td></tr>
+        <tr><td><strong>中游</strong></td><td>制造（晶圆代工）</td><td>较弱（中芯国际 14nm，先进受阻）</td></tr>
+        <tr><td><strong>下游</strong></td><td>封装测试</td><td><strong>最成熟</strong>（长电、通富、华天）</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">为什么制造最难？</h3>
+    <ul>
+      <li>7nm 以下全球仅<strong>台积电、三星</strong>两家能做</li>
+      <li>Intel 也在追赶但良率受限</li>
+      <li>ASML EUV/DUV 光刻机<strong>单台几十亿元人民币</strong>，含<strong>几十万个零件</strong></li>
+      <li>全球分工紧密：<strong>没有一个国家能完整覆盖最尖端全产业链</strong></li>
+    </ul>
+
+    <h3 class="subhead">"卡脖子" 完整链条</h3>
+    <p><code>ASML 光刻机 → 极紫外光源（美德元件）→ 整机集成</code></p>
+    <p><code>限制中国获取 → 7nm 以下先进制程受阻 → 28nm 以下设备和材料也受制</code></p>
+    <ul>
+      <li>光刻机之外，<strong>高纯度硅片</strong>（日本信越/SUMCO）也是替代难点</li>
+      <li>中国设备和材料当前能做的精度边界：<strong>28nm</strong></li>
+    </ul>
+    <div class="insight">"卡脖子" 不是光刻机单点，是整个上游供应链的卡位。这也是 2014 大基金全产业链铺开的战略意义。</div>
+  </div>
+
+  <!-- ============ S5 ============ -->
+  <div class="section" id="s5">
+    <div class="section-head">
+      <div class="section-badge">伍</div>
+      <div class="section-title">自主可控时间表：3-5 年仍是难题</div>
+      <span class="section-anchor">29:17 – 33:15</span>
+    </div>
+
+    <h3 class="subhead">杨洋判断</h3>
+    <ul>
+      <li>ASML 做了几十年，集合全球最头部公司支持</li>
+      <li><strong>3-5 年内做到完全自主可控（光刻机为代表）"还有点难度"</strong></li>
+      <li>自主可控 = 应对极端情况的<strong>底线</strong>，不是经济学概念</li>
+      <li>只要科技在进步，"自主可控"标准会持续迭代</li>
+    </ul>
+
+    <h3 class="subhead">当下的应对策略</h3>
+    <ol>
+      <li><strong>多芯片堆叠 / Chiplet</strong>：单芯不够，多芯来凑</li>
+      <li><strong>架构创新 + 系统优化</strong>：弥补制程差距</li>
+      <li><strong>先进封装（3D 堆叠）</strong>：缩短关键路径</li>
+      <li><strong>软件/算法降本</strong>：不一定非要用最高端芯片</li>
+    </ol>
+
+    <h3 class="subhead">"卷出来 = 全球能打" 的历史规律</h3>
+    <table>
+      <thead>
+        <tr><th>产业</th><th>20 年前状态</th><th>当下</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>LED</td><td>国产化起步</td><td>全球领先</td></tr>
+        <tr><td>面板</td><td>技术引进</td><td>席卷全球</td></tr>
+        <tr><td>光伏</td><td>起步晚</td><td>全球龙头</td></tr>
+        <tr><td><strong>芯片（推断）</strong></td><td>卡脖子中</td><td>下一个"卷出来"</td></tr>
+      </tbody>
+    </table>
+    <blockquote>
+      <p>任何一个在国内卷出来的行业，在全球都非常能打。</p>
+      <p>— 张圣贤</p>
+    </blockquote>
+  </div>
+
+  <!-- ============ S6 ============ -->
+  <div class="section" id="s6">
+    <div class="section-head">
+      <div class="section-badge">陆</div>
+      <div class="section-title">摩尔定律 vs 韬定律（华为提出）</div>
+      <span class="section-anchor">33:17 – 43:30</span>
+    </div>
+
+    <h3 class="subhead">两套路径对比</h3>
+    <table>
+      <thead>
+        <tr><th>维度</th><th>摩尔定律</th><th>韬定律（华为）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>核心思路</strong></td><td>晶体管数量翻倍/18 个月（线宽缩小）</td><td>缩短关键路径（数据搬运+运算时间）</td></tr>
+        <tr><td><strong>路径</strong></td><td>平面缩小（等比例缩放）</td><td>3D 堆叠（先进封装）+ 架构创新</td></tr>
+        <tr><td><strong>解决的问题</strong></td><td>算力密度提升</td><td>信号传输+运算协同效率</td></tr>
+        <tr><td><strong>物理极限</strong></td><td>接近原子尺寸（1-2nm）</td><td>暂无明显极限</td></tr>
+        <tr><td><strong>现状</strong></td><td>越来越难（漏电流+功耗）</td><td>仍处早期探索</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">摩尔定律为什么撞墙？</h3>
+    <ul>
+      <li>晶体管缩小 → 源极-漏极距离过近 → <strong>漏电流</strong> → 发热 → 功耗问题</li>
+      <li>不得不关闭部分晶体管散热 → <strong>有效算力打折</strong></li>
+      <li>工艺改进成本指数级上升</li>
+    </ul>
+
+    <h3 class="subhead">"外卖员" 比喻（韬定律）</h3>
+    <p>原来每条电路一个外卖员送所有单；现在分区域划分（系统调度优化）—— 类比 GPU 与 CPU 协同。家里煮水、煮饭、烧菜<strong>并行处理</strong>而非串行。</p>
+
+    <div class="insight">两个定律不是替代关系，是<strong>互补</strong>：摩尔继续追求单芯密度，韬定律追求系统级效率。<strong>2nm 制程 + 韬定律 = 终极方案</strong>。中国 14nm 仍可继续走摩尔（还有空间），同时发展韬定律。</div>
+  </div>
+
+  <!-- ============ S7 ============ -->
+  <div class="section" id="s7">
+    <div class="section-head">
+      <div class="section-badge">柒</div>
+      <div class="section-title">DeepSeek 适配国产芯片的深层意义</div>
+      <span class="section-anchor">43:32 – 47:55</span>
+    </div>
+
+    <h3 class="subhead">事件</h3>
+    <p>DeepSeek 模型适配国产算力（华为昇腾等）进行推理 —— <strong>国产模型 + 国产算力的完备生态</strong>。</p>
+
+    <h3 class="subhead">为什么大家兴奋？</h3>
+    <ul>
+      <li>形成"保底"能力：即使外部切断（CUDA/Arm 等）也能继续运转</li>
+      <li>验证了"不用最顶级芯片也能跑通"</li>
+      <li><strong>"梯子早晚会被抽走"</strong> —— 必须自建体系</li>
+    </ul>
+
+    <h3 class="subhead">"水密结构" 教育比喻</h3>
+    <p>国外用最聪明的"教法"教小孩（高端芯片）；国内用<strong>适配当下的教法</strong>（成熟芯片+架构优化）也能让小孩成才。关键：教育方式要适配孩子当前智商。</p>
+
+    <h3 class="subhead">概念辨析</h3>
+    <table>
+      <thead>
+        <tr><th>概念</th><th>本质</th><th>维度</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>昇腾</strong></td><td>华为 AI 芯片系列</td><td>产品</td></tr>
+        <tr><td><strong>CUDA</strong></td><td>NVIDIA 的 GPU 生态</td><td>开发平台</td></tr>
+      </tbody>
+    </table>
+    <div class="insight">两者不是同维度概念。昇腾是对标英伟达 GPU 的硬件；CUDA 是其生态护城河——国产替代不仅要做硬件，更要建生态。</div>
+  </div>
+
+  <!-- ============ S8 ============ -->
+  <div class="section" id="s8">
+    <div class="section-head">
+      <div class="section-badge">捌</div>
+      <div class="section-title">AI 驱动行情复盘：全球共振与持续性</div>
+      <span class="section-anchor">47:56 – 57:09</span>
+    </div>
+
+    <h3 class="subhead">行情演化路径</h3>
+    <table>
+      <thead>
+        <tr><th>阶段</th><th>主导细分</th><th>核心驱动</th><th>龙头地区</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>第 1 阶段（2-3 年前）</td><td>GPU</td><td>AI 算力缺口</td><td>美国（英伟达）</td></tr>
+        <tr><td>第 2 阶段（近 1 年）</<td>HBM/DDR5 涨价</td><td>韩国（三星/SK海力士）</td></tr>
+        <tr><td>第 3 阶段（最近）</td><td>电力/功率/被动器件</td><td>功耗提升</td><td>日美 + A 股</td></tr>
+        <tr><td>下一阶段（推断）</td><td>模拟/电源/MLCC</td><td>AI 芯片功耗剧增</td><td>关注 A 股</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">全球共振 vs 节奏分化</h3>
+    <ul>
+      <li><strong>共振根因</strong>：都是 AI 拉动</li>
+      <li><strong>差异点</strong>：拉动方向不同（美股 GPU → 韩股存储 → 日股/A 股设备材料 → A 股功率模拟）</li>
+      <li>A 股估值高（市梦率）：用<strong>市值视角对标海外龙头未来份额</strong>——想象空间大</li>
+      <li>国内 AI 投入<strong>才刚刚开始</strong>，增速会比海外更快</li>
+    </ul>
+
+    <h3 class="subhead">AI 投资闭环判断</h3>
+    <p>海外巨头当前阶段：<strong>现金流消耗差不多，还没到融资阶段</strong>。这个时点判断持续性还为时过早，但至少会持续较久。</p>
+    <div class="insight">A 股现在炒的是"算力周边配套"（电源/被动/模拟芯片）——AI 芯片功耗变大后，周边配套需求激增。这条线 6-7 月份某存储公司上市前还会强化。</div>
+  </div>
+
+  <!-- ============ S9 ============ -->
+  <div class="section" id="s9">
+    <div class="section-head">
+      <div class="section-badge">玖</div>
+      <div class="section-title">国产替代的长逻辑：从政策导向到产业自觉</div>
+      <span class="section-anchor">57:10 – 01:00:35</span>
+    </div>
+
+    <h3 class="subhead">三阶段历史脉络</h3>
+    <table>
+      <thead>
+        <tr><th>时间</th><th>事件</th><th>意义</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>2014</strong></td><td>成立国家集成电路产业投资基金（大基金）</td><td>政策导向起点</td></tr>
+        <tr><td><strong>2018-2019</strong></td><td>美国断供华为</td><td>产业<strong>自觉</strong>开始</td></tr>
+        <tr><td><strong>2019-2025</strong></td><td>韩称效应（一起受伤→一起用国产）</td><td>国产芯片有了一试机会</td></tr>
+        <tr><td><strong>当下</strong></td><td>设计公司+制造+设备材料全面铺开</td><td>规模效应+学习曲线兑现</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">规模效应的破解（核心）</h3>
+    <ul>
+      <li>14nm 掩膜版 <strong>一两千万美金一套</strong></li>
+      <li>生产 1 万颗和 1 亿颗，掩膜成本<strong>完全一样</strong></li>
+      <li>过去替代难 → 现在有了规模和订单摊薄成本</li>
+      <li>大基金 10 年前的"绝望投资"今天看是高瞻远瞩</li>
+    </ul>
+
+    <h3 class="subhead">核心逻辑链（推断）</h3>
+    <p><code>政策驱动（2014 大基金）→ 外部断供触发（2018-19）→ 产业自觉 → 设计公司先受益 → 制造/设备/材料跟进 → AI+国产替代双轮驱动 → 下一个 10 年：芯片产业全球化输出</code></p>
+    <div class="insight">前 10 年是"政策导向"，后 10 年是"产业自觉"——投资逻辑从 Beta 转为 Alpha。只有当上下游同时自发做国产替代，才能形成长期正循环。</div>
+  </div>
+
+  <!-- ============ S10 ============ -->
+  <div class="section" id="s10">
+    <div class="section-head">
+      <div class="section-badge">拾</div>
+      <div class="section-title">投资操作：追高 vs 等待 + 设备材料补涨</div>
+      <span class="section-anchor">01:00:36 – 01:09:49</span>
+    </div>
+
+    <h3 class="subhead">专业投资者 vs 普通投资者</h3>
+    <table>
+      <thead>
+        <tr><th>角色</th><th>策略</th><th>理由</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>专业投资者</strong></td><td>分析具体公司订单/业务趋势</td><td>长期视角持有</td></tr>
+        <tr><td><strong>普通投资者</strong></td><td>指数定投（科创芯片 ETF 等）</td><td>不错过每个阶段</td></tr>
+      </tbody>
+    </table>
+    <p>过去一两年芯片算力板块平均涨幅 <strong>1-2 倍</strong>，坚持拿着能吃到；个别股 5-10 倍非常态。</p>
+
+    <h3 class="subhead">短期波动事实</h3>
+    <ul>
+      <li>过去两年<strong>回撤 10-20% 是常态</strong></li>
+      <li>短期情绪有过热迹象</li>
+      <li>"买在无人问津时，卖在人生鼎沸时"</li>
+    </ul>
+
+    <h3 class="subhead">资金管理要点</h3>
+    <ul>
+      <li><strong>控制仓位</strong>：切忌重仓单一方向</li>
+      <li><strong>波段操作</strong>：能力允许时可适当高抛低吸</li>
+      <li><strong>长期信仰</strong>：在巨头无重大风险信号前，每次调整都是机会</li>
+    </ul>
+
+    <h3 class="subhead">设备材料补涨的传导逻辑</h3>
+    <p><code>设计公司（订单爆满）→ 制造/封测厂（产能打满）→ 设备厂（扩产需求）→ 材料厂（投产消耗）</code></p>
+    <ul>
+      <li>存储厂商（Fab/IDM）资本开支已启动</li>
+      <li>本轮扩产<strong>相对克制</strong>（吸取上一周期教训——美光负毛利）</li>
+      <li>2025-2026 设备和材料板块<strong>持续走强</strong></li>
+      <li><strong>6-7 月份国内某存储公司上市</strong>——上市前必然大买设备和材料</li>
+    </ul>
+    <div class="insight">本轮投入量和周期被拉长，对投资者体验更友好——不会短期一次性涨完。设备和材料的补涨逻辑还在延续。</div>
+  </div>
+
+  <!-- ============ S11 ============ -->
+  <div class="section" id="s11">
+    <div class="section-head">
+      <div class="section-badge">拾壹</div>
+      <div class="section-title">风险预警 & 终极判断</div>
+      <span class="section-anchor">01:09:50 – 78:46</span>
+    </div>
+
+    <h3 class="subhead">三大类风险</h3>
+    <table>
+      <thead>
+        <tr><th>风险类型</th><th>具体表现</th><th>跟踪指标</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>技术路线更迭</strong></td><td>指纹→人脸等范式切换</td><td>紧密跟踪产业新闻</td></tr>
+        <tr><td><strong>AI 投资闭环</strong></td><td>投入大但变现难</td><td>现金流转融资→举债阶段</td></tr>
+        <tr><td><strong>宏观流动性</strong></td><td>美联储利率走向</td><td>议息会议表态</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">关键判断拐点</h3>
+    <p>"投资→变现闭环<strong>始终没打通</strong>"：现金流转融资→举债阶段。当前阶段：大厂刚把自己的现金流消耗差不多，<strong>还没到融资阶段</strong> → 还会持续较久。</p>
+
+    <h3 class="subhead">对比新能源（关键类比）</h3>
+    <ul>
+      <li>2021 年新能源股价高点时，业绩还很好</li>
+      <li>2021 Q1 见顶，但产业实际高点 2-3 季度后</li>
+      <li><strong>股价高点 ≠ 业绩高点</strong>，往往领先 2-3 个季度</li>
+      <li>芯片当下<strong>业绩一片欣欣向荣</strong> → 还在左侧</li>
+    </ul>
+
+    <h3 class="subhead">流动性与技术面信号</h3>
+    <ul>
+      <li>美联储议息会议表态</li>
+      <li>交易拥挤度（软件/研报可查）</li>
+      <li>技术分析（K 线 + 资金信号）</li>
+    </ul>
+
+    <h3 class="subhead">AI 监管风险</h3>
+    <p>AI 替代人工 → 失业 → 政府监管 → 阶段性修整。不影响 5-10-20 年大趋势，但可能引发半年到一年的回调。</p>
+
+    <h3 class="subhead">终极判断（嘉宾收尾）</h3>
+    <blockquote>
+      <p>我们现在输在一个见证历史的一个时刻。</p>
+      <p>— 张圣贤</p>
+    </blockquote>
+    <ul>
+      <li>中国芯片产业<strong>仍处相对早期阶段</strong></li>
+      <li>国产化率会持续提升</li>
+      <li>历史经验：LED → 面板 → 光伏 → 芯片</li>
+      <li>未来 10-20 年，人类对芯片和 AI 的依赖会持续提升</li>
+    </ul>
+    <div class="insight">嘉宾虽偏乐观（屁股决定脑袋——ETF 经理天然看多），但<strong>历史产业演进的类比有参考价值</strong>。需关注：①业绩兑现节奏 ②美联储流动性 ③技术路线变迁。</div>
+  </div>
+
+  <!-- ============ S12 ============ -->
+  <div class="section" id="s12">
+    <div class="section-head">
+      <div class="section-badge">拾贰</div>
+      <div class="section-title">数据溯源 + 催化跟踪表</div>
+    </div>
+
+    <h3 class="subhead">关键数据速查表</h3>
+    <table>
+      <thead>
+        <tr><th>数据/事实</th><th>数值/范围</th><th>来源/性质</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>硅片纯度</td><td>11 个 9（99.999999999%）</td><td><span class="tag-ok">✅ 原文</span></td></tr>
+        <tr><td>黄金「四九金」纯度</td><td>4 个 9（99.99%）</td><td><span class="tag-ok">✅ 原文</span></td></tr>
+        <tr><td>14nm 掩膜版成本</td><td>一两千万美金/套</td><td><span class="tag-ok">✅ 原文</span></td></tr>
+        <tr><td>ASML EUV 光刻机零件数</td><td>几十万个</td><td><span class="tag-ok">✅ 原文</span></td></tr>
+        <tr><td>全球能做 7nm 以下的玩家</td><td>仅台积电、三星</td><td><span class="tag-ok">✅ 原文</span></td></tr>
+        <tr><td>28nm 中国设备/材料能力</td><td>是当前边界</td><td><span class="tag-ok">✅ 原文</span></td></tr>
+        <tr><td>光刻机自主可控时间</td><td>3-5 年内仍难</td><td><span class="tag-warn">⚠️ 推断</span></td></tr>
+        <tr><td>过去两年芯片回撤幅度</td><td>10-20%</td><td><span class="tag-ok">✅ 原文</span></td></tr>
+        <tr><td>过去一两年芯片算力涨幅</td><td>1-2 倍（指数）/ 5-10 倍（个股）</td><td><span class="tag-ok">✅ 原文</span></td></tr>
+        <tr><td>CPU:GPU 配比演变</td><td>1:8 → 1:4 → 1:1</td><td><span class="tag-ok">✅ 原文</span></td></tr>
+        <tr><td>摩尔定律时间间隔</td><td>18 个月</td><td><span class="tag-ok">✅ 原文</span></td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">催化跟踪表（投资相关事件）</h3>
+    <div class="meta-row">
+      <span class="chip dark">催化</span>
+      <span class="chip green">已发生</span>
+      <span class="chip amber">待跟踪</span>
+    </div>
+    <table>
+      <thead>
+        <tr><th>事件</th><th>时间</th><th>影响方向</th><th>标的类型</th><th>状态</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>国内某存储公司上市</td><td>2025-06~07</td><td>设备/材料需求</td><td>北方华创、中微、沪硅产业等</td><td><span class="chip amber">待跟踪</span></td></tr>
+        <tr><td>美联储议息会议</td><td>持续</td><td>流动性</td><td>科技股整体</td><td><span class="chip amber">待跟踪</span></td></tr>
+        <tr><td>黄仁勋发布 NVIDIA CPU</td><td>已发生</td><td>CPU 估值重估</td><td>国内 CPU 公司</td><td><span class="chip green">✅ 已发生</span></td></tr>
+        <tr><td>DeepSeek 国产芯片适配</td><td>已发生</td><td>国产算力链</td><td>昇腾、寒武纪等</td><td><span class="chip green">✅ 已发生</span></td></tr>
+        <tr><td>AI 投资变现闭环</td><td>持续观察</td><td>关键拐点</td><td>全板块</td><td><span class="chip amber">待跟踪</span></td></tr>
+        <tr><td>美国对华新限制</td><td>持续</td><td>国产替代加速</td><td>国产替代全链</td><td><span class="chip amber">待跟踪</span></td></tr>
+        <tr><td>6-7 月存储公司上市</td><td>已临近</td><td>设备材料订单</td><td>北方华创/中微等</td><td><span class="chip amber">待跟踪</span></td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">章节时间锚点</h3>
+    <table>
+      <thead>
+        <tr><th>时间</th><th>章节</th><th>核心</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>01:20</td><td>概念拆解</td><td>半导体/芯片/集成电路</td></tr>
+        <tr><td>04:21</td><td>用途揭秘</td><td>充电宝/LED 等</td></tr>
+        <tr><td>05:41</td><td>芯片分类</td><td>逻辑/存储/模拟/传感器</td></tr>
+        <tr><td>09:14</td><td>CPU vs GPU</td><td>配比演变</td></tr>
+        <tr><td>12:36</td><td>先进/成熟制程</td><td>28nm 分界</td></tr>
+        <tr><td>16:38</td><td>芯片诞生流程</td><td>设计/制造/封测</td></tr>
+        <tr><td>22:43</td><td>全球分工</td><td>光刻机为最难</td></tr>
+        <tr><td>29:17</td><td>自主可控</td><td>3-5 年难题</td></tr>
+        <tr><td>33:17</td><td>摩尔 vs 韬定律</td><td>互补关系</td></tr>
+        <tr><td>43:32</td><td>国产算力突围</td><td>DeepSeek 适配</td></tr>
+        <tr><td>47:56</td><td>行情复盘</td><td>全球共振</td></tr>
+        <tr><td>57:10</td><td>国产替代长逻辑</td><td>政策→自觉</td></tr>
+        <tr><td>01:00:36</td><td>投资操作</td><td>配置 vs 波段</td></tr>
+        <tr><td>01:07:10</td><td>产业链传导</td><td>设备材料补涨</td></tr>
+        <tr><td>01:09:50</td><td>风险预警</td><td>三类风险</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <div class="footer">
+    <div class="brand">库氏 Jarvis · 投研笔记</div>
+    <p>原始转录稿：<code>/tmp/podcast_transcript.txt</code>（2563 行，含完整时间戳）</p>
+    <p>GitHub：<code>references/20260623_yfts_domestic_chip_status.md</code></p>
+    <p>双端同步：GitHub master + Gitee master</p>
+    <p style="margin-top:14px">📅 报告生成：2026-06-23 · 工具：faster-whisper base + HTML v2 杂志风</p>
+  </div>
+
+</div>
+</body>
+</html>
