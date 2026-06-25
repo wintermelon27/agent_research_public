@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CWT #212 · Kristjan Kullamägi · Breakouts & Home Runs</title>
+<style>
+  /* ===== Reset & Base ===== */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;font-size:16px;scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:#faf7f2;
+    color:#2b2a26;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* ===== Layout ===== */
+  .wrap{max-width:780px;margin:0 auto;padding:48px 28px 96px}
+
+  /* ===== Cover ===== */
+  .cover{
+    background:linear-gradient(135deg,#1a1814 0%,#2c2417 50%,#1a1814 100%);
+    color:#f5e9c8;
+    border-radius:18px;
+    padding:56px 40px 48px;
+    margin-bottom:48px;
+    position:relative;
+    overflow:hidden;
+  }
+  .cover::after{
+    content:"";
+    position:absolute;right:-80px;top:-80px;
+    width:280px;height:280px;
+    background:radial-gradient(circle,rgba(212,175,55,.18) 0%,transparent 70%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-size:12px;letter-spacing:3px;color:#d4af37;
+    text-transform:uppercase;font-weight:600;
+    margin-bottom:18px;display:inline-block;
+  }
+  .cover h1{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC","Songti SC",serif;
+    font-size:34px;line-height:1.3;color:#f5e9c8;
+    margin-bottom:14px;font-weight:700;
+  }
+  .cover .subtitle{
+    font-size:15px;color:#c9b883;font-weight:500;
+    margin-bottom:32px;
+  }
+  .meta{display:grid;grid-template-columns:repeat(2,1fr);gap:18px 24px}
+  .meta-item{display:flex;flex-direction:column}
+  .meta-label{
+    font-size:11px;letter-spacing:1.5px;
+    color:#a8893d;text-transform:uppercase;
+    font-weight:600;margin-bottom:4px;
+  }
+  .meta-value{font-size:14px;color:#f5e9c8;font-weight:500}
+
+  /* ===== TOC ===== */
+  .toc{
+    background:#fff;
+    border:1px solid #ece6d8;
+    border-radius:14px;
+    padding:24px 28px;
+    margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(40,30,15,.04);
+  }
+  .toc-title{
+    font-size:13px;font-weight:700;letter-spacing:1.5px;
+    color:#a8893d;text-transform:none;
+    margin-bottom:14px;
+  }
+  .toc-list{list-style:none;padding:0;margin:0}
+  .toc-list li{margin-bottom:10px;line-height:1.5}
+  .toc-list a{
+    color:#2b2a26;text-decoration:none;
+    display:flex;align-items:center;gap:12px;
+    font-size:14px;transition:color .2s;
+  }
+  .toc-list a:hover{color:#a8893d}
+  .toc-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:26px;height:26px;border-radius:50%;
+    background:#d4af37;color:#1a1814;
+    font-size:12px;font-weight:700;flex-shrink:0;
+  }
+
+  /* ===== Section ===== */
+  .section{
+    background:#fff;
+    border:1px solid #ece6d8;
+    border-radius:14px;
+    padding:36px 36px 32px;
+    margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(40,30,15,.04);
+  }
+  .section-head{
+    display:flex;align-items:center;gap:14px;
+    padding-bottom:18px;margin-bottom:24px;
+    border-bottom:1px solid #f0e8d4;
+  }
+  .section-badge{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:48px;height:48px;border-radius:12px;
+    background:linear-gradient(135deg,#d4af37 0%,#a8893d 100%);
+    color:#1a1814;
+    font-family:"Source Han Serif SC","Noto Serif CJK SC","Songti SC",serif;
+    font-size:20px;font-weight:700;
+    flex-shrink:0;
+    box-shadow:0 2px 8px rgba(212,175,55,.25);
+  }
+  .section-title{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC","Songti SC",serif;
+    font-size:22px;font-weight:700;color:#1a1814;flex:1;line-height:1.4;
+  }
+  .section-anchor{
+    font-size:12px;color:#8a7b58;
+    font-family:"SF Mono","Menlo","Consolas",monospace;
+    background:#faf3e0;padding:4px 10px;border-radius:6px;
+    white-space:nowrap;
+  }
+  .subhead{
+    font-size:16px;font-weight:700;color:#1a1814;
+    padding-left:12px;border-left:3px solid #d4af37;
+    margin:24px 0 14px;
+  }
+  .subhead:first-child{margin-top:0}
+  p{margin-bottom:14px;color:#2b2a26;font-size:15px}
+  ul,ol{margin:0 0 14px 24px}
+  li{margin-bottom:8px;font-size:15px;color:#2b2a26;line-height:1.8}
+  strong{color:#1a1814;font-weight:700}
+
+  /* ===== Blockquote ===== */
+  blockquote{
+    background:linear-gradient(135deg,#fdf8e8 0%,#faf3e0 100%);
+    border-left:4px solid #d4af37;
+    border-radius:0 12px 12px 0;
+    padding:18px 22px 18px 50px;
+    margin:18px 0;
+    position:relative;
+  }
+  blockquote::before{
+    content:"\201C";
+    position:absolute;left:14px;top:6px;
+    font-family:Georgia,serif;
+    font-size:48px;color:#d4af37;line-height:1;font-weight:700;
+  }
+  blockquote p{margin-bottom:6px;color:#5a4a25}
+  blockquote p:last-child{margin-bottom:0;font-style:normal;font-size:13px;color:#8a7434;font-weight:500}
+
+  /* ===== Insight ===== */
+  .insight{
+    background:linear-gradient(135deg,#fffbe9 0%,#fdf3d0 100%);
+    border:1px solid #f0e0a0;
+    border-left:4px solid #d4af37;
+    border-radius:10px;
+    padding:16px 20px;
+    margin:18px 0;
+    font-size:14.5px;
+    color:#5a4a25;
+    position:relative;
+  }
+  .insight::before{
+    content:"💡";
+    position:absolute;left:-14px;top:14px;
+    background:#d4af37;color:#fff;
+    width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;
+  }
+
+  /* ===== Tag (legacy inline) ===== */
+  .tag-ok{color:#2e7d4f;font-weight:600}
+  .tag-warn{color:#b35900;font-weight:600}
+  .tag-guess{color:#5e5e8a;font-weight:600}
+
+  /* ===== Chip ===== */
+  .chip{
+    display:inline-block;
+    font-size:11.5px;font-weight:600;
+    padding:3px 10px;border-radius:14px;
+    background:#f4ecd6;color:#8a5a00;
+    border:1px solid #e6c878;
+    margin-right:6px;line-height:1.5;
+  }
+  .chip.green{background:#e8f5ec;color:#2e7d4f;border-color:#b8dec1}
+  .chip.amber{background:#fdf0c8;color:#8a5a00;border-color:#e6c878}
+  .chip.dark{background:#1a1814;color:#d4af37;border-color:#3a3220}
+  .meta-row{margin:10px 0 14px}
+
+  /* ===== Table ===== */
+  table{
+    width:100%;border-collapse:collapse;
+    margin:14px 0 18px;font-size:14px;
+    background:#fff;border-radius:10px;overflow:hidden;
+    box-shadow:0 1px 4px rgba(40,30,15,.04);
+  }
+  thead{background:#1a1814;color:#d4af37}
+  th{
+    text-align:left;padding:12px 14px;
+    font-weight:700;font-size:13px;
+    letter-spacing:.5px;
+  }
+  td{
+    padding:11px 14px;border-bottom:1px solid #f4ecd6;
+    color:#2b2a26;
+  }
+  tbody tr:nth-child(even){background:#fdf8e8}
+  tbody tr:hover{background:#faf3e0}
+
+  /* ===== Code ===== */
+  code{
+    font-family:"SF Mono","Menlo","Consolas",monospace;
+    background:#fdf3d0;color:#5a4a25;
+    padding:2px 8px;border-radius:5px;font-size:13px;
+  }
+
+  /* ===== Footer ===== */
+  .footer{
+    margin-top:48px;padding-top:24px;
+    border-top:1px dashed #e6c878;
+    text-align:center;color:#8a7b58;font-size:13px;line-height:1.9;
+  }
+  .footer .brand{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC","Songti SC",serif;
+    font-size:15px;color:#a8893d;font-weight:700;margin-bottom:8px;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width:640px){
+    .wrap{padding:32px 18px 64px}
+    .cover{padding:36px 24px 32px}
+    .cover h1{font-size:26px}
+    .section{padding:24px 22px}
+    .section-head{flex-wrap:wrap}
+    .section-title{font-size:18px}
+    .section-anchor{font-size:11px}
+    .meta{grid-template-columns:1fr;gap:12px}
+    th,td{padding:9px 10px;font-size:13px}
+    blockquote{padding:16px 18px 16px 44px}
+    blockquote::before{font-size:36px;left:10px;top:8px}
+    .section-badge{width:40px;height:40px;font-size:17px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ COVER ============ -->
+  <div class="cover">
+    <span class="eyebrow">Podcast · 投研笔记 · Chat With Traders</span>
+    <h1>Breakouts, Home Runs<br>&amp; Exponential Returns</h1>
+    <div class="subtitle">EP #212 · Kristjan Kullamägi · 5 千美元到 8 位数的散户交易范本</div>
+    <div class="meta">
+      <div class="meta-item">
+        <span class="meta-label">主播</span>
+        <span class="meta-value">Aaron Fifta · Chat With Traders</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">嘉宾</span>
+        <span class="meta-value">Kristjan Kullamägi（@Qullamaggie）</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">时长</span>
+        <span class="meta-value">79 分钟 · 1:19:55</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">发布</span>
+        <span class="meta-value">2021 年 2 月 26 日</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TOC ============ -->
+  <div class="toc">
+    <div class="toc-title">📑 目录</div>
+    <ul class="toc-list">
+      <li><a href="#s1"><span class="toc-num">1</span>Intro & 嘉宾介绍 —— 8 位数散户是谁？</a></li>
+      <li><a href="#s2"><span class="toc-num">2</span>Early Days —— 2011 年 4 次爆仓</a></li>
+      <li><a href="#s3"><span class="toc-num">3</span>从 Day 到 Swing —— 认知带宽升级</a></li>
+      <li><a href="#s4"><span class="toc-num">4</span>Breakout Strategy —— Setup 深潜（干货核心）</a></li>
+      <li><a href="#s5"><span class="toc-num">5</span>持仓心理与 Regime 判断</a></li>
+      <li><a href="#s6"><span class="toc-num">6</span>Development & Growth —— Scaling 的纪律</a></li>
+      <li><a href="#s7"><span class="toc-num">7</span>Outro —— 资源、链接、生活</a></li>
+      <li><a href="#s8"><span class="toc-num">8</span>数据溯源 & 二级资源</a></li>
+      <li><a href="#s9"><span class="toc-num">9</span>Setup 一句话总结（库哥友好版）</a></li>
+    </ul>
+  </div>
+
+  <!-- ============ S1 ============ -->
+  <div class="section" id="s1">
+    <div class="section-head">
+      <div class="section-badge">壹</div>
+      <div class="section-title">Intro & 嘉宾介绍 —— 8 位数散户是谁？</div>
+      <span class="section-anchor">00:00 – 01:54</span>
+    </div>
+
+    <p>Aaron 介绍本期嘉宾：<strong>Kristjan Kullamägi</strong>（瑞典裔 swing trader），Aaron 把上一期 Stan Druckenmiller 提到的神秘人物请到了话筒前。</p>
+
+    <h3 class="subhead">人物坐标</h3>
+    <ul>
+      <li><span class="tag-ok">✅ 原文</span>：2011 年开始<strong>全职</strong>交易美股，dropped out of biomedical laboratory science degree</li>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>"8-figure club"</strong> —— 自营独立 trader，realized tens of millions in trading profits</li>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>自学成才</strong>，无师门、无机构、无背景</li>
+      <li><span class="tag-ok">✅ 原文</span>：他自称现在的 trading 像 "trader, gamer" —— 把它当<strong>游戏</strong>而非任务</li>
+    </ul>
+
+    <blockquote>
+      <p>"Christian's been trading the US equity market full time since 2011. And although he got off to a rocky start, he's arrived at a very rare level of trading success."</p>
+      <p>— Aaron Fifta, Chat With Traders</p>
+    </blockquote>
+
+    <div class="insight">⚠️ 推断：8-figure = 9 位数（美元），意味着累计交易利润 ≥ 1 亿美金。节目议程明示：2011 起步 → day trader → swing trader → breakouts deep dive。这是一份"散户金字塔尖的方法论档案"。</div>
+  </div>
+
+  <!-- ============ S2 ============ -->
+  <div class="section" id="s2">
+    <div class="section-head">
+      <div class="section-badge">贰</div>
+      <div class="section-title">Early Days —— 2011 年 4 次爆仓</div>
+      <span class="section-anchor">01:54 – 07:30</span>
+    </div>
+
+    <p>这一段是 Kristjan 自己的"学费档案"——$5,000 起步，21 岁保安，4 次归零。</p>
+
+    <h3 class="subhead">起步与爆仓节奏</h3>
+    <ul>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>起步资金约 $5,000</strong>，当时 21 岁，工作是 mall cop / security guard</li>
+      <li><span class="tag-ok">✅ 原文</span>：先 paper trade 翻倍 → 2011 年 5 月真金白银 → <strong>2 个月内亏掉 90%</strong></li>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>3-4 次爆仓</strong>，间隔从 2 个月 → 几个月 → 6 个月……越来越长</li>
+      <li><span class="tag-ok">✅ 原文</span>：每次爆仓后回保安岗攒钱再开</li>
+    </ul>
+
+    <h3 class="subhead">"学费"循环的核心矛盾</h3>
+    <ul>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>Day trading 是唯一已知物种</strong>——他根本不知道 swing trading 的存在</li>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>无方法论</strong>：不知道 stop loss、不知道 position sizing、所有交易 all-in</li>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>"every time I blew up, I learned something new"</strong> —— 爆仓是教学而非事故</li>
+    </ul>
+
+    <blockquote>
+      <p>"I lost most of that money in first two months. Then I went back to my security guard job and for six months or so, saved up money, started again with a few thousand…"</p>
+      <p>— Kristjan Kullamägi</p>
+    </blockquote>
+
+    <div class="insight">⚠️ 推断：$5,000 对一个 21 岁的瑞典保安来说，约 3-5 个月净储蓄。"爆仓 4 次后没家破人亡"这件事本身就证明原生家庭的安全网 + 他自己的风险厌恶在涨。把"爆仓学习法"当成方法论而不是事故——这是高成就散户的共同特征。</div>
+  </div>
+
+  <!-- ============ S3 ============ -->
+  <div class="section" id="s3">
+    <div class="section-head">
+      <div class="section-badge">叁</div>
+      <div class="section-title">从 Day 到 Swing —— 认知带宽升级</div>
+      <span class="section-anchor">07:30 – 17:40</span>
+    </div>
+
+    <p>Day trader → Swing trader 不是一个"懒人选择"，而是认知带宽与 horizon 的根本性升级。</p>
+
+    <h3 class="subhead">为什么会切换</h3>
+    <ul>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>Cognitive overload</strong>——重复做很多小决策导致精神崩溃</li>
+      <li><span class="tag-ok">✅ 原文</span>：day trader 圈子"无方法论 + all-in"导致他输多赢少</li>
+      <li><span class="tag-ok">✅ 原文</span>：研究美股历史 big winners（FB, AMZN, NFLX, AAPL, TSLA）→ 发现 <strong>big moves 都发生在数周-数月而非数小时</strong></li>
+      <li><span class="tag-ok">✅ 原文</span>：这些 big winners 启动前都有 long bases / sideways consolidations</li>
+    </ul>
+
+    <h3 class="subhead">研究方法（无 backtest 派）</h3>
+    <ul>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>"go through hundreds and hundreds of charts"</strong>——eyeball + 直觉，不用 backtest</li>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>90% 时间只看 daily chart</strong>，10% 用 weekly/monthly 上下文</li>
+    </ul>
+
+    <h3 class="subhead">关键 Setup 名词（这一节铺垫）</h3>
+    <div class="meta-row">
+      <span class="chip amber">Linearity</span>
+      <span class="chip amber">Big absolute momentum</span>
+      <span class="chip amber">Big relative momentum</span>
+      <span class="chip amber">Consolidation after leg higher</span>
+    </div>
+
+    <div class="insight">⚠️ 推断：day 切 swing 不是"懒"，是因为他在 day 里看到了自己的认知带宽瓶颈。swing 把"决策密度"降下来，让同样的脑子能 cover 更大的 universe + 更长的 horizon。顶级散户的共同路径：frequency 高 → frequency 低、edge 浓度高。</div>
+  </div>
+
+  <!-- ============ S4 ============ -->
+  <div class="section" id="s4">
+    <div class="section-head">
+      <div class="section-badge">肆</div>
+      <div class="section-title">Breakout Strategy —— Setup 深潜（干货核心）</div>
+      <span class="section-anchor">17:40 – 45:10</span>
+    </div>
+
+    <p style="color:#8a7b58;font-size:13px;margin-bottom:20px">—— 整集干货最密集的一节</p>
+
+    <h3 class="subhead">4.1 Universe Filter：怎么找"最强股"</h3>
+    <ul>
+      <li><span class="tag-ok">✅ 原文</span>：扫描时间窗 = <strong>1m / 3m / 6m / 12m / 18m</strong> 的 biggest movers</li>
+      <li><span class="tag-ok">✅ 原文</span>：只看 <strong>最强 + 最 liquid</strong>——small cap 也可以是 leading，但 big absolute + big relative 是前提</li>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>"patterns you have to learn yourself"</strong>——pattern 不可扫描，只能 eyeball</li>
+    </ul>
+
+    <h3 class="subhead">4.2 Setup 形态识别（四步）</h3>
+    <table>
+      <thead>
+        <tr><th>步骤</th><th>条件</th><th>举例</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>① 动量</td><td>某时间窗大幅上涨</td><td>3 个月翻倍 = 巨大动量</td></tr>
+        <tr><td>② 回调幅度</td><td>retraces ~1/3 of prior move</td><td>翻倍后回调 33% 左右</td></tr>
+        <tr><td>③ 均线反应</td><td>回调到 10-day / 20-day MA</td><td>看价格在均线附近的反应</td></tr>
+        <tr><td>④ Linearity</td><td>higher lows above 20-day + tightening range</td><td>"the short gets tighter over the next few weeks"</td></tr>
+      </tbody>
+    </table>
+
+    <blockquote>
+      <p>"This is the hard part. Identifying a good setup, a really good setup versus something that's random and mediocre…"</p>
+      <p>— Kristjan，承认 Linearity 是 eyeball 而非 formula</p>
+    </blockquote>
+
+    <h3 class="subhead">4.3 入场：Opening Range Breakout（ORB）</h3>
+    <table>
+      <thead>
+        <tr><th>级别</th><th>触发条件</th><th>止损</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>1-min ORB</strong></td><td>第 1 根 1min K 完成 → 突破其高点</td><td>当日低点</td></tr>
+        <tr><td><strong>5-min ORB</strong></td><td>同上，5min 级别</td><td>当日低点</td></tr>
+        <tr><td><strong>60-min ORB</strong></td><td>同上，60min 级别</td><td>当日低点</td></tr>
+        <tr><td><strong>Daily breakout</strong></td><td>日线级别突破（最少用）</td><td>区间低点</td></tr>
+      </tbody>
+    </table>
+
+    <p><span class="tag-ok">✅ 原文</span>：<strong>"I buy everything at once"</strong>——一次性 all-in 买入，不 scale in</p>
+    <p><span class="tag-warn">⚠️ 对比</span>：Dan Zanger 用 50/30/20 分批加仓；Kristjan 不这么干</p>
+
+    <h3 class="subhead">4.4 出场：Two-Stop System</h3>
+    <ul>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>绝对止损（hard stop）</strong>：一旦触发无条件走人</li>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>Trailing stop</strong> = 10-day 或 20-day MA</li>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>"wait for the close"</strong>——盘中下穿不要理</li>
+      <li><span class="tag-ok">✅ 原文</span>：收盘前 10-15 分钟如明显收在 MA 下方 → 出掉剩余仓位</li>
+    </ul>
+
+    <blockquote>
+      <p>"Undercut the moving average, my trailing stop, I just closed it and then the stock just went straight up from there and closed green on the day… very important, wait for the close."</p>
+      <p>— Kristjan，被坑出来的教训</p>
+    </blockquote>
+
+    <h3 class="subhead">4.5 加仓哲学</h3>
+    <ul>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>"I don't add just because something is going my way"</strong></li>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>唯一例外</strong>：持仓数月后出现新 setup → 按"new trade"对待，新仓位独立止损</li>
+    </ul>
+
+    <h3 class="subhead">4.6 基本面（Fuel）的角色</h3>
+    <blockquote>
+      <p>"There are some type of fundamentals that drive these stocks. Like a fundamental sort of fuel and momentum is what happens after the fuel."</p>
+      <p>— Kristjan</p>
+    </blockquote>
+    <ul>
+      <li><span class="tag-ok">✅ 原文</span>：Chart-only 也能盈利，但加入基本面提升 <strong>conviction</strong></li>
+      <li><span class="tag-ok">✅ 原文</span>：知道 group 是 hot 的 + 找到 setup → <strong>会加更大仓位 + hold 更久</strong></li>
+      <li><span class="tag-ok">✅ 原文</span>：例子：electric cars / battery / lithium / <strong>QS（QuantumScape）</strong>——概念股 5 年内没营收，但 theme 清晰</li>
+    </ul>
+
+    <div class="insight">⚠️ 推断：lineup 是这一节的核心，他自己说"very hard to describe…very intuitive"。这跟 Stan Druckenmiller 的"macro 是 art 不是 science"是同一种认知——top traders 都承认看图用 intuition 而非 formula，但能用语言解释给学员听。Linearity = "higher lows above MA + tightening range"的眼力训练，没有 shortcut。</div>
+  </div>
+
+  <!-- ============ S5 ============ -->
+  <div class="section" id="s5">
+    <div class="section-head">
+      <div class="section-badge">伍</div>
+      <div class="section-title">持仓心理与 Market Regime 判断</div>
+      <span class="section-anchor">45:10 – 55:30</span>
+    </div>
+
+    <h3 class="subhead">5.1 最佳入场窗口：Market Correction 之后</h3>
+    <ul>
+      <li><span class="tag-ok">✅ 原文</span>：NASDAQ 修正几个月 → 二次探底 → <strong>leading stocks 拒绝下跌</strong></li>
+      <li><span class="tag-ok">✅ 原文</span>：二次探底时 building higher lows = "the stock is trying to tell you something"</li>
+    </ul>
+
+    <blockquote>
+      <p>"It's like you try to push a tennis ball underwater. It just pops back up."</p>
+      <p>— Kristjan，描述真正的 leading stock</p>
+    </blockquote>
+
+    <h3 class="subhead">5.2 Market Regime 判定</h3>
+    <table>
+      <thead>
+        <tr><th>Regime</th><th>Breakout 有效性</th><th>仓位建议</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>上升 / 震荡市</strong></td><td>高</td><td>全力进场</td></tr>
+        <tr><td><strong>下降市</strong></td><td>低（多数失败）</td><td>cash is a position</td></tr>
+        <tr><td><strong>Multi-month correction 后</strong></td><td>极高</td><td>数月窗口期</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">5.3 持仓 vs 加仓 vs 减仓</h3>
+    <ul>
+      <li><span class="tag-ok">✅ 原文</span>：仓位 double 时要 "sell some to lock in profits"</li>
+      <li><span class="tag-ok">✅ 原文</span>：锁定部分利润后剩下仓位不需要紧盯，<strong>"you can look at them a couple of times per day"</strong></li>
+      <li><span class="tag-ok">✅ 原文</span>：通常 <strong>15-20 个 positions</strong> 同时持仓</li>
+      <li><span class="tag-ok">✅ 原文</span>：diversify 因为 "I've seen too many stocks open down 50% and it's just not worth it"</li>
+    </ul>
+
+    <div class="insight">⚠️ 推断：cash is a position 是顶级散户的共识。"leading stocks 拒绝下跌"和 Stanley Druckenmiller（同一节目 EP210）讲的"buy what is strong, short what is weak"一脉相承——节目内部互文很紧。</div>
+  </div>
+
+  <!-- ============ S6 ============ -->
+  <div class="section" id="s6">
+    <div class="section-head">
+      <div class="section-badge">陆</div>
+      <div class="section-title">Development & Growth —— Scaling 的纪律</div>
+      <span class="section-anchor">55:30 – 1:13:17</span>
+    </div>
+
+    <h3 class="subhead">6.1 业绩分布：80/20 Rule in Trading</h3>
+    <ul>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>Win rate 约 34%（2020）</strong>——他自己反复被问才回头查</li>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>不再 track 盈亏比</strong>——"I gave up doing that type of stuff many years ago"</li>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>15-20% of his trades = 大部分利润</strong></li>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>Low win rate, high payoff</strong>——"I'm a home-run trader"</li>
+    </ul>
+
+    <h3 class="subhead">6.2 他自己承认的两个软肋</h3>
+    <table>
+      <thead>
+        <tr><th>软肋</th><th>原话</th><th>影响</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Overtreating</strong></td>
+          <td>"I'm a little bit addicted to trading… I do like to trade even when I know I shouldn't"</td>
+          <td>每年吃掉一块 returns</td>
+        </tr>
+        <tr>
+          <td><strong>Patience with winners</strong></td>
+          <td>NVAX 案例：2 周翻倍卖掉，几周后又翻倍</td>
+          <td>supercharged bull market 里的最大陷阱</td>
+        </tr>
+        <tr>
+          <td><strong>✅ 优势</strong></td>
+          <td>"I never had an issue taking losses"</td>
+          <td>能轻松止损是稀缺特质</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">6.3 Scaling Sizing —— 百分比思维</h3>
+    <ul>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>账户翻倍 → 仓位和风险翻倍</strong>（"there's a lag there, but it will eventually double too"）</li>
+      <li><span class="tag-warn">⚠️ 对比</span>：很多 trader 10 年仓位不变，错失 bull market 的复利</li>
+      <li><span class="tag-ok">✅ 原文</span>：永远 <strong>think in percent</strong>，不用 dollars / points</li>
+      <li><span class="tag-ok">✅ 原文</span>：对外 withdraw 极少——"only take out money when I really have to, like to pay living expenses or to pay taxes"</li>
+    </ul>
+
+    <blockquote>
+      <p>"The Dow is up 1000 points — it's such a useless thing to say… 1% is always 1%, no matter if the Dow is at 5000 or at 50000."</p>
+      <p>— Kristjan，对金融媒体话术的反感</p>
+    </blockquote>
+
+    <h3 class="subhead">6.4 Margin 哲学</h3>
+    <blockquote>
+      <p>"Margin is something you have to deserve. It's not a privilege. Just because it's there doesn't mean you should use it."</p>
+      <p>— Kristjan，margin earned privilege 哲学</p>
+    </blockquote>
+    <ul>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>只在赢的时候加 margin</strong>，输了 reduce 回 no-margin</li>
+      <li><span class="tag-warn">⚠️ 反例</span>：很多人在亏的时候加 margin 想扳本 → 爆仓</li>
+      <li><span class="tag-ok">✅ 原文</span>："you have to gain some ground… if you do well, that's when you start using some margin"</li>
+    </ul>
+
+    <h3 class="subhead">6.5 为什么他的成功那么 rare？</h3>
+    <p>他自己归纳为 <strong>4 点</strong>：</p>
+    <ol>
+      <li><strong>听市场不听噪音</strong>——不看 CNBC、不听 hedge fund manager 观点、不被"专业人士恐慌"传染</li>
+      <li><strong>学透你的 Setup</strong>——回看几千个 examples，nailed down 所有变体；理解 market regime</li>
+      <li><strong>Scaling</strong>——把账户 size 和风险同步增长</li>
+      <li><strong>杠杆哲学</strong>——margin 是 earned privilege，不是工具</li>
+    </ol>
+
+    <div class="insight">⚠️ 推断：34% 胜率 + 15-20% trades 贡献大部分利润——这和 Annie Duke 的"Thinking in Bets"、Pabrai 的"few bets, big bets, infrequent bets"完全同构。home-run trading 不是性格选择，是 math：当 edge 不够高频时，用 holding period 拉长换盈亏比，是小账户放大到大账户的唯一路径。</div>
+  </div>
+
+  <!-- ============ S7 ============ -->
+  <div class="section" id="s7">
+    <div class="section-head">
+      <div class="section-badge">柒</div>
+      <div class="section-title">Outro —— 资源、链接、生活</div>
+      <span class="section-anchor">1:13:17 – 1:19:55</span>
+    </div>
+
+    <h3 class="subhead">7.1 资源链接</h3>
+    <div class="meta-row">
+      <span class="chip dark">Blog</span>
+      <span class="chip green">Twitter</span>
+      <span class="chip amber">Twitch</span>
+      <span class="chip amber">YouTube</span>
+    </div>
+    <ul>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>Blog</strong> = <code>chartsandstories.com</code>（详细写他的 setup 与方法论）</li>
+      <li><span class="tag-ok">✅ 原文</span>：<strong>Twitter / Twitch / YouTube</strong> 全部统一 handle = <strong>@Qullamaggie</strong></li>
+      <li><span class="tag-ok">✅ 原文</span>：每个交易日 Twitch stream 开场 ~1.5 小时，可以 ask him questions</li>
+    </ul>
+
+    <h3 class="subhead">7.2 Life Changes —— 钱换时间，不是奢华</h3>
+    <ul>
+      <li><span class="tag-ok">✅ 原文</span>："I used to study everything market related. Now I do things I enjoy on days off"</li>
+      <li><span class="tag-ok">✅ 原文</span>："More free time on the weekends and more time for video games"</li>
+      <li><span class="tag-ok">✅ 原文</span>：他 day off 整天打电脑游戏</li>
+    </ul>
+
+    <h3 class="subhead">7.3 给听众的最后一句</h3>
+    <blockquote>
+      <p>"It's very simple because it is. I'm always trying to take things away. There's an inverse correlation between the amount of indicators and profitability."</p>
+      <p>— Kristjan，方法论总结</p>
+    </blockquote>
+
+    <div class="insight">⚠️ 推断：$5,000 → 8 位数，10 年约 2000 倍复利（年化 ~100%+），背后是 Setup + Scaling + Patience + 不 overtrading 这四条纪律。没有奇技淫巧，没有"圣杯指标"。他愿意说出来本身就是因为他知道 Setup 不可 form 化——即使全部告诉你你也练不出来，因为 linearity 是 eyeball + 几千张图的 muscle memory。</div>
+  </div>
+
+  <!-- ============ S8 ============ -->
+  <div class="section" id="s8">
+    <div class="section-head">
+      <div class="section-badge">捌</div>
+      <div class="section-title">数据溯源 &amp; 二级资源</div>
+      <span class="section-anchor">Cross-Reference</span>
+    </div>
+
+    <h3 class="subhead">8.1 关键数据/引用一览</h3>
+    <table>
+      <thead>
+        <tr><th>类别</th><th>数字/事实</th><th>出处</th><th>标签</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>起步资金</td><td>~$5,000</td><td>Kristjan 自述</td><td><span class="tag-ok">✅原文</span></td></tr>
+        <tr><td>起步年龄</td><td>21 岁</td><td>Kristjan 自述</td><td><span class="tag-ok">✅原文</span></td></tr>
+        <tr><td>爆仓次数</td><td>3-4 次 in first few years</td><td>Kristjan 自述</td><td><span class="tag-ok">✅原文</span></td></tr>
+        <tr><td>全职起始年</td><td>2011 May</td><td>Kristjan 自述</td><td><span class="tag-ok">✅原文</span></td></tr>
+        <tr><td>2020 Win rate</td><td>~34%</td><td>Kristjan 自述</td><td><span class="tag-ok">✅原文</span></td></tr>
+        <tr><td>利润贡献 trades</td><td>15-20% of trades</td><td>Kristjan 自述</td><td><span class="tag-ok">✅原文</span></td></tr>
+        <tr><td>累计利润</td><td>8-figure club</td><td>Aaron 介绍</td><td><span class="tag-ok">✅原文</span></td></tr>
+        <tr><td>同期持仓数</td><td>15-20 positions</td><td>Kristjan 自述</td><td><span class="tag-ok">✅原文</span></td></tr>
+        <tr><td>入场 ORB 级别</td><td>1-min / 5-min / 60-min</td><td>Kristjan 自述</td><td><span class="tag-ok">✅原文</span></td></tr>
+        <tr><td>Trailing stop</td><td>10 or 20-day MA</td><td>Kristjan 自述</td><td><span class="tag-ok">✅原文</span></td></tr>
+        <tr><td>Trailing stop 触发</td><td>wait for close</td><td>Kristjan 自述</td><td><span class="tag-ok">✅原文</span></td></tr>
+        <tr><td>回调幅度</td><td>~1/3 of prior move</td><td>Kristjan 自述</td><td><span class="tag-ok">✅原文</span></td></tr>
+        <tr><td>扫描时间窗</td><td>1m / 3m / 6m / 12m / 18m</td><td>Kristjan 自述</td><td><span class="tag-ok">✅原文</span></td></tr>
+        <tr><td>Push 比喻</td><td>tennis ball underwater</td><td>Kristjan 自述</td><td><span class="tag-ok">✅原文</span></td></tr>
+        <tr><td>例子 stock</td><td>NVAX, QS, EV/battery</td><td>Kristjan 自述</td><td><span class="tag-ok">✅原文</span></td></tr>
+        <tr><td>Margin 哲学</td><td>赢时加，亏时减</td><td>Kristjan 自述</td><td><span class="tag-ok">✅原文</span></td></tr>
+        <tr><td>仓位管理</td><td>百分比，不用绝对值</td><td>Kristjan 自述</td><td><span class="tag-ok">✅原文</span></td></tr>
+        <tr><td>Blog</td><td>chartsandstories.com</td><td>Kristjan</td><td><span class="tag-ok">✅原文</span></td></tr>
+        <tr><td>Social handle</td><td>@Qullamaggie</td><td>Kristjan</td><td><span class="tag-ok">✅原文</span></td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">8.2 二级资源（用于交叉验证 / 视觉化 setup）</h3>
+    <ul>
+      <li><strong>YouTube 原视频</strong>：<code>https://www.youtube.com/watch?v=K0F73Sq90j0</code></li>
+      <li><strong>Chat With Traders 官页</strong>：<code>chatwithtraders.com/episode/212-kristjan-kullamagi-...</code></li>
+      <li><strong>iHeart</strong>：<code>iheart.com/podcast/263-chat-with-traders-27627306/episode/212-...</code></li>
+      <li><strong>Trading Resource Hub Reimagined-transcript（金版，逐句校订）</strong>：<code>tradingresourcehub.substack.com/p/qullamaggie-chat-with-traders-reimagined-transcript</code></li>
+      <li><strong>Trading Resource Hub Part 1 / Part 2</strong>：<code>tradingresourcehub.substack.com/p/interview-qullamaggie-chat-with-traders-part{1,2}</code></li>
+      <li><strong>Podwise AI summary</strong>：<code>podwise.ai/episodes/842601</code></li>
+    </ul>
+
+    <h3 class="subhead">8.3 转录数据</h3>
+    <ul>
+      <li><strong>音频来源</strong>：官方 Megaphone CDN <code>CWT7632491976.mp3</code> · 110 MB · 79 min · 192 kb/s stereo</li>
+      <li><strong>转录模型</strong>：faster-whisper base int8（缓存命中）</li>
+      <li><strong>转录耗时</strong>：约 9 min（80 min 音频 → 7-8x 实时）</li>
+      <li><strong>产出</strong>：<code>/tmp/podcast_transcript.txt</code> · 70K · 675 段 · 13,469 字</li>
+    </ul>
+  </div>
+
+  <!-- ============ S9 ============ -->
+  <div class="section" id="s9">
+    <div class="section-head">
+      <div class="section-badge">玖</div>
+      <div class="section-title">Setup 一句话总结（库哥友好版）</div>
+      <span class="section-anchor">TL;DR</span>
+    </div>
+
+    <div class="insight" style="font-size:16px;line-height:2">
+      <strong>Linearity + Relative Strength + Pullback to MA + ORB entry + wait-for-close trailing = Kristjan's breakout playbook.</strong>
+    </div>
+
+    <h3 class="subhead">五句话精华</h3>
+    <ol>
+      <li><strong>扫强者不扫 random</strong>——1m/3m/6m/12m/18m biggest movers 是 universe filter</li>
+      <li><strong>Linearity 是 setup 的灵魂</strong>——higher lows + tightening range，eyeball 练出来</li>
+      <li><strong>入场是 ORB</strong>——1min/5min/60min 任选，all-in 一次买入</li>
+      <li><strong>出场分两段</strong>——分批 + 10/20-day MA trailing，<strong>必须 wait for close</strong></li>
+      <li><strong>Scaling 是纪律</strong>——账户翻倍仓位翻倍，永远 think in percent</li>
+    </ol>
+
+    <h3 class="subhead">对库哥的启示（⚠️ 推断）</h3>
+    <ul>
+      <li><span class="tag-warn">⚠️ 推断</span>：他的 Setup 不可 form 化——同样的方法告诉你你也练不出来，因为 linearity 是眼力活</li>
+      <li><span class="tag-warn">⚠️ 推断</span>：但他的<strong>纪律框架</strong>可以借鉴：①扫强者不扫 random ②入场/出场有明确规则 ③百分比思维做 sizing ④margin 是 earned privilege</li>
+      <li><span class="tag-warn">⚠️ 推断</span>：34% win rate + 15-20% 贡献大部分利润——这个曲线不适合高频 trading 个人，但适合"swing + 长 hold + 极少数大赢"的范式</li>
+    </ul>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <div class="footer">
+    <div class="brand">库氏 Jarvis · 投研笔记</div>
+    <p>原始转录稿：<code>/tmp/podcast_transcript.txt</code>（675 段，13,469 字，含完整时间戳）</p>
+    <p>GitHub：<code>references/20260625_cwt212_kristjan_qullamaggie_breakouts.md</code></p>
+    <p>Gitee：<code>references/20260625_cwt212_kristjan_qullamaggie_breakouts.md</code></p>
+    <p>双端同步：GitHub master + Gitee main</p>
+    <p style="margin-top:14px">📅 报告生成：2026-06-25 · 工具：faster-whisper base int8 + v2 杂志风格 HTML</p>
+  </div>
+
+</div>
+</body>
+</html>
