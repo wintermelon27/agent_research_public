@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EP32 股市黑话祛魅 · 播客转录笔记</title>
+<style>
+  /* ===== Reset & Base ===== */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;font-size:16px;scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:#0f1419;
+    color:#d4d4d4;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* ===== Layout ===== */
+  .wrap{max-width:780px;margin:0 auto;padding:48px 28px 96px}
+
+  /* ===== Cover ===== */
+  .cover{
+    background:linear-gradient(135deg,#0a0e13 0%,#1a2332 50%,#0a0e13 100%);
+    color:#e8e8e8;
+    border:1px solid #2a3340;
+    border-radius:18px;
+    padding:56px 40px 48px;
+    margin-bottom:48px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 12px 36px rgba(0,0,0,.5);
+  }
+  .cover::before{
+    content:"";
+    position:absolute;top:-50%;right:-30%;
+    width:520px;height:520px;
+    background:radial-gradient(circle,rgba(212,175,55,.20) 0%,rgba(212,175,55,0) 70%);
+    pointer-events:none;
+  }
+  .cover .eyebrow{
+    display:inline-block;
+    font-size:11px;letter-spacing:3px;font-weight:600;
+    color:#d4af37;text-transform:uppercase;
+    border:1px solid rgba(212,175,55,.5);
+    padding:5px 12px;border-radius:30px;
+    margin-bottom:22px;
+  }
+  .cover h1{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC","Songti SC",serif;
+    font-size:38px;line-height:1.3;font-weight:700;
+    color:#f5f5f5;
+    margin-bottom:18px;
+    letter-spacing:-0.5px;
+  }
+  .cover .subtitle{
+    font-size:15px;line-height:1.7;
+    color:#d4af37;
+    margin-bottom:32px;
+    font-weight:500;
+  }
+  .cover .meta-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);
+    gap:18px 32px;
+    padding-top:24px;
+    border-top:1px solid rgba(212,175,55,.3);
+  }
+  .cover .meta-item{display:flex;flex-direction:column;gap:4px}
+  .cover .meta-label{font-size:11px;letter-spacing:1.5px;color:#8a7b58;text-transform:uppercase;font-weight:600}
+  .cover .meta-value{font-size:14px;color:#e8e8e8;font-weight:500}
+
+  /* ===== TOC ===== */
+  .toc{
+    background:#1a2028;
+    border:1px solid #2a3340;
+    border-radius:14px;
+    padding:32px 36px;
+    margin-bottom:36px;
+    box-shadow:0 2px 12px rgba(0,0,0,.3);
+  }
+  .toc-title{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:13px;font-weight:600;letter-spacing:1.5px;
+    color:#d4af37;
+    margin-bottom:20px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .toc-list{list-style:none}
+  .toc-list li{
+    display:flex;align-items:flex-start;gap:14px;
+    padding:10px 0;
+    border-bottom:1px solid #2a3340;
+  }
+  .toc-list li:last-child{border-bottom:none}
+  .toc-num{
+    flex-shrink:0;
+    width:26px;height:26px;border-radius:50%;
+    background:#d4af37;color:#0f1419;
+    font-size:12px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    margin-top:2px;
+  }
+  .toc-text{flex:1;font-size:14.5px;color:#d4d4d4;line-height:1.5}
+  .toc-text strong{color:#d4af37;font-weight:600}
+  .toc-time{font-size:12px;color:#8a7b58;flex-shrink:0;font-family:monospace}
+
+  /* ===== Section ===== */
+  .section{
+    background:#1a2028;
+    border:1px solid #2a3340;
+    border-radius:14px;
+    padding:36px 40px;
+    margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(0,0,0,.3);
+  }
+  .section-head{
+    display:flex;align-items:flex-start;gap:18px;
+    margin-bottom:24px;padding-bottom:18px;
+    border-bottom:2px solid #2a3340;
+  }
+  .section-badge{
+    flex-shrink:0;
+    width:44px;height:44px;border-radius:12px;
+    background:linear-gradient(135deg,#d4af37 0%,#a8893d 100%);
+    color:#0f1419;
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:20px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 10px rgba(212,175,55,.3);
+  }
+  .section-title-wrap{flex:1}
+  .section-title{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:24px;line-height:1.35;font-weight:700;
+    color:#f5f5f5;margin-bottom:6px;
+    letter-spacing:-0.3px;
+  }
+  .section-anchor{
+    font-size:12.5px;color:#8a7b58;
+    font-family:monospace;
+    display:flex;align-items:center;gap:6px;
+  }
+  .section-anchor::before{content:"⏱";font-size:11px}
+
+  /* ===== Subhead ===== */
+  .subhead{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:18px;font-weight:600;
+    color:#d4af37;
+    margin:28px 0 14px;
+    padding-left:14px;
+    border-left:3px solid #d4af37;
+    line-height:1.4;
+  }
+  .subhead:first-child{margin-top:0}
+
+  /* ===== Paragraph ===== */
+  p{margin-bottom:14px;font-size:15.5px;line-height:1.85;color:#d4d4d4}
+  p strong{color:#f5f5f5;font-weight:600}
+
+  /* ===== Lists ===== */
+  ul,ol{margin:14px 0 18px;padding-left:24px}
+  ul li,ol li{margin-bottom:8px;font-size:15px;line-height:1.7;color:#d4d4d4}
+  ul li::marker{color:#d4af37}
+
+  /* ===== Table ===== */
+  .table-wrap{overflow-x:auto;margin:18px 0 22px;border-radius:10px;border:1px solid #2a3340}
+  table{
+    width:100%;border-collapse:collapse;
+    font-size:14px;background:#1a2028;
+  }
+  thead{
+    background:linear-gradient(135deg,#0a0e13 0%,#1a2332 100%);
+    color:#f5f5f5;
+  }
+  th{
+    text-align:left;padding:14px 18px;
+    font-weight:600;font-size:13.5px;letter-spacing:0.3px;
+    color:#d4af37;
+    border-bottom:2px solid #d4af37;
+  }
+  td{
+    padding:13px 18px;
+    border-bottom:1px solid #2a3340;
+    color:#d4d4d4;vertical-align:top;
+  }
+  tbody tr:nth-child(even) td{background:#212932}
+  tbody tr:hover td{background:#283140}
+  tbody tr:last-child td{border-bottom:none}
+  td code{font-family:monospace;background:#0a0e13;color:#d4af37;padding:2px 6px;border-radius:4px;font-size:13px}
+
+  /* ===== Blockquote ===== */
+  blockquote{
+    position:relative;
+    margin:24px 0;
+    padding:24px 28px 24px 56px;
+    background:linear-gradient(135deg,#1a2332 0%,#0f1419 100%);
+    border-radius:12px;
+    border-left:4px solid #d4af37;
+    font-size:15.5px;line-height:1.85;
+    color:#d4d4d4;
+  }
+  blockquote::before{
+    content:"C";
+    position:absolute;top:8px;left:18px;
+    font-family:"Source Han Serif SC",serif;
+    font-size:56px;font-weight:700;
+    color:#d4af37;
+    line-height:1;opacity:0.5;
+  }
+  blockquote p{margin-bottom:6px}
+  blockquote p:last-child{margin-bottom:0}
+  blockquote .cite{
+    display:block;margin-top:10px;
+    font-size:13px;color:#d4af37;
+    font-style:normal;font-weight:600;
+  }
+
+  /* ===== Insight Box ===== */
+  .insight{
+    margin:22px 0;
+    padding:20px 24px;
+    background:linear-gradient(135deg,#1a2332 0%,#212932 100%);
+    border:1px solid rgba(212,175,55,.4);
+    border-radius:10px;
+    font-size:14.5px;line-height:1.75;
+    color:#d4d4d4;
+  }
+  .insight::before{
+    content:"💡 ";
+    margin-right:6px;
+  }
+  .insight strong{color:#d4af37;font-weight:600}
+
+  /* ===== Chip ===== */
+  .chip{
+    display:inline-block;
+    padding:3px 10px;border-radius:12px;
+    font-size:12px;font-weight:600;letter-spacing:0.3px;
+    vertical-align:middle;
+  }
+  .chip-ok{background:rgba(46,125,79,.25);color:#7ec99a;border:1px solid rgba(46,125,79,.5)}
+  .chip-warn{background:rgba(179,89,0,.25);color:#ffb872;border:1px solid rgba(179,89,0,.5)}
+  .chip-guess{background:rgba(94,94,138,.25);color:#a5a5d0;border:1px solid rgba(94,94,138,.5)}
+  .chip-default{background:rgba(212,175,55,.2);color:#d4af37;border:1px solid rgba(212,175,55,.5)}
+
+  /* ===== Inline code ===== */
+  code{
+    font-family:"SF Mono",Consolas,monospace;
+    background:#0a0e13;color:#d4af37;
+    padding:2px 7px;border-radius:5px;
+    font-size:13.5px;
+  }
+
+  /* ===== Footer ===== */
+  .footer{
+    margin-top:56px;padding-top:28px;
+    border-top:2px dashed #2a3340;
+    text-align:center;
+    font-size:13px;color:#8a7b58;line-height:1.7;
+  }
+  .footer .brand{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:15px;font-weight:600;
+    color:#d4af37;margin-bottom:8px;
+  }
+  .footer .sync{
+    margin-top:10px;display:flex;justify-content:center;gap:14px;
+    font-size:12px;flex-wrap:wrap;
+  }
+  .footer .sync span{
+    padding:3px 10px;background:#1a2028;border:1px solid #2a3340;
+    border-radius:20px;color:#d4d4d4;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width:640px){
+    .wrap{padding:32px 16px 64px}
+    .cover{padding:40px 24px 32px;border-radius:14px}
+    .cover h1{font-size:28px}
+    .cover .meta-grid{grid-template-columns:1fr;gap:14px}
+    .section{padding:24px 22px;border-radius:12px}
+    .section-title{font-size:20px}
+    .toc{padding:22px 22px}
+    .table-wrap{margin:14px -4px}
+    th,td{padding:10px 12px;font-size:12.5px}
+    blockquote{padding:20px 20px 20px 44px;font-size:14.5px}
+    blockquote::before{font-size:44px;top:6px;left:12px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- =================== COVER =================== -->
+  <div class="cover">
+    <span class="eyebrow">厚雪长波 · 雪球出品</span>
+    <h1>卖在人声鼎沸处<br>就是趋势结束时？</h1>
+    <p class="subtitle">康曼德资本丁楹对话录 · 32 年完整穿越 A 股每一轮周期 · 12 字投资哲学：跟随趋势 / 学习常识 / 拥抱创新</p>
+    <div class="meta-grid">
+      <div class="meta-item">
+        <span class="meta-label">嘉宾</span>
+        <span class="meta-value">丁楹 · 康曼德资本</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">时长</span>
+        <span class="meta-value">101 分钟</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">发布</span>
+        <span class="meta-value">2026-06-21 · 小宇宙</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">转录</span>
+        <span class="meta-value">faster-whisper base · 33 min</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== TOC =================== -->
+  <nav class="toc">
+    <div class="toc-title">📑 目录 · Table of Contents</div>
+    <ol class="toc-list">
+      <li><span class="toc-num">1</span><span class="toc-text"><strong>核心金句</strong> — 12 字投资哲学：趋势 / 常识 / 创新</span><span class="toc-time">开篇</span></li>
+      <li><span class="toc-num">2</span><span class="toc-text"><strong>起朱楼</strong> — 《巴菲特之路》改变投资理念</span><span class="toc-time">09:36</span></li>
+      <li><span class="toc-num">3</span><span class="toc-text"><strong>6124 操盘</strong> — 股改/汇改/地产才是真正推手</span><span class="toc-time">26:45</span></li>
+      <li><span class="toc-num">4</span><span class="toc-text"><strong>6000 点离场</strong> — 严重高估 + 拥抱创新</span><span class="toc-time">29:26</span></li>
+      <li><span class="toc-num">5</span><span class="toc-text"><strong>康波周期</strong> — 周金涛精准预言 2008 危机</span><span class="toc-time">37:14</span></li>
+      <li><span class="toc-num">6</span><span class="toc-text"><strong>公奔私</strong> — 13 年创业 净值一条线</span><span class="toc-time">41:35</span></li>
+      <li><span class="toc-num">7</span><span class="toc-text"><strong>吉利 10 倍</strong> — 草根调研 4S 店</span><span class="toc-time">50:44</span></li>
+      <li><span class="toc-num">8</span><span class="toc-text"><strong>SABKMD 体系</strong> — 投资速度公式</span><span class="toc-time">54:09</span></li>
+      <li><span class="toc-num">9</span><span class="toc-text"><strong>AI Agent</strong> — "AI 用得越多越需要调研"</span><span class="toc-time">1:02:42</span></li>
+      <li><span class="toc-num">10</span><span class="toc-text"><strong>康曼德三字</strong> — 健康/曼妙/再说了</span><span class="toc-time">1:14:07</span></li>
+      <li><span class="toc-num">11</span><span class="toc-text"><strong>12 字哲学</strong> — 趋势/常识/创新 三层递进</span><span class="toc-time">1:17:48</span></li>
+      <li><span class="toc-num">12</span><span class="toc-text"><strong>AI 泡沫？</strong> — 流动性 → 盈利驱动</span><span class="toc-time">1:30:57</span></li>
+      <li><span class="toc-num">13</span><span class="toc-text"><strong>关键金句 & 投资催化</strong></span><span class="toc-time">附录</span></li>
+    </ol>
+  </nav>
+
+  <!-- =================== SECTION 1: 核心金句 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">壹</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">核心金句：12 字投资哲学</h2>
+        <div class="section-anchor">开篇</div>
+      </div>
+    </div>
+
+    <blockquote>
+      <p>"我讲讲我的底层投资哲学吧，<strong>就是 12 个字</strong>。第一是<strong>跟随趋势</strong>，第二是<strong>学习常识</strong>，第三是<strong>拥抱创新</strong>。"</p>
+      <span class="cite">— 丁楹</span>
+    </blockquote>
+
+    <div class="subhead">12 字哲学的核心定位</div>
+    <div class="insight">
+      <strong>跟随趋势</strong> → 决定<strong>止损</strong>（不犯大错）<br>
+      <strong>学习常识</strong> → 决定<strong>胜率</strong>（自然科学/社会科学/心理学 大学水平）<br>
+      <strong>拥抱创新</strong> → 决定<strong>赔率</strong>（"你想获得超额，那就不能偷懒"）
+    </div>
+
+    <blockquote>
+      <p><strong>"趋势让你能够止损，常识让你提高胜率，赔率必须拥抱创新——这就是知行合一。"</strong></p>
+      <span class="cite">— 丁楹</span>
+    </blockquote>
+  </section>
+
+  <!-- =================== SECTION 2: 起朱楼 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">贰</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">起朱楼：《巴菲特之路》改变投资理念</h2>
+        <div class="section-anchor">09:36</div>
+      </div>
+    </div>
+
+    <blockquote>
+      <p>"买股票就是买企业，最终就是你要买企业的价值。<strong>你如果不想拥有这个企业，那你也不要买他的股票。</strong>"</p>
+      <span class="cite">— 丁楹 1995 年读《巴菲特之路》</span>
+    </blockquote>
+
+    <div class="subhead">2.1 启蒙期（1995-1998）</div>
+    <ul>
+      <li>1995 年底中信建投（时中经开）成立，调到总部自营部门</li>
+      <li>1995 年底买了一本《巴菲特之路》</li>
+      <li>之前学<strong>自控</strong>（非金融），看巴菲特后转向价值投资</li>
+      <li>那时全市场"做庄"盛行（97 年才有《证券法》）</li>
+      <li>97 年《证券投资基金管理暂行办法》→ 1998 年<strong>第一批公募基金</strong>诞生</li>
+      <li>丁楹"有兴趣"就进入了——<strong>没有金融背景的幸运</strong></li>
+    </ul>
+
+    <div class="subhead">2.2 第一批公募 28 岁管 20 亿</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>维度</th><th>数据</th></tr></thead>
+        <tbody>
+          <tr><td>入行年龄</td><td>28 岁（1999 年）</td></tr>
+          <tr><td>一上手规模</td><td>20 亿（封闭式基金，锁 15 年）</td></tr>
+          <tr><td>持有人</td><td>平安、中国人寿等大型保险公司</td></tr>
+          <tr><td>前两支基金</td><td>20 亿 + 30 亿，全封闭 15 年</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="insight">
+      ✅ 原文金句（丁楹）："做投资要趁早，就是人生规划要趁早。很多人的机会都是<strong>时代给的</strong>，不是完全靠自己努力。"
+    </div>
+  </section>
+
+  <!-- =================== SECTION 3: 6124 操盘 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">叁</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">6124 大牛市操盘实录</h2>
+        <div class="section-anchor">26:45</div>
+      </div>
+    </div>
+
+    <div class="subhead">3.1 04 年管全国最大 121 股票型基金</div>
+    <ul>
+      <li>团队分几组 + 委托外部研究</li>
+      <li>委托<strong>中金</strong>提供 50-100 支名单</li>
+      <li>内部 + 外部研究成果结合 → 选股相对容易</li>
+      <li>重仓<strong>行业龙头</strong>：房地产、机械（3-1 还便宜）、食品饮料（茅台 / 五粮液）</li>
+      <li>"持有时间越长回报越多"</li>
+    </ul>
+
+    <div class="subhead">3.2 6124 的真正推手</div>
+    <blockquote>
+      <p>"股改、汇改、地产产业链，<strong>才是那波大牛市真正的推手</strong>。"</p>
+      <span class="cite">— 丁楹</span>
+    </blockquote>
+
+    <div class="insight">
+      ⚠️ 推断：06-07 年持有茅台从几十块到 200+，很多股票长 30 倍。但 07 年 6000 点"茅台已经很高了"是当时市场共识——丁楹选择偏左侧离场。
+    </div>
+  </section>
+
+  <!-- =================== SECTION 4: 6000 点离场 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">肆</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">6000 点最疯狂时为什么选择离开？</h2>
+        <div class="section-anchor">29:26</div>
+      </div>
+    </div>
+
+    <div class="subhead">4.1 离场的三点原因</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>原因</th><th>详解</th></tr></thead>
+        <tbody>
+          <tr><td><strong>① 价值投资视角的市场已严重高估</strong></td><td>3500 点"有泡沫但是理性的泡沫，好的泡沫"；5000-6000 点"就有点疯狂了"</td></tr>
+          <tr><td><strong>② 中银基金与华夏基金合并</strong></td><td>职业架构不确定</td></tr>
+          <tr><td><strong>③ 拥抱创新 + 拓展能力圈</strong></td><td>想接触外资机构投资思想 → 去香港<strong>中银资本</strong>做海外市场</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subhead">4.2 离场后的真实经历</div>
+    <p>6000 点偏左侧离场后：</p>
+    <ul>
+      <li>海外募资遇冷："大家都很谨慎，对这个市场没有信心"</li>
+      <li>在海外只待了约 1 年多（2007-2008）</li>
+      <li>2007 下半年回国内加入<strong>中信建投</strong>管自营</li>
+      <li>08 年真正完整经历全球金融危机——之后才看清宏观周期对微观的影响</li>
+    </ul>
+
+    <div class="insight">
+      6000 点时"<strong>精准制导</strong>是非常难的一件事"——投资是科学 + 艺术 + 运气。
+    </div>
+  </section>
+
+  <!-- =================== SECTION 5: 康波周期 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">伍</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">康波周期第一次登场</h2>
+        <div class="section-anchor">37:14</div>
+      </div>
+    </div>
+
+    <div class="subhead">5.1 周金涛与康波周期</div>
+    <p>丁楹在中信建投时与<strong>周金涛</strong>是同事：</p>
+    <ul>
+      <li>周金涛在 <strong>2007 年非常精准地预测了次贷危机</strong>（康波周期）</li>
+      <li>康波周期理论在 2007 年非常有效</li>
+      <li>08-13 年在中国被"对冲"（4 万亿等政策）→ 周期理论应用效果差</li>
+      <li>15-16 年又"大放异彩"</li>
+    </ul>
+
+    <div class="insight">
+      ✅ 原文金句（丁楹）："任何理论在不同时期效果不同……分析这个产业宏观是有变化的。"周期在中国被政策熨平过，但在 2015-2016 年又恢复效力。
+    </div>
+
+    <div class="subhead">5.2 2010 股指期货推出后的新机会</div>
+    <ul>
+      <li>2010 年中国推股指期货 → 简单期现套利可做到年化 <strong>12%</strong></li>
+      <li>阴诺（九坤/衍复等）创始人<strong>徐书楠</strong>就是当时部门出来的</li>
+      <li>"只要一个新东西出来，里面就充满了机会"</li>
+    </ul>
+  </section>
+
+  <!-- =================== SECTION 6: 公奔私 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">陆</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">2013 公奔私：笃定私募的"黄金十年"</h2>
+        <div class="section-anchor">41:35</div>
+      </div>
+    </div>
+
+    <p>✅ 原文数据：<strong>13 年成立康曼德</strong></p>
+    <ul>
+      <li>启动资金 = 自有 + 公司资本 + 朋友同学 → <strong>8000 万</strong></li>
+      <li>"在资本市场面前不要觉得自己有多牛"——<strong>一年不在江湖，江湖可能就早把你忘了</strong></li>
+      <li>选择<strong>杭州</strong>（"挺贵的，精神大厦一个两居室，租金 1 个月 2.7 万"）</li>
+    </ul>
+
+    <div class="subhead">6.1 13-14 年"净值几乎一条直线"的原因</div>
+    <ul>
+      <li>唯恐<strong>用一年时间积累的投资者信任</strong>被打破</li>
+      <li>0.99-1.01 区间小幅波动</li>
+      <li>错过很多小股票机会，但<strong>没有陷入深度回调</strong></li>
+      <li>"投资是长跑，一开始是跑前面的人带路……藏在队伍中间，等拼耐力的时候冲上去"</li>
+    </ul>
+
+    <div class="insight">
+      创业前两年（13-14）的<strong>低收益 + 低波动</strong>是有意为之的策略选择："你不敢给大家赔钱"——"在体系内的话，每个月工资都是打卡进去的；现在出来，我们一开始做了一个两居室（公司），一个月两万七就是从我卡上打出去"。
+    </div>
+  </section>
+
+  <!-- =================== SECTION 7: 吉利 10 倍 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">柒</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">吉利两年 10 倍怎么提前抓到？</h2>
+        <div class="section-anchor">50:44</div>
+      </div>
+    </div>
+
+    <p>✅ 原文数据：<strong>吉利（00175.HK）SUV 时代 2015-2017 两年 10 倍</strong>（"长程" / "嘴" SUV → 吉利跟上，单月卖 1 万辆）</p>
+
+    <div class="subhead">7.1 草根调研法</div>
+    <blockquote>
+      <p>"我们的研究员<strong>会给 4S 店打电话</strong>问一问提车需要多久，根据这个判断销售紧俏程度……打一个地方全各地都打，请那些各地方言的人去打，让人可信度会高一点。"</p>
+      <span class="cite">— 丁楹</span>
+    </blockquote>
+
+    <ul>
+      <li>提车要等 = 产能受限 = 爆火</li>
+      <li>加价 = 销售紧俏</li>
+      <li>"我们一般无论研究员还是您，在看这套逻辑的时候，就比较<strong>很左侧的机会</strong>"</li>
+    </ul>
+
+    <div class="subhead">7.2 极点的复盘（"20 块卖晚了"）</div>
+    <ul>
+      <li>2015-2017 业绩 1 块到 4 块（4 倍），但更因为<strong>估值从 10 倍以下升到 20 倍+</strong></li>
+      <li>17-18 年卖在 20 块左右，<strong>但其实卖晚了</strong></li>
+      <li>PB / PS 早已突破"高位限"——但当时没有体系约束</li>
+      <li>这些"血的教训"后来被纳入风控</li>
+    </ul>
+  </section>
+
+  <!-- =================== SECTION 8: SABKMD 体系 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">捌</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">SABKMD 评级体系是怎么跑通的？</h2>
+        <div class="section-anchor">54:09</div>
+      </div>
+    </div>
+
+    <div class="subhead">8.1 体系结构</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>维度</th><th>含义</th></tr></thead>
+        <tbody>
+          <tr><td><strong>S</strong></td><td>好赛道（行业龙头）</td></tr>
+          <tr><td><strong>A</strong></td><td>好赛道中的一般公司</td></tr>
+          <tr><td><strong>B</strong></td><td>一般赛道中的好公司</td></tr>
+          <tr><td><strong>C</strong></td><td>一般公司</td></tr>
+          <tr><td><strong>S5 / S4</strong></td><td>万亿赛道 / 千亿赛道（数字细分）</td></tr>
+          <tr><td><strong>K</strong></td><td>Key Position = <strong>重仓</strong></td></tr>
+          <tr><td><strong>M</strong></td><td><strong>持有</strong></td></tr>
+          <tr><td><strong>D</strong></td><td>Distributed = <strong>轻仓</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subhead">8.2 投资速度公式</div>
+    <div class="insight">
+      $$\text{投资速度} = \frac{\text{预期空间}}{\text{预期时间} \times \text{概率}}$$
+      <p style="margin-top:10px">哪个品种"速度快" → 调仓到速度快的品种。空间 ÷ 时间 ÷ 概率 → 调仓换仓的判断准则。</p>
+    </div>
+
+    <div class="subhead">8.3 体系的完善时间线</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>时点</th><th>进展</th></tr></thead>
+        <tbody>
+          <tr><td>2013-2015</td><td>自下而上为主，"1.0 时代"（与老中医模式无大差别）</td></tr>
+          <tr><td>2015-2017</td><td>极点的教训 + 量化基础（人力机序，Excel + VBA）</td></tr>
+          <tr><td>2017 年底</td><td>内部"百日精进"——100 天重整方法论</td></tr>
+          <tr><td>2018-2019</td><td>管理规模接近 20 亿，<strong>SABKMD 体系完成</strong></td></tr>
+          <tr><td>2019-2021</td><td>曲线"斜着往上走"——体系闭环威力显现</td></tr>
+          <tr><td>2020 年后</td><td>完整闭环，<strong>2.0 时代</strong>——人人复现、不依赖个别研究员</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <blockquote>
+      <p>"<strong>体系的力量重于某只股票给你的贡献。</strong>……十几年里每阶段的最强板块，我们都参与到了——通过一天一天的过程，它自然而然转到那里去了。"</p>
+      <span class="cite">— 丁楹</span>
+    </blockquote>
+  </section>
+
+  <!-- =================== SECTION 9: AI Agent =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">玖</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">亲手搭的 AI Agent</h2>
+        <div class="section-anchor">1:02:42</div>
+      </div>
+    </div>
+
+    <div class="subhead">9.1 早盘前 4 个时间点的工作流</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>时间</th><th>工作</th></tr></thead>
+        <tbody>
+          <tr><td><strong>7:30</strong></td><td>扫描股票<strong>编辑变化</strong>，发汇总表</td></tr>
+          <tr><td><strong>8:00</strong></td><td>高估 / 低估<strong>估值表</strong>提示</td></tr>
+          <tr><td><strong>8:30</strong></td><td>提示市场关注 + <strong>动量较强</strong>的股票</td></tr>
+          <tr><td><strong>9:00</strong></td><td><strong>给出"头寸建议"</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subhead">9.2 AI 能做 / 不能做</div>
+    <blockquote>
+      <p>"很多人担心 AI 来了以后人类会失去工作，而我<strong>一点都不担心</strong>，尤其我们这个行业。<strong>AI 用得越多就越需要调研</strong>……因为你要验证 AI 的结论，数据源不一样，这个数据源它可能不传上网。"</p>
+      <span class="cite">— 丁楹</span>
+    </blockquote>
+
+    <div class="insight">
+      AI 是"牛顿力学"——日常够用。特殊场景（天体物理 / 量子）需要"爱因斯坦相对论"——研究员要深入。"原来没有这个 AI 时 AI 给你 8 个理由，我不用它了——<strong>决策还是在自己</strong>"。
+    </div>
+
+    <div class="subhead">9.3 AI 的核心价值</div>
+    <ul>
+      <li><strong>速度</strong>——投资要讲速度</li>
+      <li><strong>一致性处理</strong>——把综合处理 + 文档生成</li>
+      <li><strong>找预期差</strong>——一致性预期错了，要找"错在哪"</li>
+      <li>短板：物理世界的真实 / 及时 / 私密信息获取</li>
+    </ul>
+  </section>
+
+  <!-- =================== SECTION 10: 康曼德三字 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">拾</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">"康曼德"三个字的意思</h2>
+        <div class="section-anchor">1:14:07</div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>十年</th><th>字</th><th>含义</th></tr></thead>
+        <tbody>
+          <tr><td>第一个十年</td><td><strong>康</strong></td><td>健康——我活下来就好，健康地活着</td></tr>
+          <tr><td>第二个十年</td><td><strong>曼</strong></td><td>曼妙、巧妙、漫长——<strong>长期主义</strong>，<strong>AI 用好才能巧妙</strong></td></tr>
+          <tr><td>第三个十年</td><td>德</td><td>"再说了"（实验态度）</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- =================== SECTION 11: 12 字哲学 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">拾壹</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">12 字哲学：趋势/常识/创新 三层递进</h2>
+        <div class="section-anchor">1:17:48</div>
+      </div>
+    </div>
+
+    <div class="subhead">11.1 卖在人声鼎沸处 vs 跟随趋势</div>
+    <blockquote>
+      <p>"<strong>卖在人声鼎沸处</strong>可以理解为<strong>趋势结束</strong>——要认清产业 / 股票趋势的一阶变化和二阶变化。<strong>卖在人声鼎沸和跟随趋势是一致的</strong>。"</p>
+      <span class="cite">— 丁楹</span>
+    </blockquote>
+
+    <div class="subhead">11.2 买在无人问津时 = 必要条件，不充分</div>
+    <blockquote>
+      <p>"<strong>买在无人问津时是必要条件，但未必是充分条件</strong>——无人问津可能 3 年、5 年……投资速度不够。要找<strong>催化剂</strong>，找产业和公司的变化。"</p>
+      <span class="cite">— 丁楹</span>
+    </blockquote>
+
+    <div class="subhead">11.3 趋势投资 vs 价值投资</div>
+    <div class="insight">
+      随时间目标正前 + 长期稳定持续的正前 → <strong>不绝对区分</strong><br>
+      • 趋势投资 + 价值投资"都收在 DCF 里"<br>
+      • 比 DCF 目标价低 → <strong>明显低估 → 重仓</strong><br>
+      • 高到 1.5 倍 DCF → <strong>明显高估 → 卖</strong><br>
+      • 中间状态 → <strong>持有</strong>
+    </div>
+  </section>
+
+  <!-- =================== SECTION 12: AI 泡沫? =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">拾贰</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">AI 是泡沫还是趋势？</h2>
+        <div class="section-anchor">1:30:57</div>
+      </div>
+    </div>
+
+    <div class="subhead">12.1 当下判断</div>
+    <blockquote>
+      <p>"26 年可能 A 股正在从<strong>流动性驱动 → 盈利驱动</strong>——能够支撑这波势继续往前走的一个重要因素。"</p>
+      <span class="cite">— 丁楹</span>
+    </blockquote>
+
+    <ul>
+      <li>AI 趋势"已经在"（产业利润已经释放）</li>
+      <li>海外算力公司业绩暴增、存储利润暴增</li>
+      <li>真正要关注的是<strong>增速高点什么时候出现</strong></li>
+      <li>流动性驱动的多 → 盈利释放期</li>
+    </ul>
+
+    <div class="subhead">12.2 与 2000 年互联网泡沫对比</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>维度</th><th>2000 互联网</th><th>2026 AI</th></tr></thead>
+        <tbody>
+          <tr><td>商业模式变化</td><td>大（仅此而已）</td><td>大 + <strong>业绩兑现</strong></td></tr>
+          <tr><td>制造业基础</td><td>弱</td><td><strong>全球最大制造业强国</strong></td></tr>
+          <tr><td>体系完善</td><td>不完善</td><td>完善</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="insight">
+      ⚠️ 推断：2026 年"<strong>能看到业绩</strong>"是 2000 年没有的。这是 AI 与当年互联网泡沫的本质区别。
+    </div>
+
+    <div class="subhead">12.3 行业方向（按 12 字哲学）</div>
+    <p><strong>跟随趋势</strong>：</p>
+    <ul>
+      <li>AI 算力、存储、基础建设、能源管理系统</li>
+      <li>"全球投资界现在只分两个：<strong>与 AI 相关的，与 AI 无关的</strong>"</li>
+    </ul>
+
+    <p><strong>学习常识</strong>（找脆弱环节）：</p>
+    <ul>
+      <li>华为套刻理论：空间对垒 → <strong>时间对垒</strong>——可能 2030-2031 突破卡脖子</li>
+      <li>国产算力要继续重视</li>
+      <li><strong>光</strong>的发展（"20 世纪是光子的时代"）</li>
+      <li><strong>材料</strong>（现在可插拔，未来 CPU 集成）</li>
+    </ul>
+
+    <p><strong>拥抱创新</strong>（提升能力）：</p>
+    <ul>
+      <li>不是"消费都不看了"——"便宜的值得拥有"</li>
+      <li><strong>短期看 AI 基建，长期看 AI 应用</strong></li>
+      <li>AI 应用空间大，"一定会有那种大公司"</li>
+    </ul>
+
+    <div class="subhead">12.4 资产配置哲学</div>
+    <blockquote>
+      <p>"AI 的机会是<strong>修路</strong>，AI 的应用是<strong>跑车</strong>……我作为资产管理人，<strong>不是管自己的钱</strong>——我要让投资人既获得收益，又让波动比主观投资者<strong>波动小一点</strong>。"</p>
+      <span class="cite">— 丁楹</span>
+    </blockquote>
+
+    <p><strong>风控机制</strong>：</p>
+    <ul>
+      <li>多头敞口整体控制在<strong>三到五成</strong></li>
+      <li>看好的股票<strong>一直拿着</strong>——如果需要验证，卖<strong>别人的股票 / 股指期货</strong></li>
+      <li>不卖自己的股票（"如果要卖，就没必要买"）</li>
+    </ul>
+  </section>
+
+  <!-- =================== SECTION 13: 关键金句 & 投资催化 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">拾叁</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">关键金句 & 投资催化跟踪</h2>
+        <div class="section-anchor">附录</div>
+      </div>
+    </div>
+
+    <div class="subhead">13.1 关键金句汇总</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>主题</th><th>金句</th></tr></thead>
+        <tbody>
+          <tr><td>价值投资</td><td>"买股票就是买企业。如果你不想拥有这个企业，那你也不要买他的股票。"</td></tr>
+          <tr><td>时势</td><td>"做投资要趁早。人的机会都是时代给的，不是完全靠自己努力。"</td></tr>
+          <tr><td>投资长跑</td><td>"投资是长跑……藏在队伍中间，等拼耐力的时候冲上去。"</td></tr>
+          <tr><td>体系力量</td><td>"体系的力量重于某只股票给你的贡献。"</td></tr>
+          <tr><td>12 字哲学</td><td>趋势决定止损、常识决定胜率、<strong>创新决定赔率</strong></td></tr>
+          <tr><td>AI 调研</td><td>"AI 用得越多就越需要调研"</td></tr>
+          <tr><td>无人问津</td><td>"买在无人问津时是必要条件，但未必是充分条件……要找催化剂"</td></tr>
+          <tr><td>AI 时代资产</td><td>"AI 是修路，AI 应用是跑车……我要让波动比主观投资者小"</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subhead">13.2 投资催化跟踪</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>时点 / 行业</th><th>关键判断</th><th>仓位影响</th></tr></thead>
+        <tbody>
+          <tr><td>2007 年 6000 点</td><td>公奔私去香港</td><td>减仓 / 离场</td></tr>
+          <tr><td>2013-2014 创业</td><td>净值 0.99-1.01 一条线</td><td>蓄力</td></tr>
+          <tr><td>2015-2017 吉利</td><td>草根调研 4S 店</td><td>重仓翻 10 倍</td></tr>
+          <tr><td>2017 极点</td><td>PB 突破"高位限"未及时减仓</td><td><td><strong>教训</strong></td></tr>
+          <tr><td>2018 百日精进</td><td>完成 SABKMD 体系</td><td>2.0 时代</td></tr>
+          <tr><td>2020 之后</td><td>AI/计算机/电子估值便宜逐步配</td><td>科技主线</td></tr>
+          <tr><td>924 行情</td><td><strong>没有加仓也没有减仓</strong>（7 层仓 + 转债对冲）</td><td>守纪律</td></tr>
+          <tr><td>2026 AI 算力</td><td>跟随趋势：算力/存储/能源管理</td><td>重仓</td></tr>
+          <tr><td>2030 国产芯片</td><td>套刻突破卡脖子</td><td>长期看好</td></tr>
+          <tr><td>AI 应用</td><td>短期看基建，长期看应用</td><td>长期布局</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subhead">13.3 关键数据汇总</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>维度</th><th>数据</th></tr></thead>
+        <tbody>
+          <tr><td>入行</td><td>1994 年</td></tr>
+          <tr><td>第一支公募基金</td><td>1999 年 28 岁，一上手 20 亿</td></tr>
+          <tr><td>6124 大牛市</td><td>2007 年 6000 点偏左侧离场</td></tr>
+          <tr><td>2008 全球金融危机</td><td>在港经历完整周期</td></tr>
+          <tr><td>股指期货套利</td><td>2010 年起年化 12%</td></tr>
+          <tr><td>公奔私</td><td>2013 年成立康曼德，8000 万启动</td></tr>
+          <tr><td>净值 0.99-1.01</td><td>2013-2014 年一年换信任</td></tr>
+          <tr><td>吉利 10 倍</td><td>2015-2017 年</td></tr>
+          <tr><td>百日精进</td><td>2017 年底</td></tr>
+          <tr><td>管理规模近 20 亿</td><td>2018 年</td></tr>
+          <tr><td>SABKMD 体系完成</td><td>2018-2019 年</td></tr>
+          <tr><td>924 行情</td><td>7 层仓 + 转债对冲</td></tr>
+          <tr><td>AI 算力重仓</td><td>2026 年</td></tr>
+          <tr><td>多头敞口</td><td>整体 3-5 成</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- =================== FOOTER =================== -->
+  <div class="footer">
+    <div class="brand">🎙️ 厚雪长波 · 丁楹对话录</div>
+    <div>原始转录稿：<code>ep3.txt</code>（3855 segments）</div>
+    <div>数据来源：小宇宙 xyzcdn.net CDN + faster-whisper (base, CPU int8)</div>
+    <div class="sync">
+      <span>📁 GitHub · wintermelon27/agent_research</span>
+      <span>📁 Gitee · wintermeloncurry/agent_research</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

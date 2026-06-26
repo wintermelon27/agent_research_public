@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EP32 股市黑话祛魅 · 播客转录笔记</title>
+<style>
+  /* ===== Reset & Base ===== */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;font-size:16px;scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:#0f1419;
+    color:#d4d4d4;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* ===== Layout ===== */
+  .wrap{max-width:780px;margin:0 auto;padding:48px 28px 96px}
+
+  /* ===== Cover ===== */
+  .cover{
+    background:linear-gradient(135deg,#0a0e13 0%,#1a2332 50%,#0a0e13 100%);
+    color:#e8e8e8;
+    border:1px solid #2a3340;
+    border-radius:18px;
+    padding:56px 40px 48px;
+    margin-bottom:48px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 12px 36px rgba(0,0,0,.5);
+  }
+  .cover::before{
+    content:"";
+    position:absolute;top:-50%;right:-30%;
+    width:520px;height:520px;
+    background:radial-gradient(circle,rgba(212,175,55,.20) 0%,rgba(212,175,55,0) 70%);
+    pointer-events:none;
+  }
+  .cover .eyebrow{
+    display:inline-block;
+    font-size:11px;letter-spacing:3px;font-weight:600;
+    color:#d4af37;text-transform:uppercase;
+    border:1px solid rgba(212,175,55,.5);
+    padding:5px 12px;border-radius:30px;
+    margin-bottom:22px;
+  }
+  .cover h1{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC","Songti SC",serif;
+    font-size:38px;line-height:1.3;font-weight:700;
+    color:#f5f5f5;
+    margin-bottom:18px;
+    letter-spacing:-0.5px;
+  }
+  .cover .subtitle{
+    font-size:15px;line-height:1.7;
+    color:#d4af37;
+    margin-bottom:32px;
+    font-weight:500;
+  }
+  .cover .meta-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);
+    gap:18px 32px;
+    padding-top:24px;
+    border-top:1px solid rgba(212,175,55,.3);
+  }
+  .cover .meta-item{display:flex;flex-direction:column;gap:4px}
+  .cover .meta-label{font-size:11px;letter-spacing:1.5px;color:#8a7b58;text-transform:uppercase;font-weight:600}
+  .cover .meta-value{font-size:14px;color:#e8e8e8;font-weight:500}
+
+  /* ===== TOC ===== */
+  .toc{
+    background:#1a2028;
+    border:1px solid #2a3340;
+    border-radius:14px;
+    padding:32px 36px;
+    margin-bottom:36px;
+    box-shadow:0 2px 12px rgba(0,0,0,.3);
+  }
+  .toc-title{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:13px;font-weight:600;letter-spacing:1.5px;
+    color:#d4af37;
+    margin-bottom:20px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .toc-list{list-style:none}
+  .toc-list li{
+    display:flex;align-items:flex-start;gap:14px;
+    padding:10px 0;
+    border-bottom:1px solid #2a3340;
+  }
+  .toc-list li:last-child{border-bottom:none}
+  .toc-num{
+    flex-shrink:0;
+    width:26px;height:26px;border-radius:50%;
+    background:#d4af37;color:#0f1419;
+    font-size:12px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    margin-top:2px;
+  }
+  .toc-text{flex:1;font-size:14.5px;color:#d4d4d4;line-height:1.5}
+  .toc-text strong{color:#d4af37;font-weight:600}
+  .toc-time{font-size:12px;color:#8a7b58;flex-shrink:0;font-family:monospace}
+
+  /* ===== Section ===== */
+  .section{
+    background:#1a2028;
+    border:1px solid #2a3340;
+    border-radius:14px;
+    padding:36px 40px;
+    margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(0,0,0,.3);
+  }
+  .section-head{
+    display:flex;align-items:flex-start;gap:18px;
+    margin-bottom:24px;padding-bottom:18px;
+    border-bottom:2px solid #2a3340;
+  }
+  .section-badge{
+    flex-shrink:0;
+    width:44px;height:44px;border-radius:12px;
+    background:linear-gradient(135deg,#d4af37 0%,#a8893d 100%);
+    color:#0f1419;
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:20px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 10px rgba(212,175,55,.3);
+  }
+  .section-title-wrap{flex:1}
+  .section-title{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:24px;line-height:1.35;font-weight:700;
+    color:#f5f5f5;margin-bottom:6px;
+    letter-spacing:-0.3px;
+  }
+  .section-anchor{
+    font-size:12.5px;color:#8a7b58;
+    font-family:monospace;
+    display:flex;align-items:center;gap:6px;
+  }
+  .section-anchor::before{content:"⏱";font-size:11px}
+
+  /* ===== Subhead ===== */
+  .subhead{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:18px;font-weight:600;
+    color:#d4af37;
+    margin:28px 0 14px;
+    padding-left:14px;
+    border-left:3px solid #d4af37;
+    line-height:1.4;
+  }
+  .subhead:first-child{margin-top:0}
+
+  /* ===== Paragraph ===== */
+  p{margin-bottom:14px;font-size:15.5px;line-height:1.85;color:#d4d4d4}
+  p strong{color:#f5f5f5;font-weight:600}
+
+  /* ===== Lists ===== */
+  ul,ol{margin:14px 0 18px;padding-left:24px}
+  ul li,ol li{margin-bottom:8px;font-size:15px;line-height:1.7;color:#d4d4d4}
+  ul li::marker{color:#d4af37}
+
+  /* ===== Table ===== */
+  .table-wrap{overflow-x:auto;margin:18px 0 22px;border-radius:10px;border:1px solid #2a3340}
+  table{
+    width:100%;border-collapse:collapse;
+    font-size:14px;background:#1a2028;
+  }
+  thead{
+    background:linear-gradient(135deg,#0a0e13 0%,#1a2332 100%);
+    color:#f5f5f5;
+  }
+  th{
+    text-align:left;padding:14px 18px;
+    font-weight:600;font-size:13.5px;letter-spacing:0.3px;
+    color:#d4af37;
+    border-bottom:2px solid #d4af37;
+  }
+  td{
+    padding:13px 18px;
+    border-bottom:1px solid #2a3340;
+    color:#d4d4d4;vertical-align:top;
+  }
+  tbody tr:nth-child(even) td{background:#212932}
+  tbody tr:hover td{background:#283140}
+  tbody tr:last-child td{border-bottom:none}
+  td code{font-family:monospace;background:#0a0e13;color:#d4af37;padding:2px 6px;border-radius:4px;font-size:13px}
+
+  /* ===== Blockquote ===== */
+  blockquote{
+    position:relative;
+    margin:24px 0;
+    padding:24px 28px 24px 56px;
+    background:linear-gradient(135deg,#1a2332 0%,#0f1419 100%);
+    border-radius:12px;
+    border-left:4px solid #d4af37;
+    font-size:15.5px;line-height:1.85;
+    color:#d4d4d4;
+  }
+  blockquote::before{
+    content:"C";
+    position:absolute;top:8px;left:18px;
+    font-family:"Source Han Serif SC",serif;
+    font-size:56px;font-weight:700;
+    color:#d4af37;
+    line-height:1;opacity:0.5;
+  }
+  blockquote p{margin-bottom:6px}
+  blockquote p:last-child{margin-bottom:0}
+  blockquote .cite{
+    display:block;margin-top:10px;
+    font-size:13px;color:#d4af37;
+    font-style:normal;font-weight:600;
+  }
+
+  /* ===== Insight Box ===== */
+  .insight{
+    margin:22px 0;
+    padding:20px 24px;
+    background:linear-gradient(135deg,#1a2332 0%,#212932 100%);
+    border:1px solid rgba(212,175,55,.4);
+    border-radius:10px;
+    font-size:14.5px;line-height:1.75;
+    color:#d4d4d4;
+  }
+  .insight::before{
+    content:"💡 ";
+    margin-right:6px;
+  }
+  .insight strong{color:#d4af37;font-weight:600}
+
+  /* ===== Chip ===== */
+  .chip{
+    display:inline-block;
+    padding:3px 10px;border-radius:12px;
+    font-size:12px;font-weight:600;letter-spacing:0.3px;
+    vertical-align:middle;
+  }
+  .chip-ok{background:rgba(46,125,79,.25);color:#7ec99a;border:1px solid rgba(46,125,79,.5)}
+  .chip-warn{background:rgba(179,89,0,.25);color:#ffb872;border:1px solid rgba(179,89,0,.5)}
+  .chip-guess{background:rgba(94,94,138,.25);color:#a5a5d0;border:1px solid rgba(94,94,138,.5)}
+  .chip-default{background:rgba(212,175,55,.2);color:#d4af37;border:1px solid rgba(212,175,55,.5)}
+
+  /* ===== Inline code ===== */
+  code{
+    font-family:"SF Mono",Consolas,monospace;
+    background:#0a0e13;color:#d4af37;
+    padding:2px 7px;border-radius:5px;
+    font-size:13.5px;
+  }
+
+  /* ===== Footer ===== */
+  .footer{
+    margin-top:56px;padding-top:28px;
+    border-top:2px dashed #2a3340;
+    text-align:center;
+    font-size:13px;color:#8a7b58;line-height:1.7;
+  }
+  .footer .brand{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:15px;font-weight:600;
+    color:#d4af37;margin-bottom:8px;
+  }
+  .footer .sync{
+    margin-top:10px;display:flex;justify-content:center;gap:14px;
+    font-size:12px;flex-wrap:wrap;
+  }
+  .footer .sync span{
+    padding:3px 10px;background:#1a2028;border:1px solid #2a3340;
+    border-radius:20px;color:#d4d4d4;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width:640px){
+    .wrap{padding:32px 16px 64px}
+    .cover{padding:40px 24px 32px;border-radius:14px}
+    .cover h1{font-size:28px}
+    .cover .meta-grid{grid-template-columns:1fr;gap:14px}
+    .section{padding:24px 22px;border-radius:12px}
+    .section-title{font-size:20px}
+    .toc{padding:22px 22px}
+    .table-wrap{margin:14px -4px}
+    th,td{padding:10px 12px;font-size:12.5px}
+    blockquote{padding:20px 20px 20px 44px;font-size:14.5px}
+    blockquote::before{font-size:44px;top:6px;left:12px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- =================== COVER =================== -->
+  <div class="cover">
+    <span class="eyebrow">起朱楼宴宾客 · Vol.165</span>
+    <h1>年报季中的真实中国 2026<br>关键词：重构</h1>
+    <p class="subtitle">大卫翁 7 年读 300+ 份年报 · K 型分化 · 经营逻辑重构 · 中国籍全球公司 · AI 算力物理化</p>
+    <div class="meta-grid">
+      <div class="meta-item">
+        <span class="meta-label">主播</span>
+        <span class="meta-value">大卫翁</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">时长</span>
+        <span class="meta-value">88 分钟</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">发布</span>
+        <span class="meta-value">2026-05-05 · 小宇宙</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">转录</span>
+        <span class="meta-value">faster-whisper base · 32 min</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== TOC =================== -->
+  <nav class="toc">
+    <div class="toc-title">📑 目录 · Table of Contents</div>
+    <ol class="toc-list">
+      <li><span class="toc-num">1</span><span class="toc-text"><strong>核心金句</strong> — 重构是认知，讲的是企业怎么想</span><span class="toc-time">开篇</span></li>
+      <li><span class="toc-num">2</span><span class="toc-text"><strong>系列说明</strong> — 8 年读年报，3 点说明</span><span class="toc-time">00:14</span></li>
+      <li><span class="toc-num">3</span><span class="toc-text"><strong>GDP 剪刀差</strong> — 全 A 利润几乎全靠金融业</span><span class="toc-time">02:36</span></li>
+      <li><span class="toc-num">4</span><span class="toc-text"><strong>五座大山</strong> — 申洲国际视角的 2025 经营环境</span><span class="toc-time">05:29</span></li>
+      <li><span class="toc-num">5</span><span class="toc-text"><strong>宏观 K 型分化</strong> — 地产链 vs AI 算力</span><span class="toc-time">15:50</span></li>
+      <li><span class="toc-num">6</span><span class="toc-text"><strong>经营逻辑重构</strong> — 安全 / 贸易范式 / AI 算力</span><span class="toc-time">42:52</span></li>
+      <li><span class="toc-num">7</span><span class="toc-text"><strong>中国籍的全球公司</strong> — 三层本土化</span><span class="toc-time">52:03</span></li>
+      <li><span class="toc-num">8</span><span class="toc-text"><strong>长期价值</strong> — 质量 + 隔举打开（宁德时代视角）</span><span class="toc-time">70:16</span></li>
+      <li><span class="toc-num">9</span><span class="toc-text"><strong>AI 物理化</strong> — 中美各自消化 AI 红利</span><span class="toc-time">75:36</span></li>
+    </ol>
+  </nav>
+
+  <!-- =================== SECTION 1: 核心金句 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">壹</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">核心金句：重构是认知，不是动作</h2>
+        <div class="section-anchor">开篇</div>
+      </div>
+    </div>
+
+    <blockquote>
+      <p>去年的关键词是<strong>进化</strong>，讲的是企业怎么动。今年的关键词是<strong>重构</strong>，讲的是企业怎么想。</p>
+      <p>企业家们已经不在"安度"的语境里了，他们把过去几年熬出来的那些朦胧的判断，用清晰的语言表达出来，试图描述这个新世界。</p>
+      <span class="cite">— 大卫翁</span>
+    </blockquote>
+
+    <div class="subhead">本期三句收尾金句</div>
+    <blockquote>
+      <p><strong>"成功的惯性会累积成为坠落的重量。"</strong></p>
+      <p style="margin-top:14px"><strong>"繁荣的代价是永恒的不安，破坏才能增长，稳定只是一种幻觉。"</strong></p>
+      <p style="margin-top:14px"><strong>"创造力爆发时代……我们有工程师红利 + 技术积累，能够爆发出更加灿烂的创造力。"</strong></p>
+      <span class="cite">— 美的年报 / 李录访谈</span>
+    </blockquote>
+  </section>
+
+  <!-- =================== SECTION 2: 系列说明 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">贰</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">系列说明：8 年读 300+ 份年报</h2>
+        <div class="section-anchor">00:14</div>
+      </div>
+    </div>
+
+    <div class="subhead">2.1 阅读方法</div>
+    <ul>
+      <li>每年 3-4 月集中读 300+ 份年报</li>
+      <li>包含：自持仓、长期关注公司、当年最火热行业</li>
+      <li>重点：管理层讨论与分析、致股东信、董事长致辞</li>
+    </ul>
+
+    <div class="subhead">2.2 三年趋势演变</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>年份</th><th>年报披露趋势</th></tr></thead>
+        <tbody>
+          <tr><td>2020-2022</td><td>宏观思考 + 报喜也报忧</td></tr>
+          <tr><td>2023-2024</td><td>宏观思考减少，"论势"为主</td></tr>
+          <tr><td>2025-2026</td><td>报喜不报忧，"几乎销声匿迹"</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="insight">
+      系列定位从"从年报看宏观中国"逐渐转向"从年报看产业和企业真实状况"——这更符合年报本身的初心，但信息密度在下降。
+    </div>
+  </section>
+
+  <!-- =================== SECTION 3: GDP 剪刀差 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">叁</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">GDP 剪刀差：3% 利润增长几乎全靠金融业</h2>
+        <div class="section-anchor">02:36</div>
+      </div>
+    </div>
+
+    <div class="subhead">3.1 关键数据对比</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>指标</th><th>2023</th><th>2024</th><th>2025</th></tr></thead>
+        <tbody>
+          <tr><td>实际 GDP</td><td>~5%</td><td>~5%</td><td>~5%</td></tr>
+          <tr><td>名义 GDP</td><td>~4%</td><td>~4%</td><td>~3.9%</td></tr>
+          <tr><td>全 A 营收增长</td><td>+0.86%</td><td><span class="chip chip-warn">-1.07%</span></td><td>回归增长</td></tr>
+          <tr><td>全 A 归母净利润</td><td><span class="chip chip-warn">-1.56%</span></td><td><span class="chip chip-warn">-1.51%</span></td><td>~+3%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subhead">3.2 2025 利润拆分</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>板块</th><th>2025 利润增长</th><th>2025 营收增长</th></tr></thead>
+        <tbody>
+          <tr><td><span class="chip chip-ok">金融业</span></td><td><strong>+6.7%</strong></td><td>—</td></tr>
+          <tr><td>非金融业</td><td><span class="chip chip-warn">-1.1%</span></td><td>+0.8%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="insight">
+      非金融企业利润下降几乎完全由<strong>利润率收缩</strong>造成（营收微增 + 利润下滑）——这与"行业越来越内卷"的体感完全匹配。
+    </div>
+  </section>
+
+  <!-- =================== SECTION 4: 五座大山 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">肆</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">五座大山：申洲国际视角的 2025 经营环境</h2>
+        <div class="section-anchor">05:29</div>
+      </div>
+    </div>
+
+    <blockquote>
+      <p>申洲国际（耐克等品牌代工龙头）2025 年报用比过往长得多的篇幅描述了问题，点了五个点：<strong>共强需弱、劳动力成本上升、汇率波动、地缘政治、关税政策</strong>。</p>
+      <span class="cite">— 申洲国际 2025 年报</span>
+    </blockquote>
+
+    <div class="subhead">4.1 五座大山详解</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>压力</th><th>具体表现</th><th>影响</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1. 共强需弱</strong></td><td>内需乏力 + 产能东南亚转移 + 以价换量</td><td>毛利率收缩</td></tr>
+          <tr><td><strong>2. 劳动力成本</strong></td><td>中国 + 东南亚均上涨</td><td>盈利空间压缩</td></tr>
+          <tr><td><strong>3. 汇率波动</strong></td><td>人民币对美元加大</td><td>汇兑风险</td></tr>
+          <tr><td><strong>4. 地缘政治</strong></td><td>中东冲突 → 原油 / 化纤 / 物流成本</td><td>链条传导</td></tr>
+          <tr><td><strong>5. 关税 + 转口审查</strong></td><td>越南 / 墨西哥转口受阻</td><td>出口企业压力</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subhead">4.2 与此同时另一头烈火烹油</div>
+    <ul>
+      <li><strong>紫金矿业</strong>：全球金属需求"结构性革命"——能源转型 + 算力时代</li>
+      <li><strong>光模块公司</strong>：超大规模 AI 算力 → 海量高速光模块</li>
+      <li><strong>豪麦科技</strong>（轮胎模具）：GE 燃气轮机 2028-2029 产能售罄，AI 数据中心自发电</li>
+    </ul>
+
+    <div class="insight">
+      这五个压力对很多行业都适用（不光是纺织）。2025 年是"最复杂最不一样的一年"——AI 算力链 + 上游资源是少有的上行板块。
+    </div>
+  </section>
+
+  <!-- =================== SECTION 5: K 型分化 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">伍</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">宏观 K 型分化：地产链 vs AI 算力</h2>
+        <div class="section-anchor">15:50</div>
+      </div>
+    </div>
+
+    <div class="subhead">5.1 下行的 K：地产链的"双重打击"</div>
+
+    <p><strong>万科 2025 年亏损 ~1000 亿</strong>——4 个亏损原因：</p>
+    <ul>
+      <li>房地产开发结算规模下降 + 毛利率低位</li>
+      <li>业务风险敞口扩大 → 信用减值 + 资产减值</li>
+      <li>非主业经营性业务 + 财务投资亏损</li>
+      <li>大宗资产 / 股权出售价格低于账面值</li>
+    </ul>
+
+    <p><strong>美凯龙（红星美凯龙）2025 亏损 200+ 亿</strong>——其中投资型房地产公允价值变动损失 <span class="chip chip-warn">234.4 亿元</span></p>
+
+    <p><strong>港铁</strong>：深圳颂荟商场（1 万平米）2026 年 2 月<strong>未能成功招标出售</strong>——中国线下零售的缩影</p>
+
+    <div class="subhead">5.2 政府财政压力的滞后传导</div>
+    <p><strong>杭州临安区高速公路案例</strong>（最精彩的一段）：</p>
+    <ul>
+      <li>临安区为本地车牌 ETC 通行费买单，2025 年 <strong>1.35 亿</strong>（占 REIT 资产包收入 19.05 亿的 ~20%）</li>
+      <li>但临安区 2025 年一般公共预算 <strong>85.4 亿</strong>，同比下降 <span class="chip chip-warn">10.5 亿</span></li>
+      <li>2024 年报未提"压力"，2025 年报首次提——地产链的下游传导有 <strong>1-2 年滞后</strong></li>
+    </ul>
+
+    <div class="subhead">5.3 制造业的压力：汇川技术首次提示</div>
+    <p>工控龙头汇川技术（过去被作者当"模范生"）：</p>
+    <ul>
+      <li>2024 年报无此风险提示，<strong>2025 年报首次出现</strong></li>
+      <li>2026 一季报：<strong>增收不增利</strong></li>
+      <li>原因：上游铜/钢/半导体涨价 + 主机厂（新能源车）自制比例提升 + 行业降价</li>
+    </ul>
+
+    <div class="subhead">5.4 产业园 REITs 数据（中小企业窗口）</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>指标</th><th>占比</th></tr></thead>
+        <tbody>
+          <tr><td>2025 全年 + 2026 一季度<strong>收入同比下滑</strong>的园区</td><td>~<span class="chip chip-warn">90%</span></td></tr>
+          <tr><td>一季度<strong>环比降幅扩大</strong>的园区</td><td>~<span class="chip chip-warn">75%</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subhead">5.5 上行的 K：紫金矿业负收益率可转债</div>
+    <p><strong>紫金矿业 2026 年 1 月负收益率零息可转债</strong>：</p>
+    <ul>
+      <li>发行价 102 元，到期还 100 元（不付利息）</li>
+      <li>亚太地区矿业类可转债<strong>最高转股溢价率 40%</strong></li>
+      <li>发行 15 亿美元（>100 亿人民币）</li>
+      <li>意味着：现阶段紫金<strong>融资成本为负</strong></li>
+    </ul>
+
+    <div class="subhead">5.6 另一面：零食量贩 + 地方政府新模式</div>
+    <p><strong>零食量贩</strong>（消费的另一面）：</p>
+    <ul>
+      <li>万辰集团：年新增 4720 家店，期末 <strong>18000 家</strong></li>
+      <li>鸣鸣很忙：<strong>21948 家</strong>门店，60% 在县城/乡镇，覆盖全国 75% 县城</li>
+    </ul>
+
+    <p><strong>地方政府新模式</strong>（科技药业 + 上海金山）：</p>
+    <ul>
+      <li>政府先投 3.7 亿装修厂房</li>
+      <li>科技药业前 10 年年付 ≤1000 万，第 11-20 年 ≤1800 万</li>
+      <li>20 年内按最终投资额回购（上限 3.7 亿）</li>
+      <li>早期不需大额资本开支 → 保留现金流做研发</li>
+    </ul>
+
+    <div class="insight">
+      K 型分化的"上面"和"下面"不是简单的增速差异——<strong>它们的运行逻辑、增长逻辑、支撑因素已经截然不同</strong>。"用资本分配"和"用劳动分配"是同一现象的两个维度。
+    </div>
+  </section>
+
+  <!-- =================== SECTION 6: 经营逻辑重构 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">陆</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">经营逻辑重构：安全、贸易范式、AI 算力</h2>
+        <div class="section-anchor">42:52</div>
+      </div>
+    </div>
+
+    <div class="subhead">6.1 安全逻辑（紫金矿业 / 顺丰控股）</div>
+    <blockquote>
+      <p>"全球资源治理格局的深度变革是一场由<strong>安全逻辑取代效率逻辑</strong>所驱动的系统性重购。传统基于全球化分工的开采、出口、海外加工、中端制造的现行价值链正在瓦解。"</p>
+      <span class="cite">— 紫金矿业 2025 年报</span>
+    </blockquote>
+    <p>顺丰控股的措辞更直白：<strong>"安全、韧性、效率"</strong>——排序变了，<strong>安全第一、韧性第二、效率第三</strong>，和前全球化阶段截然不同。</p>
+
+    <div class="subhead">6.2 新的贸易范式：友岸外包（friend-shoring）</div>
+    <p>环旭电子年报提到客户转向"<strong>有岸外包</strong>"（友岸外包）：</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>模式</th><th>含义</th><th>案例</th></tr></thead>
+        <tbody>
+          <tr><td>离岸外包 (offshoring)</td><td>哪便宜去哪儿</td><td>制造业东南亚</td></tr>
+          <tr><td>近岸外包 (nearshoring)</td><td>地理相近</td><td>美国 → 墨西哥</td></tr>
+          <tr><td><strong>友岸外包 (friend-shoring)</strong></td><td><strong>政治盟友</strong></td><td>苹果 iPhone 印度 / 越南；台积电美 / 日</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>✅ 原文：耶伦 2022 年 4 月大西洋理事会演讲正式推火"友岸外包"概念。经过 2-3 年准备期，<strong>2025 年趋势明显化</strong>。</p>
+
+    <div class="subhead">6.3 AI 算力基础设施（唯一不受前两条影响的）</div>
+    <p><strong>工业富联</strong>（原智能手机代工）→ 现在<strong>全球 AI 服务器龙头</strong>：</p>
+    <blockquote>
+      <p>"AI 算力基础设施成为推动数字经济发展的核心底座，全球科技产业由此进入了新一轮成长器。"</p>
+      <span class="cite">— 工业富联董事长致辞</span>
+    </blockquote>
+
+    <p><strong>中美 AI 资本市场偏好的各自比较优势：</strong></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>市场</th><th>偏好</th><th>代表</th></tr></thead>
+        <tbody>
+          <tr><td><strong>🇺🇸 美股</strong></td><td>软 AI</td><td>OpenAI、Anthropic、Meta</td></tr>
+          <tr><td><strong>🇨🇳 A 股</strong></td><td>硬 AI</td><td>光模块、AI 芯片、电力设备、燃气轮机</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>✅ 原文数据：<strong>电力设备板块 2026 年迄今 A 股行业平均涨幅第一</strong></p>
+
+    <div class="insight">
+      在技术革命的<strong>绝对速度要求</strong>下，安全逻辑和贸易范式可以被暂时搁置——效率 / 量产能力才是 AI 算力阶段最看重的。这就是为什么中国企业能吃 AI 基建红利（不仅中国，更主要是美国）。
+    </div>
+  </section>
+
+  <!-- =================== SECTION 7: 中国籍的全球公司 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">柒</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">中国籍的全球公司：三层本土化</h2>
+        <div class="section-anchor">52:03</div>
+      </div>
+    </div>
+
+    <blockquote>
+      <p>"中国提供给全球公司的四个条件：<strong>巨大市场 / 监管统一 / 文化趋同 / 开放性</strong>。这个时代是会出现以中国为基础的全球公司——中国籍的全球公司。"</p>
+      <span class="cite">— 李录访谈（喜马拉雅资本）</span>
+    </blockquote>
+
+    <p>李录认为比亚迪是这个浪潮中重要的一朵浪花，但<strong>不是唯一的</strong>。</p>
+
+    <div class="subhead">7.1 三层本土化</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>层级</th><th>含义</th><th>案例</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1. 制造本土化</strong></td><td>海外建厂</td><td>100+ 中国企业提及海外制造基地</td></tr>
+          <tr><td><strong>2. 产业集群本土化</strong></td><td>供应链一起搬过去</td><td>宇通客车 60% 海外收入；宁德时代售后 75 国 1200 站；君圣电子并购欧洲企业</td></tr>
+          <tr><td><strong>3. 研发本土化</strong></td><td>在地研发</td><td>百济神州 3800 人全球临床团队；传音手机为黑人优化摄像头</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>✅ 原文金句（迈瑞医疗年报）：<strong>"逆全球化带来的不是封闭，而是更深度的本地化。"</strong></p>
+
+    <div class="insight">
+      <strong>研发本土化是新增点</strong>（2018-19 年几乎没有这一层）。生物医药的研发本土化要求最高——临床数据本身要求国际化。从销售出海 → 产能出海 → 供应链出海 → 研发出海，<strong>三段式本土化正在形成</strong>。
+    </div>
+  </section>
+
+  <!-- =================== SECTION 8: 长期价值 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">捌</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">长期价值：质量 + 隔举打开</h2>
+        <div class="section-anchor">70:16</div>
+      </div>
+    </div>
+
+    <p><strong>宁德时代提出</strong>："如何在不确定的世界中构建确定性的长期价值。"</p>
+
+    <div class="subhead">8.1 答案分两部分</div>
+
+    <p><strong>第一部分：建立"长期稳定可持续创造价值的体系"</strong></p>
+    <blockquote>
+      <p>"造电池容易，造好电池很难。在高度规模化的产业中，任何细微缺陷都会被时间和空间无限放大。<strong>关键质量标准较行业平均实现数量级的领先。</strong>"</p>
+      <span class="cite">— 宁德时代 2025 年报</span>
+    </blockquote>
+
+    <p><strong>第二部分：全域增量 / 隔举打开</strong></p>
+    <p>把电池从交通工具/储能组件，升级为能源系统的"基础单元"——从"组件供应商"变成"能源系统参与者"。</p>
+
+    <div class="insight">
+      宁德时代 2022 年新能源泡沫破裂后能重返高峰，正是因为做到了"质量 + 隔举打开"。<strong>质量 = 中国制造业下一阶段的护城河</strong>（"物超所值"而非"价低物廉"）。在越来越内卷的当下，"把物理细节做到极致"反而是被某些企业放弃的危险点。
+    </div>
+  </section>
+
+  <!-- =================== SECTION 9: AI 物理化 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">玖</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">AI 物理化：物理世界的回光返照</h2>
+        <div class="section-anchor">75:36</div>
+      </div>
+    </div>
+
+    <blockquote>
+      <p>"我们越多的使用 AI 帮助我们在虚拟世界的活动，<strong>物理世界的基础设施就变得更加重要</strong>。"</p>
+      <span class="cite">— 大卫翁</span>
+    </blockquote>
+
+    <div class="subhead">9.1 物理世界的"过渡期"溢价</div>
+    <ul>
+      <li>美国算力受限于<strong>能源</strong>（不只是芯片）</li>
+      <li>中国制造业（电池 / 燃机 / 输变电）把自己重新定义为 AI 时代的基础单元</li>
+      <li>"<strong>物理世界的回光返照</strong>"——过渡期里物理基础设施更值钱</li>
+    </ul>
+
+    <div class="subhead">9.2 中国 AI 突围的结构性制约（外文评书）</div>
+    <ul>
+      <li>缺乏最先进芯片</li>
+      <li>国内消费市场较弱</li>
+      <li>资本市场规模 &lt; 美国，资本管制限制对外国投资者吸引力</li>
+      <li>顶尖人才仍多在美国受训，海外人才回流难度大</li>
+      <li>科技风投有相当部分来自美国，受美国限制措施影响</li>
+    </ul>
+
+    <div class="insight">
+      <strong>长期风险</strong>：如果中国 AI 故事永远停留在"给数据中心供电 / 造光模块"，就会重蹈<strong>智能手机时代</strong>覆辙——产业链最肥美的利润归苹果/平台公司，中国"喝汤"。"破坏性创新"和研发机制重构急需。
+    </div>
+  </section>
+
+  <!-- =================== 关键数据汇总 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">拾</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">关键数据汇总 & 投资催化跟踪</h2>
+        <div class="section-anchor">附录</div>
+      </div>
+    </div>
+
+    <div class="subhead">10.1 关键数据表</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>维度</th><th>数据</th><th>来源</th></tr></thead>
+        <tbody>
+          <tr><td>2025 实际 GDP</td><td>~5%</td><td><span class="chip chip-ok">✅官方</span></td></tr>
+          <tr><td>2025 名义 GDP</td><td>~3.9%</td><td><span class="chip chip-ok">✅官方</span></td></tr>
+          <tr><td>2025 全 A 净利润</td><td>+3%（金融+6.7% / 非金融-1.1%）</td><td><span class="chip chip-ok">✅原文</span></td></tr>
+          <tr><td>万科 2025 亏损</td><td>~1000 亿</td><td><span class="chip chip-ok">✅原文</span></td></tr>
+          <tr><td>美凯龙 2025 公允价值变动损失</td><td><span class="chip chip-warn">234.4 亿</span></td><td><span class="chip chip-ok">✅原文</span></td></tr>
+          <tr><td>紫金矿业零息可转债</td><td>15 亿美元（&gt;100 亿）</td><td><span class="chip chip-ok">✅原文</span></td></tr>
+          <tr><td>临安区买单通行费</td><td>1.35 亿（占 REIT 收入 19.05 亿的 ~20%）</td><td><span class="chip chip-ok">✅原文</span></td></tr>
+          <tr><td>临安区 2025 公共预算</td><td>85.4 亿（同比 -10.5 亿）</td><td><span class="chip chip-ok">✅原文</span></td></tr>
+          <tr><td>园区 REITs 收入下滑占比</td><td>2025-2026Q1 ~90%；环比降幅扩大 ~75%</td><td><span class="chip chip-ok">✅原文</span></td></tr>
+          <tr><td>万辰集团门店</td><td>18000 家（年增 4720）</td><td><span class="chip chip-ok">✅原文</span></td></tr>
+          <tr><td>鸣鸣很忙门店</td><td>21948 家，覆盖全国 75% 县城</td><td><span class="chip chip-ok">✅原文</span></td></tr>
+          <tr><td>友岸外包概念</td><td>耶伦 2022 年 4 月大西洋理事会演讲</td><td><span class="chip chip-ok">✅原文</span></td></tr>
+          <tr><td>宇通客车海外收入</td><td>60%</td><td><span class="chip chip-ok">✅原文</span></td></tr>
+          <tr><td>宁德时代售后网络</td><td>75 国 1200 站</td><td><span class="chip chip-ok">✅原文</span></td></tr>
+          <tr><td>百济神州全球临床团队</td><td>3800 人</td><td><span class="chip chip-ok">✅原文</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subhead">10.2 投资催化跟踪</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>公司 / 板块</th><th>2025-2026 关键变化</th><th>仓位影响</th></tr></thead>
+        <tbody>
+          <tr><td>紫金矿业</td><td>负收益率零息可转债发行成功</td><td>行业景气度高</td></tr>
+          <tr><td>AI 算力 / 光模块</td><td>行业普遍乐观</td><td>短期景气度</td></tr>
+          <tr><td>电力设备</td><td>2026 A 股行业平均涨幅第一</td><td>AI 基建主线</td></tr>
+          <tr><td>燃气轮机（GE/三菱/西门子）</td><td>2028-2029 产能售罄</td><td>间接利好豪麦科技</td></tr>
+          <tr><td>万科 / 美凯龙</td><td>巨额亏损，资产端减值</td><td>行业下行</td></tr>
+          <tr><td>零食量贩（万辰/鸣鸣）</td><td>高速门店扩张</td><td>逆势增长</td></tr>
+          <tr><td>汇川技术</td><td>增收不增利（首次）</td><td>制造业压力信号</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- =================== FOOTER =================== -->
+  <div class="footer">
+    <div class="brand">🎙️ 起朱楼宴宾客 · Vol.165 年报季中的真实中国 2026</div>
+    <div>原始转录稿：<code>ep1.txt</code>（1964 segments）</div>
+    <div>数据来源：小宇宙 xyzcdn.net CDN + faster-whisper (base, CPU int8)</div>
+    <div class="sync">
+      <span>📁 GitHub · wintermelon27/agent_research</span>
+      <span>📁 Gitee · wintermeloncurry/agent_research</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

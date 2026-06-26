@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EP32 股市黑话祛魅 · 播客转录笔记</title>
+<style>
+  /* ===== Reset & Base ===== */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;font-size:16px;scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:#0f1419;
+    color:#d4d4d4;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* ===== Layout ===== */
+  .wrap{max-width:780px;margin:0 auto;padding:48px 28px 96px}
+
+  /* ===== Cover ===== */
+  .cover{
+    background:linear-gradient(135deg,#0a0e13 0%,#1a2332 50%,#0a0e13 100%);
+    color:#e8e8e8;
+    border:1px solid #2a3340;
+    border-radius:18px;
+    padding:56px 40px 48px;
+    margin-bottom:48px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 12px 36px rgba(0,0,0,.5);
+  }
+  .cover::before{
+    content:"";
+    position:absolute;top:-50%;right:-30%;
+    width:520px;height:520px;
+    background:radial-gradient(circle,rgba(212,175,55,.20) 0%,rgba(212,175,55,0) 70%);
+    pointer-events:none;
+  }
+  .cover .eyebrow{
+    display:inline-block;
+    font-size:11px;letter-spacing:3px;font-weight:600;
+    color:#d4af37;text-transform:uppercase;
+    border:1px solid rgba(212,175,55,.5);
+    padding:5px 12px;border-radius:30px;
+    margin-bottom:22px;
+  }
+  .cover h1{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC","Songti SC",serif;
+    font-size:38px;line-height:1.3;font-weight:700;
+    color:#f5f5f5;
+    margin-bottom:18px;
+    letter-spacing:-0.5px;
+  }
+  .cover .subtitle{
+    font-size:15px;line-height:1.7;
+    color:#d4af37;
+    margin-bottom:32px;
+    font-weight:500;
+  }
+  .cover .meta-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);
+    gap:18px 32px;
+    padding-top:24px;
+    border-top:1px solid rgba(212,175,55,.3);
+  }
+  .cover .meta-item{display:flex;flex-direction:column;gap:4px}
+  .cover .meta-label{font-size:11px;letter-spacing:1.5px;color:#8a7b58;text-transform:uppercase;font-weight:600}
+  .cover .meta-value{font-size:14px;color:#e8e8e8;font-weight:500}
+
+  /* ===== TOC ===== */
+  .toc{
+    background:#1a2028;
+    border:1px solid #2a3340;
+    border-radius:14px;
+    padding:32px 36px;
+    margin-bottom:36px;
+    box-shadow:0 2px 12px rgba(0,0,0,.3);
+  }
+  .toc-title{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:13px;font-weight:600;letter-spacing:1.5px;
+    color:#d4af37;
+    margin-bottom:20px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .toc-list{list-style:none}
+  .toc-list li{
+    display:flex;align-items:flex-start;gap:14px;
+    padding:10px 0;
+    border-bottom:1px solid #2a3340;
+  }
+  .toc-list li:last-child{border-bottom:none}
+  .toc-num{
+    flex-shrink:0;
+    width:26px;height:26px;border-radius:50%;
+    background:#d4af37;color:#0f1419;
+    font-size:12px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    margin-top:2px;
+  }
+  .toc-text{flex:1;font-size:14.5px;color:#d4d4d4;line-height:1.5}
+  .toc-text strong{color:#d4af37;font-weight:600}
+  .toc-time{font-size:12px;color:#8a7b58;flex-shrink:0;font-family:monospace}
+
+  /* ===== Section ===== */
+  .section{
+    background:#1a2028;
+    border:1px solid #2a3340;
+    border-radius:14px;
+    padding:36px 40px;
+    margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(0,0,0,.3);
+  }
+  .section-head{
+    display:flex;align-items:flex-start;gap:18px;
+    margin-bottom:24px;padding-bottom:18px;
+    border-bottom:2px solid #2a3340;
+  }
+  .section-badge{
+    flex-shrink:0;
+    width:44px;height:44px;border-radius:12px;
+    background:linear-gradient(135deg,#d4af37 0%,#a8893d 100%);
+    color:#0f1419;
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:20px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 10px rgba(212,175,55,.3);
+  }
+  .section-title-wrap{flex:1}
+  .section-title{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:24px;line-height:1.35;font-weight:700;
+    color:#f5f5f5;margin-bottom:6px;
+    letter-spacing:-0.3px;
+  }
+  .section-anchor{
+    font-size:12.5px;color:#8a7b58;
+    font-family:monospace;
+    display:flex;align-items:center;gap:6px;
+  }
+  .section-anchor::before{content:"⏱";font-size:11px}
+
+  /* ===== Subhead ===== */
+  .subhead{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:18px;font-weight:600;
+    color:#d4af37;
+    margin:28px 0 14px;
+    padding-left:14px;
+    border-left:3px solid #d4af37;
+    line-height:1.4;
+  }
+  .subhead:first-child{margin-top:0}
+
+  /* ===== Paragraph ===== */
+  p{margin-bottom:14px;font-size:15.5px;line-height:1.85;color:#d4d4d4}
+  p strong{color:#f5f5f5;font-weight:600}
+
+  /* ===== Lists ===== */
+  ul,ol{margin:14px 0 18px;padding-left:24px}
+  ul li,ol li{margin-bottom:8px;font-size:15px;line-height:1.7;color:#d4d4d4}
+  ul li::marker{color:#d4af37}
+
+  /* ===== Table ===== */
+  .table-wrap{overflow-x:auto;margin:18px 0 22px;border-radius:10px;border:1px solid #2a3340}
+  table{
+    width:100%;border-collapse:collapse;
+    font-size:14px;background:#1a2028;
+  }
+  thead{
+    background:linear-gradient(135deg,#0a0e13 0%,#1a2332 100%);
+    color:#f5f5f5;
+  }
+  th{
+    text-align:left;padding:14px 18px;
+    font-weight:600;font-size:13.5px;letter-spacing:0.3px;
+    color:#d4af37;
+    border-bottom:2px solid #d4af37;
+  }
+  td{
+    padding:13px 18px;
+    border-bottom:1px solid #2a3340;
+    color:#d4d4d4;vertical-align:top;
+  }
+  tbody tr:nth-child(even) td{background:#212932}
+  tbody tr:hover td{background:#283140}
+  tbody tr:last-child td{border-bottom:none}
+  td code{font-family:monospace;background:#0a0e13;color:#d4af37;padding:2px 6px;border-radius:4px;font-size:13px}
+
+  /* ===== Blockquote ===== */
+  blockquote{
+    position:relative;
+    margin:24px 0;
+    padding:24px 28px 24px 56px;
+    background:linear-gradient(135deg,#1a2332 0%,#0f1419 100%);
+    border-radius:12px;
+    border-left:4px solid #d4af37;
+    font-size:15.5px;line-height:1.85;
+    color:#d4d4d4;
+  }
+  blockquote::before{
+    content:"C";
+    position:absolute;top:8px;left:18px;
+    font-family:"Source Han Serif SC",serif;
+    font-size:56px;font-weight:700;
+    color:#d4af37;
+    line-height:1;opacity:0.5;
+  }
+  blockquote p{margin-bottom:6px}
+  blockquote p:last-child{margin-bottom:0}
+  blockquote .cite{
+    display:block;margin-top:10px;
+    font-size:13px;color:#d4af37;
+    font-style:normal;font-weight:600;
+  }
+
+  /* ===== Insight Box ===== */
+  .insight{
+    margin:22px 0;
+    padding:20px 24px;
+    background:linear-gradient(135deg,#1a2332 0%,#212932 100%);
+    border:1px solid rgba(212,175,55,.4);
+    border-radius:10px;
+    font-size:14.5px;line-height:1.75;
+    color:#d4d4d4;
+  }
+  .insight::before{
+    content:"💡 ";
+    margin-right:6px;
+  }
+  .insight strong{color:#d4af37;font-weight:600}
+
+  /* ===== Chip ===== */
+  .chip{
+    display:inline-block;
+    padding:3px 10px;border-radius:12px;
+    font-size:12px;font-weight:600;letter-spacing:0.3px;
+    vertical-align:middle;
+  }
+  .chip-ok{background:rgba(46,125,79,.25);color:#7ec99a;border:1px solid rgba(46,125,79,.5)}
+  .chip-warn{background:rgba(179,89,0,.25);color:#ffb872;border:1px solid rgba(179,89,0,.5)}
+  .chip-guess{background:rgba(94,94,138,.25);color:#a5a5d0;border:1px solid rgba(94,94,138,.5)}
+  .chip-default{background:rgba(212,175,55,.2);color:#d4af37;border:1px solid rgba(212,175,55,.5)}
+
+  /* ===== Inline code ===== */
+  code{
+    font-family:"SF Mono",Consolas,monospace;
+    background:#0a0e13;color:#d4af37;
+    padding:2px 7px;border-radius:5px;
+    font-size:13.5px;
+  }
+
+  /* ===== Footer ===== */
+  .footer{
+    margin-top:56px;padding-top:28px;
+    border-top:2px dashed #2a3340;
+    text-align:center;
+    font-size:13px;color:#8a7b58;line-height:1.7;
+  }
+  .footer .brand{
+    font-family:"Source Han Serif SC","Noto Serif CJK SC",serif;
+    font-size:15px;font-weight:600;
+    color:#d4af37;margin-bottom:8px;
+  }
+  .footer .sync{
+    margin-top:10px;display:flex;justify-content:center;gap:14px;
+    font-size:12px;flex-wrap:wrap;
+  }
+  .footer .sync span{
+    padding:3px 10px;background:#1a2028;border:1px solid #2a3340;
+    border-radius:20px;color:#d4d4d4;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width:640px){
+    .wrap{padding:32px 16px 64px}
+    .cover{padding:40px 24px 32px;border-radius:14px}
+    .cover h1{font-size:28px}
+    .cover .meta-grid{grid-template-columns:1fr;gap:14px}
+    .section{padding:24px 22px;border-radius:12px}
+    .section-title{font-size:20px}
+    .toc{padding:22px 22px}
+    .table-wrap{margin:14px -4px}
+    th,td{padding:10px 12px;font-size:12.5px}
+    blockquote{padding:20px 20px 20px 44px;font-size:14.5px}
+    blockquote::before{font-size:44px;top:6px;left:12px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- =================== COVER =================== -->
+  <div class="cover">
+    <span class="eyebrow">投资 ABC · E57</span>
+    <h1>看过很多数据后<br>我们开始相信一些简单的事</h1>
+    <p class="subtitle">中国大类资产投资 2025 年报 · 制作人篇 — 金栋 / 港港 / 仝仝聊数据如何改变投资行为</p>
+    <div class="meta-grid">
+      <div class="meta-item">
+        <span class="meta-label">主持</span>
+        <span class="meta-value">Amiee</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">时长</span>
+        <span class="meta-value">51 分钟</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">发布</span>
+        <span class="meta-value">2026-06-22 · 小宇宙</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">转录</span>
+        <span class="meta-value">faster-whisper base · 19 min</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== TOC =================== -->
+  <nav class="toc">
+    <div class="toc-title">📑 目录 · Table of Contents</div>
+    <ol class="toc-list">
+      <li><span class="toc-num">1</span><span class="toc-text"><strong>核心金句</strong> — 数据改变的不是认知，是行动</span><span class="toc-time">开篇</span></li>
+      <li><span class="toc-num">2</span><span class="toc-text"><strong>年报起点</strong> — SBBI 美国版 + 排除偶然幸运偏见</span><span class="toc-time">04:08</span></li>
+      <li><span class="toc-num">3</span><span class="toc-text"><strong>这次不一样</strong> — 身处周期中的小切片</span><span class="toc-time">12:53</span></li>
+      <li><span class="toc-num">4</span><span class="toc-text"><strong>目标概率</strong> — 仝仝从 80% 权益 → 四笔钱</span><span class="toc-time">16:59</span></li>
+      <li><span class="toc-num">5</span><span class="toc-text"><strong>高收益高风险</strong> — 风险先有，收益后有</span><span class="toc-time">24:14</span></li>
+      <li><span class="toc-num">6</span><span class="toc-text"><strong>胜天半子</strong> — 温度计 24 次复盘</span><span class="toc-time">33:00</span></li>
+      <li><span class="toc-num">7</span><span class="toc-text"><strong>求真</strong> — 研究最大的奖赏</span><span class="toc-time">41:23</span></li>
+      <li><span class="toc-num">8</span><span class="toc-text"><strong>明年加什么</strong> — 定投 / 资产配置 / 短中期</span><span class="toc-time">43:53</span></li>
+      <li><span class="toc-num">9</span><span class="toc-text"><strong>一张图入门</strong> — 把年报当工具</span><span class="toc-time">45:45</span></li>
+    </ol>
+  </nav>
+
+  <!-- =================== SECTION 1: 核心金句 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">壹</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">核心金句：数据改变的不是认知，是行动</h2>
+        <div class="section-anchor">开篇</div>
+      </div>
+    </div>
+
+    <blockquote>
+      <p>我们没有说过去历史能代表未来，<strong>但作为年报，我们呈现的是客观数据</strong>——随着时间积累，大家可以拿这些数据去验证它是否符合市场规律。</p>
+      <span class="cite">— 仝仝</span>
+    </blockquote>
+
+    <div class="subhead">本期核心观点（5 条）</div>
+    <div class="insight">
+      <strong>① 数据 → 常识 → 安心</strong>：21 年的中国数据可能短，但"能给你一个区间"就够了<br>
+      <strong>② 市场真的有周期</strong>：身处其中只是"一个切片"——"这次真的不一样"是对周期的健忘<br>
+      <strong>③ 目标概率 &gt; 收益最大化</strong>：仝仝从 80% 权益 → 重回四笔钱配置<br>
+      <strong>④ 高收益 ≠ 想要它</strong>：要的是"富贵险中求"性价比<br>
+      <strong>⑤ "胜天半子"很难</strong>：温度计 24 次操作 16 对 4 错，但盈亏比不划算
+    </div>
+  </section>
+
+  <!-- =================== SECTION 2: 年报起点 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">贰</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">年报起点：SBBI 美国版 + 排除偶然幸运偏见</h2>
+        <div class="section-anchor">04:08</div>
+      </div>
+    </div>
+
+    <p>✅ 原文数据：参考美国 <strong>SBBI Yearbook</strong>（Stocks, Bonds, Bills and Inflation）—— 1976 年由 <strong>Roger Ibbotson</strong> 和 <strong>Rex Sinquefield</strong> 推出，是大类资产长期收益研究的标杆。</p>
+
+    <div class="subhead">2.1 为什么做这份年报</div>
+    <p><strong>金栋（数据）</strong>：2010 年开始研究金融数据，2021 年后接触海外数据和研究方法。</p>
+    <ul>
+      <li>美国版 SBBI 看后"很兴奋"——长期观点 + 排除偶然 / 幸运 / 偏见</li>
+      <li>国内数据时间短，但流传的研究方法<strong>多基于短期视角</strong></li>
+      <li>"投资短期数据 / 观点，市场周期一遍就不起作用了"</li>
+    </ul>
+
+    <p><strong>港港（设计）</strong>：年报图表"漂亮、赏心悦目"——但公式术语太多</p>
+    <p><strong>仝仝（编辑）</strong>：核心是"<strong>朴素简单</strong>"——股票长期收益最高、投资时间越长正收益概率越高</p>
+
+    <div class="subhead">2.2 中国 21 年数据够不够用？</div>
+    <p><strong>质疑</strong>：起点 2005 年<strong>股权分置改革</strong>，前 10 年是绿洲、后 10 年是沙漠，21 年能像美国百年数据一样有指导意义吗？</p>
+
+    <p><strong>金栋回答</strong>：</p>
+    <ul>
+      <li>21 年对一百年确实短，但能"把宽广区间收缩到相当范围"</li>
+      <li>1 年波动：+100% 多到 -70% 多</li>
+      <li>3-5-10 年：年化收益率能收缩到更大范围</li>
+      <li>20 年：更接近真实值</li>
+      <li>美国百年也是"涨 10 年、跌 10 年"，不是一帆风顺</li>
+    </ul>
+
+    <div class="insight">
+      数据 10.04% 和 10.05% 的精度差异<strong>不重要</strong>，重要的是"区间"和"确定性"。金栋原话："<strong>准确的数字没有那么重要，但能给我一个区间，不同资产的收益区间之间的事情反而对我更有帮助。</strong>"
+    </div>
+  </section>
+
+  <!-- =================== SECTION 3: 这次不一样 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">叁</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">每场「这次真的不一样」都是市场的小切片</h2>
+        <div class="section-anchor">12:53</div>
+      </div>
+    </div>
+
+    <blockquote>
+      <p>"身处不同事件当中，<strong>焦虑情绪并不会因为事件是否是极值而变少</strong>。"</p>
+      <span class="cite">— 仝仝</span>
+    </blockquote>
+
+    <div class="subhead">3.1 "这次真的不一样" 复盘</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>时间</th><th>当时认为"这次真的不一样"</th><th>现在看</th></tr></thead>
+        <tbody>
+          <tr><td><strong>2008</strong></td><td>全球金融危机，雷曼时刻，担心奥运会办不了</td><td>市场修复，中国房市下跌也恢复</td></tr>
+          <tr><td><strong>2018-2023</strong></td><td>23-24 年市场低迷，社交媒体"关灯吃面"</td><td>A 股 + 海外市场总体正收益</td></tr>
+          <tr><td><strong>美国 10 年</strong></td><td>50/60/70/80 年代不同的年华收益（5-15%）</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="insight">
+      <strong>"这次真的不一样" 本身就是反指</strong>——美国百年数据中每个十年都有 5% 到 15% 的不同收益区间，不是"A 股十年一遇"。"每次都不一样，但每次市场都呈现周期性变化"——身处其中只是"一个切片"。
+    </div>
+  </section>
+
+  <!-- =================== SECTION 4: 目标概率 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">肆</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">目标概率：仝仝从 80% 权益 → 四笔钱</h2>
+        <div class="section-anchor">16:59</div>
+      </div>
+    </div>
+
+    <blockquote>
+      <p>"比起收益，我更在意<strong>实现自己目标的概率</strong>。"</p>
+      <span class="cite">— 仝仝</span>
+    </blockquote>
+
+    <div class="subhead">4.1 仝仝的心理账户</div>
+    <p>✅ 原文金句（仝仝）："我有一个心理账户，三年后要用来付买房首付——我就会想，大概能比较稳地拿到多少收益率，比如 3-4%……我就会配更多债券类资产，权益类少一些，<strong>我更追求它能够更大概率的去实现三年后付首付的目标</strong>。"</p>
+
+    <div class="subhead">4.2 23-24 年 A 股低迷时的心理支撑</div>
+    <ul>
+      <li>当时 80% 在权益里，<strong>没留备用金</strong></li>
+      <li>心情荡到极点，"关灯吃面"</li>
+      <li>反思："<strong>忘念啊</strong>"（忘了初心）</li>
+      <li>应对：开始买美元理财（控制比例，不为高收益，为分散风险）</li>
+      <li>有了海外资产做底，2024 年市场低迷也没影响情绪，<strong>能拿得住</strong></li>
+    </ul>
+
+    <div class="subhead">4.3 "四笔钱"框架</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>类型</th><th>用途</th><th>特征</th></tr></thead>
+        <tbody>
+          <tr><td>活钱</td><td>日常开销</td><td>流动性高</td></tr>
+          <tr><td>稳钱</td><td>保险 + 短期要用的钱</td><td>低风险</td></tr>
+          <tr><td>长钱</td><td>可长期投资</td><td>高波动</td></tr>
+          <tr><td>（灵活）</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="insight">
+      ✅ 用户留言互动（来源）："当下你的安全感主要来自于哪里？"——很多人的回答是"<strong>每一天能看到家庭资产结构健康</strong>这件事"——"不确定性中的确定性"。
+    </div>
+  </section>
+
+  <!-- =================== SECTION 5: 高收益高风险 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">伍</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">高收益高风险：风险先有，收益后有</h2>
+        <div class="section-anchor">24:14</div>
+      </div>
+    </div>
+
+    <blockquote>
+      <p>"不是为了拿到更高的收益所以可以接受风险高——<strong>相反过来，因为它首先风险很高，所以收益才高</strong>。"</p>
+      <span class="cite">— 港港</span>
+    </blockquote>
+
+    <div class="subhead">5.1 摘燕窝的比喻</div>
+    <p>福建人去悬崖摘燕窝——不是"我想赚大钱所以冒险"，而是"燕窝稀缺 + 摘取风险高，所以它价高"。</p>
+    <ul>
+      <li>如果燕窝 1 块钱一斤，没人去</li>
+      <li>投资也是：<strong>收益高的根本原因是风险高，不是反过来</strong></li>
+    </ul>
+
+    <div class="subhead">5.2 仝仝看产品的新视角</div>
+    <p>不再只看收益率，而是看三个维度：</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>维度</th><th>检验问题</th></tr></thead>
+        <tbody>
+          <tr><td><strong>① 业绩基准</strong></td><td>投资这类资产"应得收益"是多少？产品跑赢还是跑输？</td></tr>
+          <tr><td><strong>② 底层资产</strong></td><td>风险收益特征是什么？合理收益范围？超额来源？</td></tr>
+          <tr><td><strong>③ 费用 / 性价比</strong></td><td>为赚这些钱付出的成本是否太高？</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="insight">
+      ✅ 原文金句（仝仝）："当我看到涨 30% 想动手时，我能不能意识到这 30% 背后是要多承担更高的风险？这些风险我能承担吗？<strong>风险收益有没有性价比？</strong>"
+    </div>
+  </section>
+
+  <!-- =================== SECTION 6: 胜天半子 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">陆</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">想胜天半子，就要卖在牛市尽头买在熊市低点？</h2>
+        <div class="section-anchor">33:00</div>
+      </div>
+    </div>
+
+    <p>金栋"温度计"实操 24 次复盘：</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>操作</th><th>数量</th><th>结果</th></tr></thead>
+        <tbody>
+          <tr><td>正确（低买高卖）</td><td>16 次（66.7%）</td><td>每次赚 10-20%</td></tr>
+          <tr><td>错误（卖飞）</td><td>4 次</td><td>茅台继续涨 100%，红利继续涨</td></tr>
+          <tr><td>错误（错过）</td><td>多次</td><td>等了 3 年还没跌到买入区间</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>最终算账</strong>：80% 胜率 × 10% 盈利 vs 20% 失败率 × 100% 损失 → <span class="chip chip-warn">整体亏</span></p>
+
+    <div class="subhead">6.1 核心问题</div>
+    <ul>
+      <li><strong>资金利用效率</strong>：卖出后 3 年空仓等待，本身的机会成本</li>
+      <li><strong>心理负担</strong>：等待期间不断怀疑自己</li>
+      <li><strong>温度计的"短处"</strong>：单边上涨 / 单边下跌市里完全失效</li>
+      <li><strong>个股的"消失"风险</strong>：周期存在 ≠ 个股存在——"小水洼上的洞穴永远阴凉"——局部地区"春夏秋冬"循环可能消失</li>
+    </ul>
+
+    <div class="insight">
+      卖高买低"听起来很正"，但中间的等待区间比想象中长得多。"硬要靠技巧去获得更高收益，对我来讲是不现实的"。金栋<strong>放弃"超越市场平均"想法但没有彻底放弃</strong>——大底部出现时仍会加仓，但遵守资产配置底线。
+    </div>
+  </section>
+
+  <!-- =================== SECTION 7: 求真 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">柒</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">求真，是最大的奖赏</h2>
+        <div class="section-anchor">41:23</div>
+      </div>
+    </div>
+
+    <blockquote>
+      <p>"其实对我来讲最大的那个驱动力，是<strong>求真</strong>。这个事我能真正懂，对我来讲是一个最大的奖赏……经过自己的研究和探索，我会非常相信它……<strong>这个最后让我觉得我能够更接近真相的过程，会让我无比地觉得自豪</strong>。"</p>
+      <span class="cite">— 金栋</span>
+    </blockquote>
+
+    <div class="insight">
+      ⚠️ 推断：<strong>研究的价值不是"多赚"，而是"心安"</strong>——理解了底层逻辑才有真正的内心秩序。"你没有经过自己的研究，别人告诉你一个道理，你没有那么相信；但是经过这些之后，你会非常相信它。"
+    </div>
+  </section>
+
+  <!-- =================== SECTION 8: 明年加什么 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">捌</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">明年可能增加哪些内容？</h2>
+        <div class="section-anchor">43:53</div>
+      </div>
+    </div>
+
+    <div class="subhead">8.1 金栋的三个方向</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>方向</th><th>解决什么问题</th></tr></thead>
+        <tbody>
+          <tr><td><strong>① 定投结果</strong></td><td>用户反馈较多，一次性投资的结果已不够看</td></tr>
+          <tr><td><strong>② 资产配置</strong></td><td>怎么把不同资产结合？讲得比较少</td></tr>
+          <tr><td><strong>③ 短中期场景</strong></td><td>"我只能投三五年 / 十年，二十年的结果对我有什么指导意义？不确定性区间能收缩到多窄？"</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>港港的提议：<strong>加房地产研究</strong>——但数据上有难点，请用户留言支持。</p>
+  </section>
+
+  <!-- =================== SECTION 9: 一张图入门 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">玖</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">一张图入门：把年报当工具</h2>
+        <div class="section-anchor">45:45</div>
+      </div>
+    </div>
+
+    <div class="subhead">9.1 三张关键图（小白必看）</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>图编号</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td><strong>图 1-1</strong></td><td>中国大类资产长期年化收益</td></tr>
+          <tr><td><strong>图 2-1</strong></td><td>A 股整体滚动年化收益率</td></tr>
+          <tr><td><strong>图 6-1</strong></td><td>风险 - 收益图</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <blockquote>
+      <p>"拿着这三张图，把文字丢给 AI 聊一聊，肯定对你有帮助。"</p>
+      <span class="cite">— 港港</span>
+    </blockquote>
+
+    <div class="subhead">9.2 进阶读法</div>
+    <ul>
+      <li><strong>港港</strong>：先看感兴趣的图表（视觉驱动）→ 看每张图结论</li>
+      <li><strong>仝仝</strong>：每张图都有小前言，先看前言 → 看第 1-2 张图 → 心里留个印象</li>
+      <li>关键概念：<strong>名义收益 vs 实际收益</strong>（战胜通胀多少才是真本事）</li>
+    </ul>
+
+    <div class="insight">
+      ✅ 原文金句（仝仝）："如果你听完之后对中国大类资产投资 2025 年报多了一点好奇，不妨先从<strong>一张图、一个结论、或者一个你正在关心的问题</strong>开始。或许它会在某个时刻，变成你投资生活中的一个小小坐标。"
+    </div>
+  </section>
+
+  <!-- =================== 关键概念与术语 =================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-badge">拾</div>
+      <div class="section-title-wrap">
+        <h2 class="section-title">关键概念 & 投资经验提炼</h2>
+        <div class="section-anchor">附录</div>
+      </div>
+    </div>
+
+    <div class="subhead">10.1 关键术语</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>概念</th><th>解释</th></tr></thead>
+        <tbody>
+          <tr><td><strong>SBBI Yearbook</strong></td><td>美国经典大类资产长期收益年报，1976 年由 Ibbotson + Sinquefield 推出</td></tr>
+          <tr><td><strong>股权分置改革（股改）</strong></td><td>2005 年起改革——非流通股逐步可流通，需给流通股股东补偿</td></tr>
+          <tr><td><strong>四笔钱</strong></td><td>活钱 / 稳钱 / 长钱 + 灵活的家庭资产框架</td></tr>
+          <tr><td><strong>业绩基准</strong></td><td>基金"应得收益"的参照标准（投资范围对应的市场指数）</td></tr>
+          <tr><td><strong>估值温度计</strong></td><td>借助历史数据判断当前估值高低的工具</td></tr>
+          <tr><td><strong>比尔·阿克曼</strong></td><td>Bill Ackman，美国知名对冲基金经理，潘兴广场资本创始人</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subhead">10.2 投资经验提炼</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>经验</th><th>核心要点</th></tr></thead>
+        <tbody>
+          <tr><td><strong>数据 → 安心</strong></td><td>21 年数据能给区间就够了，精确度没那么重要</td></tr>
+          <tr><td><strong>周期</strong></td><td>"春夏秋冬"是规律，身处其中看不到全貌</td></tr>
+          <tr><td><strong>目标概率</strong></td><td>资产配置的核心是"实现目标的概率"，不是"收益最大化"</td></tr>
+          <tr><td><strong>风险收益因果</strong></td><td>风险先有，收益后有——燕窝 1 块钱一斤没人摘</td></tr>
+          <tr><td><strong>温度计反思</strong></td><td>胜率 ≠ 收益；卖飞一次的损失可以覆盖多次正确操作</td></tr>
+          <tr><td><strong>求真</strong></td><td>研究的最大奖赏是"理解 + 心安"，不是"赚更多"</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subhead">10.3 实用建议</div>
+    <ol>
+      <li>先看三张图：图 1-1 / 2-1 / 6-1 → 把文字丢给 AI</li>
+      <li>看前言：每张图都有小前言，告诉动机和新增内容</li>
+      <li>互动话题：你希望明年年报加哪些内容？留言给"投资 ABC"</li>
+      <li>数据使用：把图 + 文字丢给 AI 一起讨论，是当下高效的入门方式</li>
+    </ol>
+  </section>
+
+  <!-- =================== FOOTER =================== -->
+  <div class="footer">
+    <div class="brand">🎙️ 投资 ABC · E57 中国大类资产 2025 年报</div>
+    <div>原始转录稿：<code>ep2.txt</code>（1668 segments）</div>
+    <div>数据来源：小宇宙 xyzcdn.net CDN + faster-whisper (base, CPU int8)</div>
+    <div class="sync">
+      <span>📁 GitHub · wintermelon27/agent_research</span>
+      <span>📁 Gitee · wintermeloncurry/agent_research</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
